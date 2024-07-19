@@ -1,0 +1,9 @@
+ext {
+    versions = [
+            compileSdk    : 34,
+            minSdk        : 24,
+            targetSdk     : 34,
+            javaSDKVersion: JavaVersion.VERSION_11,
+            jvmTarget     : 11,
+    ]
+}

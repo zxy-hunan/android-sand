@@ -1,4 +1,4 @@
-package com.xy.sand
+package com.xy.home
 
 import com.xy.mviframework.base.vm.BaseViewModel
 import com.xy.mviframework.network.default.apiRetrofit

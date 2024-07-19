@@ -15,8 +15,10 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "a_sand"
 include ':app'
 include ':user'
 include ':home'
 include ':im'
+include ':common'
