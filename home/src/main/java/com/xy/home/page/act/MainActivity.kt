@@ -26,7 +26,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     var userFrg: Fragment? = null
 
     override fun initData(savedInstanceState: Bundle?) {
-        viewModel.articleList()
+
     }
 
     override fun initView() {

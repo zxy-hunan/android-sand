@@ -2,6 +2,7 @@ package com.xy.home.vm
 
 import android.annotation.SuppressLint
 import android.util.Log
+import com.xy.common.data.CommConfig
 import com.xy.home.api.MainApiService
 import com.xy.home.intent.MainIntent
 import com.xy.mviframework.base.vm.BaseViewModel
@@ -20,11 +21,12 @@ class MainVm : BaseViewModel<MainIntent>() {
 
     @SuppressLint("SuspiciousIndentation")
     fun articleList() {
-      var dftMap= mutableMapOf<String, String>("pageNo" to "1","pageSize" to "10")
+      val dftMap= mutableMapOf<String, String>("pageNo" to "1","pageSize" to CommConfig.pageSize)
         apiService.articleList(dftMap).HttpCoroutine(onError = {
             Log.e("MainVm", "articleList: onError", )
         }, onSuccess = {
             Log.e("MainVm", "articleList: onSuccess", )
+            _intent.emitCoroutine(MainIntent.ArticleList(it))
         })
     }
 }

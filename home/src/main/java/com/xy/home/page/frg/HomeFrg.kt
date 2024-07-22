@@ -1,5 +1,7 @@
 package com.xy.home.page.frg
 
+import android.util.Log
+import com.dylanc.longan.toast
 import com.xy.home.databinding.FragmentHomeBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.vm.MainVm
@@ -16,9 +18,18 @@ class HomeFrg() :MviFragment<FragmentHomeBinding,MainVm,MainIntent>(MainVm::clas
     }
 
     override fun lazyLoad() {
+        viewModel.articleList()
     }
 
     override fun observe() {
+        intentCallBack {
+            when(it){
+                is MainIntent.ArticleList->{
+                    Log.e("MainIntent", "ArticleList: ", )
+                    toast("it.size:${it.list.size}")
+                }
+            }
+        }
     }
 
     override fun onListens() {

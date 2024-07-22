@@ -1,5 +1,6 @@
 package com.xy.home.intent
 
+import com.xy.common.data.BaseModel
 import com.xy.mviframework.base.vm.BaseIntent
 
 /**
@@ -8,5 +9,6 @@ import com.xy.mviframework.base.vm.BaseIntent
  * @date 2024/7/18 19:18
  * @brief mainIntent
  */
-class MainIntent : BaseIntent() {
+sealed class MainIntent : BaseIntent() {
+    data class ArticleList(val list:List<BaseModel>) : MainIntent()
 }
