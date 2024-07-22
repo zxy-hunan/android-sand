@@ -1,8 +1,9 @@
-package com.xy.home
+package com.xy.home.page.act
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.xy.home.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

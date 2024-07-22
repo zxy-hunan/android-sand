@@ -9,4 +9,10 @@ import com.xy.mviframework.base.BaseApp
  * @brief application
  */
 class App :BaseApp() {
+
+    override fun onCreate() {
+        super.onCreate()
+        BASEURL = BuildConfig.BASE_URL_PRODUCTION
+    }
+
 }

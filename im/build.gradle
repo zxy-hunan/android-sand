@@ -27,8 +27,15 @@ android {
     kotlinOptions {
         jvmTarget = rootProject.ext.versions.jvmTarget
     }
+
+    viewBinding {
+        enabled true
+    }
 }
 
 dependencies {
     api project(':common')
+/*    api project(':tuicore')
+    api project(':timcommon')
+    api project(':tuichat')*/
 }

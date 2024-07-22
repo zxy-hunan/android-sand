@@ -1,4 +1,4 @@
-package com.xy.home
+package com.xy.home.intent
 
 import com.xy.mviframework.base.vm.BaseIntent
 

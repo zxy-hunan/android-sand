@@ -1,0 +1,19 @@
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/utils_toast_bg"
+        android:title="1" />
+    <item
+        android:id="@+id/action_dashboard"
+        android:icon="@drawable/utils_toast_bg"
+        android:title="2" />
+    <item
+        android:id="@+id/action_notifications"
+        android:icon="@drawable/utils_toast_bg"
+        android:title="3" />
+    <item
+        android:id="@+id/action_user"
+        android:icon="@drawable/utils_toast_bg"
+        android:title="4" />
+</menu>

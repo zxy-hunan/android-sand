@@ -4,6 +4,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven { url 'https://jitpack.io' }
+        maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
     }
 }
 dependencyResolutionManagement {
@@ -12,8 +13,12 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url "https://mirrors.tencent.com/nexus/repository/maven-public/" }
     }
 }
+
+
+
 
 
 rootProject.name = "a_sand"
@@ -22,3 +27,13 @@ include ':user'
 include ':home'
 include ':im'
 include ':common'
+
+include ':tuicore'
+project(":tuicore").projectDir = new File('im/TUICore')
+
+include ':timcommon'
+project(":timcommon").projectDir = new File('im/TIMCommon/timcommon')
+
+include ':tuichat'
+project(":tuichat").projectDir = new File('im/TUIChat')
+

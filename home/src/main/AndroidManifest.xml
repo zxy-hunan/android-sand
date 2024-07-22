@@ -5,7 +5,7 @@
     <application>
 
         <activity
-            android:name="com.xy.home.WelcomeAct"
+            android:name="com.xy.home.page.act.WelcomeAct"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".page.act.MainActivity"/>
 
     </application>
 
