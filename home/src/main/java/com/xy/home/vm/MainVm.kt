@@ -6,7 +6,7 @@ import com.xy.common.data.CommConfig
 import com.xy.home.api.MainApiService
 import com.xy.home.intent.MainIntent
 import com.xy.mviframework.base.vm.BaseViewModel
-import com.xy.mviframework.network.default.apiRetrofit
+import com.xy.mviframework.network.def.apiRetrofit
 
 /**
  * @file MainVm
