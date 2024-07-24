@@ -12,6 +12,10 @@ import com.xy.home.vm.MainVm
 import com.xy.im.page.frg.NotiFrg
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.user.page.frg.UserFrg
+import me.majiajie.pagerbottomtabstrip.MaterialMode
+import me.majiajie.pagerbottomtabstrip.NavigationController
+import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener
+
 
 /**
  * @file MainActivity
@@ -45,7 +49,55 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
 
 
     private fun navSelectedAction() {
-        binding.bnv.setOnNavigationItemSelectedListener {
+
+        val navigationController: NavigationController = binding.bnv.material()
+            .addItem(android.R.drawable.ic_menu_camera, "1")
+            .addItem(android.R.drawable.ic_menu_compass, "2")
+            .addItem(android.R.drawable.ic_menu_search, "3")
+            .addItem(android.R.drawable.ic_menu_help, "4")
+            .build()
+
+        navigationController.addTabItemSelectedListener(object : OnTabItemSelectedListener{
+            override fun onSelected(index: Int, old: Int) {
+                when (index) {
+                    0 -> {
+                        if (homeFrg == null) { homeFrg = HomeFrg()}
+                        homeFrg?.let {
+                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
+                        }
+                    }
+
+                    1 -> {
+                        if (homeCommunityFrg == null) { homeCommunityFrg = HomeCommunityFrg()}
+                        homeCommunityFrg?.let {
+                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
+                        }
+                    }
+
+                    2 -> {
+                        if (notiFrg == null) { notiFrg = NotiFrg()}
+                        notiFrg?.let {
+                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
+                        }
+                    }
+
+                    3 -> {
+                        if (userFrg == null) { userFrg = UserFrg()}
+                        userFrg?.let {
+                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
+                        }
+                    }
+
+
+                }
+            }
+
+            override fun onRepeat(index: Int) {
+            }
+
+        })
+
+        /*binding.bnv.setOnNavigationItemSelectedListener {
             HomeFrg()
             when (it.itemId) {
                 R.id.action_home -> {
@@ -79,7 +131,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
                 else -> {}
             }
             return@setOnNavigationItemSelectedListener true
-        }
+        }*/
     }
 
 }

@@ -48,4 +48,6 @@ dependencies {
     implementation project(':im')
     implementation project(':user')
 
+    implementation 'me.majiajie:pager-bottom-tab-strip:2.4.0'
+
 }
