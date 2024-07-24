@@ -1,8 +1,14 @@
 package com.xy.home.page.act
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.FragmentUtils
+import com.dylanc.longan.statusBarColor
+import com.gyf.immersionbar.ktx.immersionBar
+import com.gyf.immersionbar.ktx.statusBarHeight
 import com.xy.home.R
 import com.xy.home.databinding.ActivityMainBinding
 import com.xy.home.intent.MainIntent
@@ -12,7 +18,6 @@ import com.xy.home.vm.MainVm
 import com.xy.im.page.frg.NotiFrg
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.user.page.frg.UserFrg
-import me.majiajie.pagerbottomtabstrip.MaterialMode
 import me.majiajie.pagerbottomtabstrip.NavigationController
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener
 
@@ -34,6 +39,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     }
 
     override fun initView() {
+        immersionBar(binding.view)
         homeFrg = HomeFrg()
         FragmentUtils.add(supportFragmentManager, homeFrg!!, R.id.ll_content)
         navSelectedAction()
@@ -45,6 +51,24 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
 
 
     override fun onListener() {
+    }
+
+    fun immersionBar(statusView: View){
+
+       /* val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,statusBarHeight)
+        layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+        layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+        layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+        statusView?.layoutParams = layoutParams*/
+
+        immersionBar {
+            statusBarColor(com.google.android.material.R.color.m3_ref_palette_white)
+
+//            statusBarAlpha(0.1f)
+            statusBarDarkFont(true)
+
+            titleBarMarginTop(statusView)
+        }
     }
 
 

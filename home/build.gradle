@@ -48,6 +48,9 @@ dependencies {
     implementation project(':im')
     implementation project(':user')
 
+    //底部tab
     implementation 'me.majiajie:pager-bottom-tab-strip:2.4.0'
+    //搜索框
+    implementation 'io.github.lapism:search:2.0.1'
 
 }
