@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.scwang.smart.refresh.header.material.CircleImageView
+    <ImageView
         android:id="@+id/circleImageView"
         android:layout_width="56dp"
         android:layout_height="56dp"
@@ -24,6 +24,7 @@
         android:layout_height="45dp"
         android:layout_marginHorizontal="20dp"
         android:hint="请输入用户名"
+        android:textSize="13sp"
         app:shape_radius="10dp"
         app:shape_solidColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"

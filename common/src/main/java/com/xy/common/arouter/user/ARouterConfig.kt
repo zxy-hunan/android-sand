@@ -7,7 +7,7 @@ class ARouterConfig {
 
         object LoginAct {
 
-            const val PATH = "$GROUP/act/login"
+            const val PATH = "$GROUP/page/acy/login"
 
             fun push() {
                 ARouter.getInstance()
