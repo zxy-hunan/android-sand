@@ -1,7 +1,9 @@
 package com.xy.user.page.acy
 
 import android.os.Bundle
+import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.user.databinding.ActivityLoginBinding
@@ -20,11 +22,24 @@ class LoginAcy : MviAcy<ActivityLoginBinding, UserVm, UserIntent>(UserVm::class.
     }
 
     override fun initView() {
+        immersionBar(binding.view)
     }
 
     override fun observe() {
     }
 
     override fun onListener() {
+    }
+
+    fun immersionBar(statusView: View){
+
+        immersionBar {
+            statusBarColor(com.google.android.material.R.color.m3_ref_palette_white)
+
+//            statusBarAlpha(0.1f)
+            statusBarDarkFont(true)
+
+            titleBarMarginTop(statusView)
+        }
     }
 }

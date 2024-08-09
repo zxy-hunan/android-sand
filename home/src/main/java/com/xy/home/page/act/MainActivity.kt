@@ -1,15 +1,12 @@
 package com.xy.home.page.act
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.FragmentUtils
-import com.dylanc.longan.statusBarColor
 import com.gyf.immersionbar.ktx.immersionBar
-import com.gyf.immersionbar.ktx.statusBarHeight
 import com.xy.home.R
+import com.xy.home.data.APPTAG
 import com.xy.home.databinding.ActivityMainBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.page.frg.HomeCommunityFrg
@@ -55,12 +52,6 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
 
     fun immersionBar(statusView: View){
 
-       /* val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,statusBarHeight)
-        layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-        layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-        layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
-        statusView?.layoutParams = layoutParams*/
-
         immersionBar {
             statusBarColor(com.google.android.material.R.color.m3_ref_palette_white)
 
@@ -84,28 +75,28 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
         navigationController.addTabItemSelectedListener(object : OnTabItemSelectedListener{
             override fun onSelected(index: Int, old: Int) {
                 when (index) {
-                    0 -> {
+                    APPTAG.HOME.tag -> {
                         if (homeFrg == null) { homeFrg = HomeFrg()}
                         homeFrg?.let {
                             FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
                         }
                     }
 
-                    1 -> {
+                    APPTAG.COMMUNITY.tag -> {
                         if (homeCommunityFrg == null) { homeCommunityFrg = HomeCommunityFrg()}
                         homeCommunityFrg?.let {
                             FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
                         }
                     }
 
-                    2 -> {
+                    APPTAG.NOTIFICATION.tag -> {
                         if (notiFrg == null) { notiFrg = NotiFrg()}
                         notiFrg?.let {
                             FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
                         }
                     }
 
-                    3 -> {
+                    APPTAG.USER.tag -> {
                         if (userFrg == null) { userFrg = UserFrg()}
                         userFrg?.let {
                             FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
