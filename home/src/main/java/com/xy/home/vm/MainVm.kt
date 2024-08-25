@@ -19,9 +19,11 @@ class MainVm : BaseViewModel<MainIntent>() {
         apiRetrofit.create(MainApiService::class.java)
     }
 
+    var page=1
+
     @SuppressLint("SuspiciousIndentation")
     fun articleList() {
-      val dftMap= mutableMapOf<String, String>("pageNo" to "1","pageSize" to CommConfig.pageSize)
+      val dftMap= mutableMapOf<String, String>("pageNo" to "$page","pageSize" to CommConfig.pageSize)
         apiService.articleList(dftMap).HttpCoroutine(onError = {
             Log.e("MainVm", "articleList: onError", )
         }, onSuccess = {

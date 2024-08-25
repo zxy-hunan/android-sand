@@ -7,11 +7,10 @@ package com.xy.user.data
  * @brief user model
  */
 
-data class UserTagModel(var tagName: String, var tagUrl: String, var tag: UserTag)
+data class UserTagModel(var tagName: String, var tagUrl: String, var tag: UserTag, var res: Int = 0)
 
 
-
-sealed class UserTag{
+sealed class UserTag {
     abstract val tag: String
 
     object SETTING : UserTag() {

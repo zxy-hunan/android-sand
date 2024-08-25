@@ -1,6 +1,9 @@
 package com.xy.sand
 
 import com.alibaba.android.arouter.launcher.ARouter
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.xy.mviframework.base.BaseApp
 
 /**
@@ -15,6 +18,7 @@ class App :BaseApp() {
         super.onCreate()
         initNetWork()
         initArouter()
+        smartRefreshInit()
     }
 
     private fun initNetWork() {
@@ -26,5 +30,13 @@ class App :BaseApp() {
         ARouter.openDebug()
         ARouter.init(this)
     }
+
+    private fun smartRefreshInit() {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+            ClassicsHeader(this)
+        }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(this) }
+    }
+
 
 }

@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
 
     <TextView
         android:id="@+id/tv_title"
@@ -13,88 +14,102 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="#000"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="this is test" />
+        />
 
-    <ImageView
-        android:id="@+id/iv_article"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"
-        tools:src="@drawable/utils_toast_bg"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
-    <com.scwang.smart.refresh.header.material.CircleImageView
-        android:id="@+id/iv_head"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title"
-        tools:src="@drawable/utils_toast_bg" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_article"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/shape_img_10ran"
+            app:shapeAppearance="@style/CircleStyle1"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:visibility="visible"
+            android:src="@drawable/icon_default"
+            />
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textColor="#333"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_head"
-        app:layout_constraintStart_toEndOf="@+id/iv_head"
-        app:layout_constraintTop_toTopOf="@+id/iv_head"
-        tools:text="textview" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_article">
 
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textColor="#333"
-        android:textSize="16sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/iv_article"
-        app:layout_constraintStart_toStartOf="@+id/iv_head"
-        app:layout_constraintTop_toBottomOf="@+id/iv_head"
-        tools:text="texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_head"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/shape_default_image_bg"
+                app:shapeAppearance="@style/CircleStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/icon_default"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="#333"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+                app:layout_constraintStart_toEndOf="@+id/iv_head"
+                app:layout_constraintTop_toTopOf="@+id/iv_head" />
 
 
-    <TextView
-        android:id="@+id/tv_star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:paddingStart="@android:mipmap/sym_def_app_icon"
-        android:textColor="#333"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content"
-        tools:ignore="RtlSymmetry"
-        tools:text="35" />
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="#333"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/iv_head"
+                app:layout_constraintTop_toBottomOf="@+id/iv_head" />
 
 
-    <TextView
-        android:id="@+id/tv_common"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:paddingStart="@android:mipmap/sym_def_app_icon"
-        android:textColor="#333"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_star"
-        app:layout_constraintTop_toTopOf="@+id/tv_star"
-        tools:ignore="RtlSymmetry"
-        tools:text="100" />
+            <TextView
+                android:id="@+id/tv_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="3dp"
+                android:textColor="#333"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content" />
 
+
+            <TextView
+                android:id="@+id/tv_common"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="#333"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_star"
+                app:layout_constraintTop_toTopOf="@+id/tv_star" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

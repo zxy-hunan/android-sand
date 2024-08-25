@@ -14,6 +14,9 @@ import com.xy.user.databinding.FragmentUserBinding
 import com.xy.user.databinding.ItemSettingBinding
 import com.xy.user.intent.UserIntent
 import com.xy.user.page.acy.LoginAcy
+import com.xy.user.page.frg.viewhelper.rvBase
+import com.xy.user.page.frg.viewhelper.rvSetting
+import com.xy.user.page.frg.viewhelper.rvTop
 import com.xy.user.vm.UserVm
 
 /**
@@ -24,31 +27,20 @@ import com.xy.user.vm.UserVm
  */
 class UserFrg : MviFragment<FragmentUserBinding, UserVm, UserIntent>(UserVm::class.java) {
     override fun initView() {
-
-        binding.rvSetting.grid(3).setup {
-            addType<UserTagModel>(R.layout.item_setting)
-            onBind {
-             val binding =  getBinding<ItemSettingBinding>()
-                val item = getModel<UserTagModel>()
-                binding.tvName.text = item.tagName
-            }
-            onClick(R.id.ll_item,R.id.ll_item) {
-                val item = getModel<UserTagModel>()
-                when (item.tag) {
-                    UserTag.SETTING -> {
-                        gotoLogin()
-                    }
-
-                    else -> {}
-                }
-            }
-        }
+        binding.rvSetting.rvSetting()
+        binding.rvMiddle.rvBase()
+        binding.rvHigh.rvBase()
+        binding.rvTop.rvTop()
     }
 
 
 
     override fun lazyLoad() {
         binding.rvSetting.models = viewModel.getSettingTagList()
+        binding.rvMiddle.models = viewModel.getMiddleTagList()
+        binding.rvHigh.models = viewModel.getHighTagList()
+        binding.rvTop.models = viewModel.getTopTagList()
+
     }
 
     override fun observe() {

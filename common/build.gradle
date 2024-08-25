@@ -45,4 +45,15 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     api 'com.github.zxy-hunan:AFrameworkMVI:1.1.1'
+
+    api  'io.github.scwang90:refresh-header-classics:2.0.5'
+
+    api 'com.airbnb.android:lottie:6.1.0'
+
+    api 'com.github.bumptech.glide:glide:4.15.1'
+//    api 'com.github.bumptech.glide:recyclerview-integration:4.15.1'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+//    api 'jp.wasabeef:glide-transformations:4.2.0'
+
+//    api 'io.github.lucksiege:pictureselector:v3.11.1'
 }

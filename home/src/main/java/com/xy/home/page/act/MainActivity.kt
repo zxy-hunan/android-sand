@@ -66,10 +66,10 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     private fun navSelectedAction() {
 
         val navigationController: NavigationController = binding.bnv.material()
-            .addItem(android.R.drawable.ic_menu_camera, "1")
-            .addItem(android.R.drawable.ic_menu_compass, "2")
-            .addItem(android.R.drawable.ic_menu_search, "3")
-            .addItem(android.R.drawable.ic_menu_help, "4")
+            .addItem(R.mipmap.home, "首页")
+            .addItem(R.mipmap.coummity, "热议")
+            .addItem(R.mipmap.chat, "会话")
+            .addItem(R.mipmap.me, "我").setMode(4)
             .build()
 
         navigationController.addTabItemSelectedListener(object : OnTabItemSelectedListener{
