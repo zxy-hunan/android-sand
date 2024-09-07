@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
@@ -36,7 +41,7 @@
                 android:layout_toLeftOf="@id/iv_sign"
                 android:paddingHorizontal="35dp"
                 android:paddingVertical="10dp"
-                android:text="搜索江水淘沙"
+                android:text="搜索知鸟"
                 android:textColor="#d0d0d0"
                 android:textSize="12sp"
                 app:shape_radius="10dp"

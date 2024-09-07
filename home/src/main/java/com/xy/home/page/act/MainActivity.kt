@@ -1,8 +1,11 @@
 package com.xy.home.page.act
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.FragmentUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.home.R
@@ -53,12 +56,12 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     fun immersionBar(statusView: View){
 
         immersionBar {
-            statusBarColor(com.google.android.material.R.color.m3_ref_palette_white)
+//            statusBarColor(com.google.android.material.R.color.m3_ref_palette_white)
 
 //            statusBarAlpha(0.1f)
             statusBarDarkFont(true)
 
-            titleBarMarginTop(statusView)
+//            titleBarMarginTop(statusView)
         }
     }
 

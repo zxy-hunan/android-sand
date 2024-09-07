@@ -15,5 +15,5 @@ import retrofit2.http.QueryMap
  */
 interface MainApiService {
     @GET("system/article/list")
-    fun articleList(@QueryMap params: Map<String,String>): Flow<BaseRes<List<ArticleModel>>>
+    fun articleList(@QueryMap params: Map<String,Int>): Flow<BaseRes<List<ArticleModel>>>
 }

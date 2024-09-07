@@ -23,11 +23,11 @@ class MainVm : BaseViewModel<MainIntent>() {
 
     @SuppressLint("SuspiciousIndentation")
     fun articleList() {
-      val dftMap= mutableMapOf<String, String>("pageNo" to "$page","pageSize" to CommConfig.pageSize)
+      val dftMap= mutableMapOf<String, Int>("pageNum" to page,"pageSize" to 10)
         apiService.articleList(dftMap).HttpCoroutine(onError = {
             Log.e("MainVm", "articleList: onError", )
         }, onSuccess = {
-            Log.e("MainVm", "articleList: onSuccess", )
+            Log.e("MainVm", "articleList: onSuccess $page ${it.size}", )
             _intent.emitCoroutine(MainIntent.ArticleList(it))
         })
     }

@@ -6,12 +6,14 @@ import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.drake.brv.annotaion.DividerOrientation
+import com.drake.brv.utils.addModels
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.dylanc.longan.toast
 import com.dylanc.viewbinding.getBinding
+import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.home.R
 import com.xy.home.data.ArticleModel
 import com.xy.home.databinding.FragmentHomeBinding
@@ -29,6 +31,14 @@ import com.xy.mviframework.base.ui.vb.frg.MviFragment
  */
 class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::class.java) {
     override fun initView() {
+
+        immersionBar {
+
+//            statusBarAlpha(0.1f)
+//            statusBarDarkFont(true)
+
+            titleBarMarginTop(binding.viewLine)
+        }
 
         binding.rvTop.linear().divider {
             orientation = DividerOrientation.HORIZONTAL
@@ -56,7 +66,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 
         binding.rvList.linear().divider {
             orientation = DividerOrientation.HORIZONTAL
-            setDivider(5, dp = true)
+            setDivider(10, dp = true)
             setColor(Color.parseColor("#f5f5f5"))
             startVisible = true
         }
@@ -102,7 +112,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 //                    toast("it.size:${it.list.size}")
                     binding.prf.finishRefresh()
                     binding.prf.finishLoadMore()
-                    binding.rvList.models = it.list
+                    binding.rvList.addModels(it.list)
 
 
                     var topList = (binding.rvList.models as List<ArticleModel>).take(3)
