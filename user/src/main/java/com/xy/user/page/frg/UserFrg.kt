@@ -5,6 +5,7 @@ import com.drake.brv.utils.grid
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.dylanc.longan.TAG
+import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.mviframework.base.ui.vb.frg.MviFragment
 import com.xy.user.R
@@ -27,6 +28,14 @@ import com.xy.user.vm.UserVm
  */
 class UserFrg : MviFragment<FragmentUserBinding, UserVm, UserIntent>(UserVm::class.java) {
     override fun initView() {
+
+        immersionBar {
+
+            statusBarDarkFont(true)
+
+            titleBarMarginTop(binding.viewLine)
+        }
+
         binding.rvSetting.rvSetting()
         binding.rvMiddle.rvBase()
         binding.rvHigh.rvBase()

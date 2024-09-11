@@ -15,9 +15,9 @@ import com.xy.user.intent.UserIntent
 class UserVm : BaseViewModel<UserIntent>() {
     fun getSettingTagList():MutableList<UserTagModel>{
         val list= mutableListOf<UserTagModel>()
-        list.add(UserTagModel("个人中心","1",UserTag.OTHER))
-        list.add(UserTagModel("关于我们","1",UserTag.OTHER))
-        list.add(UserTagModel("设置","1",UserTag.SETTING))
+        list.add(UserTagModel("个人中心","1",UserTag.OTHER,R.drawable.user_smile))
+        list.add(UserTagModel("关于我们","1",UserTag.OTHER,R.drawable.user_help))
+        list.add(UserTagModel("设置","1",UserTag.SETTING,R.drawable.user_setting))
         return list
     }
 

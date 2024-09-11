@@ -35,7 +35,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
         immersionBar {
 
 //            statusBarAlpha(0.1f)
-//            statusBarDarkFont(true)
+            statusBarDarkFont(true)
 
             titleBarMarginTop(binding.viewLine)
         }
@@ -52,7 +52,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 
                 item.tvNum.text = (position + 1).toString() + ""
 
-                item.tvNum.shapeDrawableBuilder.solidColor= when(modelPosition){
+                item.tvNum.shapeDrawableBuilder.solidColor = when (modelPosition) {
                     0 -> Color.parseColor("#F75000")
                     1 -> Color.parseColor("#FFA042")
                     2 -> Color.parseColor("#FFE66F")
@@ -112,6 +112,9 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 //                    toast("it.size:${it.list.size}")
                     binding.prf.finishRefresh()
                     binding.prf.finishLoadMore()
+                    if (it.list.size < 10) {
+                        binding.prf.setNoMoreData(true)
+                    }
                     binding.rvList.addModels(it.list)
 
 
@@ -125,7 +128,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
     override fun onListens() {
         binding.prf.run {
             onRefresh {
-                viewModel.page=1
+                viewModel.page = 1
                 viewModel.articleList()
             }
             onLoadMore {
