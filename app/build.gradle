@@ -58,7 +58,9 @@ android {
 }
 
 dependencies {
+    implementation project(':common')
     implementation project(':home')
-//    implementation project(':im')
+    implementation project(':im')
     implementation project(':user')
+    kapt rootProject.ext.dependenciesroot["arouterCompiler"]
 }

@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.FragmentUtils
 import com.gyf.immersionbar.ktx.immersionBar
+import com.xy.common.util.initFragment
 import com.xy.home.R
 import com.xy.home.data.APPTAG
 import com.xy.home.databinding.ActivityMainBinding
@@ -28,11 +29,8 @@ import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener
  * @date 2024/7/18 19:18
  * @brief main
  */
-class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::class.java) {
-    var homeFrg: Fragment? = null
-    var homeCommunityFrg: Fragment? = null
-    var notiFrg: Fragment? = null
-    var userFrg: Fragment? = null
+class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::class.java, windowBgRes = com.xy.common.R.color.white) {
+    private val frgList = mutableListOf<Fragment>()
 
     override fun initData(savedInstanceState: Bundle?) {
 
@@ -40,10 +38,16 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
 
     override fun initView() {
         immersionBar(binding.view)
-        homeFrg = HomeFrg()
-        FragmentUtils.add(supportFragmentManager, homeFrg!!, R.id.ll_content)
+        initFrg()
         navSelectedAction()
 
+    }
+
+    private fun initFrg() {
+        frgList.add(HomeFrg())
+        frgList.add(HomeCommunityFrg())
+        frgList.add(NotiFrg())
+        frgList.add(UserFrg())
     }
 
     override fun observe() {
@@ -53,7 +57,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     override fun onListener() {
     }
 
-    fun immersionBar(statusView: View){
+    fun immersionBar(statusView: View) {
 
         immersionBar {
 //            statusBarColor(com.google.android.material.R.color.m3_ref_palette_white)
@@ -75,37 +79,32 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
             .addItem(R.mipmap.me, "我").setMode(4)
             .build()
 
-        navigationController.addTabItemSelectedListener(object : OnTabItemSelectedListener{
+        binding.mainVp.run {
+//            isUserInputEnabled = false
+            initFragment(supportFragmentManager, frgList).run {
+                offscreenPageLimit = frgList.size - 1
+            }
+        }
+        navigationController.setupWithViewPager(binding.mainVp)
+
+        navigationController.addTabItemSelectedListener(object : OnTabItemSelectedListener {
             override fun onSelected(index: Int, old: Int) {
                 when (index) {
                     APPTAG.HOME.tag -> {
-                        if (homeFrg == null) { homeFrg = HomeFrg()}
-                        homeFrg?.let {
-                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                        }
+
                     }
 
                     APPTAG.COMMUNITY.tag -> {
-                        if (homeCommunityFrg == null) { homeCommunityFrg = HomeCommunityFrg()}
-                        homeCommunityFrg?.let {
-                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                        }
+
                     }
 
                     APPTAG.NOTIFICATION.tag -> {
-                        if (notiFrg == null) { notiFrg = NotiFrg()}
-                        notiFrg?.let {
-                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                        }
+
                     }
 
                     APPTAG.USER.tag -> {
-                        if (userFrg == null) { userFrg = UserFrg()}
-                        userFrg?.let {
-                            FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                        }
-                    }
 
+                    }
 
                 }
             }
@@ -115,41 +114,6 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
 
         })
 
-        /*binding.bnv.setOnNavigationItemSelectedListener {
-            HomeFrg()
-            when (it.itemId) {
-                R.id.action_home -> {
-                    if (homeFrg == null) { homeFrg = HomeFrg()}
-                    homeFrg?.let {
-                        FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                    }
-                }
-
-                R.id.action_dashboard -> {
-                    if (homeCommunityFrg == null) { homeCommunityFrg = HomeCommunityFrg()}
-                    homeCommunityFrg?.let {
-                        FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                    }
-                }
-
-                R.id.action_notifications -> {
-                    if (notiFrg == null) { notiFrg = NotiFrg()}
-                    notiFrg?.let {
-                        FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                    }
-                }
-
-                R.id.action_user -> {
-                    if (userFrg == null) { userFrg = UserFrg()}
-                    userFrg?.let {
-                        FragmentUtils.replace(supportFragmentManager, it, R.id.ll_content)
-                    }
-                }
-
-                else -> {}
-            }
-            return@setOnNavigationItemSelectedListener true
-        }*/
     }
 
 }

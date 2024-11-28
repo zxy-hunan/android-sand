@@ -1,13 +1,12 @@
-package com.xy.common.arouter.user
 import com.alibaba.android.arouter.launcher.ARouter
 
 class ARouterConfig {
-    object User{
-        private const val GROUP: String = "/user"
+    object Home{
+        private const val GROUP: String = "/home"
 
-        object LoginAct {
+        object HomeDetailAcy {
 
-            const val PATH = "$GROUP/page/acy/login"
+            const val PATH = "$GROUP/page/act/homeDetail"
 
             fun push() {
                 ARouter.getInstance()
@@ -16,10 +15,14 @@ class ARouterConfig {
             }
         }
 
+    }
 
-        object SettingsAct {
+    object Post{
+        private const val GROUP: String = "/post"
 
-            const val PATH = "$GROUP/page/acy/settings"
+        object PostAcy {
+
+            const val PATH = "$GROUP/page/act/postCommunityAct"
 
             fun push() {
                 ARouter.getInstance()

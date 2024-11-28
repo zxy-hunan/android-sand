@@ -41,6 +41,8 @@ android {
 }
 
 dependencies {
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+//    kapt 'com.alibaba:arouter-compiler:1.5.2'
     api project(':common')
+
+    kapt rootProject.ext.dependenciesroot["arouterCompiler"]
 }

@@ -53,4 +53,5 @@ dependencies {
     //搜索框
     implementation 'io.github.lapism:search:2.0.1'
 
+    kapt rootProject.ext.dependenciesroot["arouterCompiler"]
 }

@@ -15,8 +15,8 @@
         </activity>
 
         <activity android:name=".page.act.MainActivity"/>
-
-
+        <activity android:name=".page.act.HomeDetailAcy"/>
+        <activity android:name=".page.act.PostCommunityAct"/>
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@ class UserVm : BaseViewModel<UserIntent>() {
         val list= mutableListOf<UserTagModel>()
         list.add(UserTagModel("个人中心","1",UserTag.OTHER,R.drawable.user_smile))
         list.add(UserTagModel("关于我们","1",UserTag.OTHER,R.drawable.user_help))
+        list.add(UserTagModel("提交建议","1",UserTag.OTHER,R.drawable.user_help))
         list.add(UserTagModel("设置","1",UserTag.SETTING,R.drawable.user_setting))
         return list
     }

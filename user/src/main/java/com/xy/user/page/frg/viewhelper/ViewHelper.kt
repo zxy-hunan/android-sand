@@ -7,12 +7,14 @@ import com.drake.brv.utils.divider
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
+import com.xy.common.arouter.user.ARouterConfig
 import com.xy.user.R
 import com.xy.user.data.UserTag
 import com.xy.user.data.UserTagModel
 import com.xy.user.databinding.ItemSettingBinding
 import com.xy.user.databinding.ItemSettingsBinding
 import com.xy.user.databinding.ItemUserTopBinding
+import com.xy.user.page.acy.SettingsAcy
 
 fun RecyclerView.rvSetting(){
     this.linear()
@@ -33,7 +35,7 @@ fun RecyclerView.rvSetting(){
             val item = getModel<UserTagModel>()
             when (item.tag) {
                 UserTag.SETTING -> {
-//                    gotoLogin()
+                    ARouterConfig.User.SettingsAct.push()
                 }
 
                 else -> {}

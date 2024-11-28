@@ -92,8 +92,10 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                         item.ivArticle.visibility = View.VISIBLE
                         item.ivArticle.load(data.imageurl)
                     }
+                }
 
-
+                R.id.cl_root.onClick {
+                    ARouterConfig.Home.HomeDetailAcy.push()
                 }
 
             }

@@ -51,6 +51,10 @@ dependencies {
     api 'com.airbnb.android:lottie:6.1.0'
 
     api 'com.github.bumptech.glide:glide:4.15.1'
+
+    api rootProject.ext.dependenciesroot["banner"]
+
+    kapt rootProject.ext.dependenciesroot["arouterCompiler"]
 //    api 'com.github.bumptech.glide:recyclerview-integration:4.15.1'
 //    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
 //    api 'jp.wasabeef:glide-transformations:4.2.0'

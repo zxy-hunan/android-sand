@@ -3,5 +3,6 @@
 
     <application>
         <activity android:name="com.xy.user.page.acy.LoginAcy" />
+        <activity android:name=".page.acy.SettingsAcy"/>
     </application>
 </manifest>
