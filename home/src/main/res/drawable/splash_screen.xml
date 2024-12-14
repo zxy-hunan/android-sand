@@ -17,16 +17,16 @@
             android:src="@drawable/icon_login_top_circle" />
     </item>
 
-    <item android:top="131dp">
-        <bitmap
-            android:gravity="top|center_horizontal"
-            android:src="@drawable/ic_launcher" />
-    </item>
-    <item android:top="228dp">
-        <bitmap
-            android:gravity="top|center_horizontal"
-            android:src="@drawable/icon_search" />
-    </item>
+<!--    <item android:top="131dp">-->
+<!--        <bitmap-->
+<!--            android:gravity="top|center_horizontal"-->
+<!--            android:src="@drawable/ic_launcher" />-->
+<!--    </item>-->
+<!--    <item android:top="228dp">-->
+<!--        <bitmap-->
+<!--            android:gravity="top|center_horizontal"-->
+<!--            android:src="@drawable/icon_search" />-->
+<!--    </item>-->
 
 
 <!--    <item android:top="@dimen/dp_243"
