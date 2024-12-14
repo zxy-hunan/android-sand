@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-    <!--ShapeableImageView 圆 -->
-    <style name="CircleStyle">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
-
-    <style name="CircleStyle1">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">10%</item>
-    </style>
+<resources>
 
     <style name="SplashTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowLayoutInDisplayCutoutMode" tools:ignore="NewApi">shortEdges</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:navigationBarColor">@color/translucent</item>
-<!--        <item name="editTextStyle">@style/EditTextStyle.Alignment</item>-->
     </style>
-
 </resources>
