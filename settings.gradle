@@ -21,19 +21,26 @@ dependencyResolutionManagement {
 
 
 
-rootProject.name = "a_sand"
+//rootProject.name = "a_sand"
 include ':app'
 include ':user'
 include ':home'
 include ':im'
 include ':common'
 
+// 引入内部组件通信模块 (必要模块)
 include ':tuicore'
-project(":tuicore").projectDir = new File('im/TUICore')
+project(':tuicore').projectDir = new File('im/TUICore/tuicore')
 
+// 引入 IM 组件公共模块（必要模块）
 include ':timcommon'
-project(":timcommon").projectDir = new File('im/TIMCommon/timcommon')
+project(':timcommon').projectDir = new File('im/TIMCommon/timcommon')
 
+// 引入聊天功能模块 (基础功能模块)
 include ':tuichat'
-project(":tuichat").projectDir = new File('im/TUIChat')
+project(':tuichat').projectDir = new File('im/TUIChat/tuichat')
+
+// 引入会话功能模块 (基础功能模块)
+include ':tuiconversation'
+project(':tuiconversation').projectDir = new File('im/TUIConversation/tuiconversation')
 

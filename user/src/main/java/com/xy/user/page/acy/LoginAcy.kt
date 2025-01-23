@@ -23,6 +23,9 @@ class LoginAcy : MviAcy<ActivityLoginBinding, UserVm, UserIntent>(UserVm::class.
 
     override fun initView() {
         immersionBar(binding.view)
+        binding.llLogin.setOnClickListener {
+            
+        }
     }
 
     override fun observe() {

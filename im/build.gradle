@@ -44,7 +44,6 @@ android {
 dependencies {
     api project(':common')
     kapt rootProject.ext.dependenciesroot["arouterCompiler"]
-/*    api project(':tuicore')
-    api project(':timcommon')
-    api project(':tuichat')*/
+    api project(':tuiconversation')
+    api project(':tuichat')
 }

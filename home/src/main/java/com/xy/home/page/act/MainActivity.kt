@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.FragmentUtils
 import com.gyf.immersionbar.ktx.immersionBar
+import com.tencent.qcloud.tuikit.tuiconversation.minimalistui.page.TUIConversationMinimalistFragment
 import com.xy.common.util.initFragment
 import com.xy.home.R
 import com.xy.home.data.APPTAG
@@ -46,7 +47,8 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     private fun initFrg() {
         frgList.add(HomeFrg())
         frgList.add(HomeCommunityFrg())
-        frgList.add(NotiFrg())
+//        frgList.add(NotiFrg())
+        frgList.add(TUIConversationMinimalistFragment())
         frgList.add(UserFrg())
     }
 

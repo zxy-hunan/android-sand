@@ -14,8 +14,9 @@
             <option value="$PROJECT_DIR$/home" />
             <option value="$PROJECT_DIR$/im" />
             <option value="$PROJECT_DIR$/im/TIMCommon/timcommon" />
-            <option value="$PROJECT_DIR$/im/TUIChat" />
-            <option value="$PROJECT_DIR$/im/TUICore" />
+            <option value="$PROJECT_DIR$/im/TUIChat/tuichat" />
+            <option value="$PROJECT_DIR$/im/TUIConversation/tuiconversation" />
+            <option value="$PROJECT_DIR$/im/TUICore/tuicore" />
             <option value="$PROJECT_DIR$/user" />
           </set>
         </option>

@@ -1,0 +1,166 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tencent.qcloud.tuikit.tuichat" >
+4
+5    <uses-sdk android:minSdkVersion="19" />
+6
+7    <uses-permission
+7-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:4:5-5:38
+8        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+8-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:4:22-78
+9        android:maxSdkVersion="28" />
+9-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:5:9-35
+10    <uses-permission android:name="android.permission.CAMERA" />
+10-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:7:5-65
+10-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:7:22-62
+11    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+11-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:8:5-71
+11-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:8:22-68
+12    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+12-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:9:5-80
+12-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:9:22-77
+13
+14    <application>
+14-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:11:5-97:19
+15        <activity
+15-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:12:9-15:77
+16            android:name="com.tencent.qcloud.tuikit.tuichat.component.imagevideobrowse.ImageVideoBrowseActivity"
+16-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:13:13-113
+17            android:configChanges="screenSize|keyboardHidden|orientation"
+17-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:15:13-74
+18            android:launchMode="singleTask" />
+18-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:14:13-44
+19        <activity
+19-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:17:9-19:52
+20            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.FriendProfileActivity"
+20-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:18:13-98
+21            android:screenOrientation="portrait" />
+21-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:19:13-49
+22        <!-- **************** Classic UI Start **************** -->
+23        <activity
+23-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:21:9-24:52
+24            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.MessageReplyDetailActivity"
+24-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:22:13-103
+25            android:screenOrientation="portrait"
+25-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:24:13-49
+26            android:windowSoftInputMode="adjustResize|stateHidden" />
+26-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:23:13-67
+27        <activity
+27-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:25:9-27:52
+28            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.TUIForwardChatActivity"
+28-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:26:13-99
+29            android:screenOrientation="portrait" />
+29-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:27:13-49
+30        <activity
+30-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:28:9-32:71
+31            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.TUIC2CChatActivity"
+31-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:29:13-95
+32            android:launchMode="singleTask"
+32-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:30:13-44
+33            android:screenOrientation="portrait"
+33-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:31:13-49
+34            android:windowSoftInputMode="adjustNothing|stateHidden" />
+34-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:32:13-68
+35        <activity
+35-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:35:9-39:70
+36            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.TUIGroupChatActivity"
+36-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:36:13-97
+37            android:launchMode="singleTask"
+37-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:37:13-44
+38            android:screenOrientation="portrait"
+38-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:38:13-49
+39            android:windowSoftInputMode="adjustNothing|stateHidden" />
+39-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:39:13-68
+40        <activity
+40-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:41:9-43:52
+41            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.MessageReceiptDetailActivity"
+41-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:42:13-105
+42            android:screenOrientation="portrait" />
+42-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:43:13-49
+43        <activity
+43-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:44:9-46:52
+44            android:name="com.tencent.qcloud.tuikit.tuichat.component.camera.CameraActivity"
+44-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:45:13-93
+45            android:screenOrientation="portrait" />
+45-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:46:13-49
+46        <activity
+46-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:48:9-49:52
+47            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.GroupInfoActivity"
+47-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:48:19-100
+48            android:screenOrientation="portrait" />
+48-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:49:13-49
+49        <activity
+49-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:50:9-51:52
+50            android:name="com.tencent.qcloud.tuikit.tuichat.classicui.page.GroupNoticeActivity"
+50-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:50:19-102
+51            android:screenOrientation="portrait" />
+51-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:51:13-49
+52        <!-- **************** Classic UI End **************** -->
+53
+54
+55        <!-- **************** Minimalist UI Start **************** -->
+56        <activity
+56-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:59:9-63:71
+57            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.widget.messagepopmenu.ChatPopActivity"
+57-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:60:13-112
+58            android:launchMode="singleTask"
+58-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:62:13-44
+59            android:theme="@style/ChatTransparentPopActivityStyle"
+59-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:61:13-67
+60            android:windowSoftInputMode="adjustNothing|stateHidden" />
+60-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:63:13-68
+61        <activity
+61-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:65:9-69:71
+62            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.page.TUIC2CChatMinimalistActivity"
+62-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:66:13-108
+63            android:launchMode="singleTask"
+63-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:67:13-44
+64            android:screenOrientation="portrait"
+64-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:68:13-49
+65            android:windowSoftInputMode="adjustNothing|stateHidden" />
+65-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:69:13-68
+66        <activity
+66-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:71:9-75:71
+67            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.page.TUIGroupChatMinimalistActivity"
+67-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:72:13-110
+68            android:launchMode="singleTask"
+68-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:73:13-44
+69            android:screenOrientation="portrait"
+69-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:74:13-49
+70            android:windowSoftInputMode="adjustNothing|stateHidden" />
+70-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:75:13-68
+71        <activity
+71-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:77:9-79:52
+72            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.page.MessageDetailMinimalistActivity"
+72-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:78:13-111
+73            android:screenOrientation="portrait" />
+73-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:79:13-49
+74        <activity
+74-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:81:9-83:52
+75            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.page.TUIForwardChatMinimalistActivity"
+75-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:82:13-112
+76            android:screenOrientation="portrait" />
+76-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:83:13-49
+77        <activity
+77-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:85:9-86:52
+78            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.page.GroupInfoMinimalistActivity"
+78-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:85:19-113
+79            android:screenOrientation="portrait" />
+79-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:86:13-49
+80        <activity
+80-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:89:9-91:52
+81            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.page.FriendProfileMinimalistActivity"
+81-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:90:13-111
+82            android:screenOrientation="portrait" />
+82-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:91:13-49
+83        <activity
+83-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:93:9-94:52
+84            android:name="com.tencent.qcloud.tuikit.tuichat.minimalistui.page.GroupNoticeMinimalistActivity"
+84-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:93:19-115
+85            android:screenOrientation="portrait" />
+85-->D:\Space\AndroidSpace\github\android-sand\im\TUIChat\tuichat\src\main\AndroidManifest.xml:94:13-49
+86        <!-- **************** Minimalist UI End **************** -->
+87
+88    </application>
+89
+90</manifest>

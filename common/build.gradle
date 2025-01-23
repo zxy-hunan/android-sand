@@ -52,6 +52,8 @@ dependencies {
 
     api 'com.github.bumptech.glide:glide:4.15.1'
 
+    api 'com.github.DylanCaiCoding:MMKV-KTX:1.2.14'
+
     api rootProject.ext.dependenciesroot["banner"]
 
     kapt rootProject.ext.dependenciesroot["arouterCompiler"]

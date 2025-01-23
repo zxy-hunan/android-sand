@@ -24,6 +24,9 @@ android {
 
         buildConfigField("String", "BASE_URL_PRODUCTION", '"http://gyuelife.online/prod-api/"')
 
+        def configPath = rootProject.ext.sand
+        buildConfigField("String", "IM_APPID", "\"${configPath.im_appid}\"")
+
         kapt {
             //Arouter路由配置
             arguments {

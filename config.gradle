@@ -1,4 +1,9 @@
 ext {
+
+    sand=[
+            im_appid      : "1600045254",
+    ]
+
     versions = [
             compileSdk    : 34,
             minSdk        : 24,
