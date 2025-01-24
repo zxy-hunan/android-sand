@@ -95,7 +95,8 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                 }
 
                 R.id.cl_root.onClick {
-                    ARouterConfig.Home.HomeDetailAcy.push()
+                    val data = getModelOrNull<ArticleModel>() ?: return@onClick
+                    ARouterConfig.Home.H5Act.push(data.arpath)
                 }
 
             }

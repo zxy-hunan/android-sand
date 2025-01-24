@@ -3,6 +3,7 @@ package com.xy.home.vm
 import android.annotation.SuppressLint
 import android.util.Log
 import com.xy.common.data.CommConfig
+import com.xy.common.data.Common
 import com.xy.home.api.MainApiService
 import com.xy.home.intent.MainIntent
 import com.xy.mviframework.base.vm.BaseViewModel
@@ -20,10 +21,26 @@ class MainVm : BaseViewModel<MainIntent>() {
     }
 
     var page = 1
+    var isRefresh = true
+
+     fun refresh() {
+        isRefresh=true
+        page = 1
+        articleList("${Common.Hot.no}")
+    }
+
+    fun loadMore() {
+        isRefresh=false
+        page ++
+        articleList("${Common.Hot.no}")
+    }
 
     @SuppressLint("SuspiciousIndentation")
-    fun articleList() {
-        val dftMap = mutableMapOf<String, Int>("pageNum" to page, "pageSize" to 10)
+    fun articleList(comId:String="") {
+        val dftMap = mutableMapOf<String, String>("pageNum" to "$page", "pageSize" to "10")
+        if(comId.isNotBlank()){
+            dftMap["comId"] = comId
+        }
         apiService.articleList(dftMap).HttpCoroutine(onError = {
             Log.e("MainVm", "articleList: onError")
         }, onSuccess = {

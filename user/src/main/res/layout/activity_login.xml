@@ -59,7 +59,7 @@
         app:shape_radius="10dp"
         app:shape_solidColor="#f5f5f5" />
 
-    <LinearLayout
+    <com.hjq.shape.view.ShapeTextView
         android:id="@+id/ll_login"
         android:layout_width="0dp"
         android:layout_height="56dp"
@@ -69,19 +69,25 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        app:shape_startColor="#FF697C"
+        app:shape_endColor="#FF3853"
+        android:text="login"
+        android:textSize="18sp"
+        app:shape_radius="10dp"
+        android:textColor="@color/white"
         android:background="@drawable/shape_recommend_bg"
         app:layout_constraintEnd_toEndOf="@+id/shapeEditText2"
         app:layout_constraintStart_toStartOf="@+id/shapeEditText2"
-        app:layout_constraintTop_toBottomOf="@+id/shapeEditText2">
+        app:layout_constraintTop_toBottomOf="@+id/shapeEditText2"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:text="login"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="#fff"-->
+<!--            android:text="login"/>-->
 
 
-    </LinearLayout>
+<!--    </com.hjq.shape.view.ShapeTextView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

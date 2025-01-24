@@ -1,9 +1,22 @@
 package com.xy.home.page.frg
 
+import androidx.databinding.DataBindingUtil.getBinding
+import com.drake.brv.utils.addModels
+import com.drake.brv.utils.divider
+import com.drake.brv.utils.linear
+import com.drake.brv.utils.models
+import com.drake.brv.utils.setup
 import com.gyf.immersionbar.ktx.immersionBar
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import com.xy.common.data.Common
 import com.xy.common.util.clickDebounce
+import com.xy.home.R
 import com.xy.home.data.ArticleModel
 import com.xy.home.databinding.FragmentHomeCommunityBinding
+import com.xy.home.databinding.ItemArticleBinding
+import com.xy.home.databinding.ItemCommunityArticleBinding
+import com.xy.home.databinding.ItemTopArticleBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.page.adapter.CommunityTopAdapter
 import com.xy.home.vm.MainVm
@@ -15,7 +28,7 @@ import com.xy.mviframework.base.ui.vb.frg.MviFragment
  * @date 2024/7/22 14:01
  * @brief HomeCommunityFrg
  */
-class HomeCommunityFrg() :MviFragment<FragmentHomeCommunityBinding,MainVm,MainIntent>(MainVm::class.java) {
+class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, MainIntent>(MainVm::class.java) {
     override fun initView() {
         immersionBar {
             statusBarDarkFont(true)
@@ -24,19 +37,30 @@ class HomeCommunityFrg() :MviFragment<FragmentHomeCommunityBinding,MainVm,MainIn
         binding.stvPost.clickDebounce {
             ARouterConfig.Post.PostAcy.push()
         }
+        setRv()
     }
 
     override fun lazyLoad() {
-        viewModel.page = 1
-        viewModel.articleList()
+        binding.pglRefresh.refresh()
     }
+
+
 
     override fun observe() {
         intentCallBack {
             when (it) {
                 is MainIntent.ArticleList -> {
+                    binding.pglRefresh.finishLoadMore()
+                    binding.pglRefresh.finishRefresh()
+                    if (it.list.size < 10) {
+                        binding.pglRefresh.setNoMoreData(true)
+                    }
+                    if(viewModel.isRefresh){
+                        binding.rvCommunity.models=it.list
+                    }else{
+                        binding.rvCommunity.addModels(it.list)
+                    }
 
-                    startBanner(it.list)
                 }
             }
         }
@@ -52,6 +76,32 @@ class HomeCommunityFrg() :MviFragment<FragmentHomeCommunityBinding,MainVm,MainIn
 
     }
 
+    private fun setRv() {
+        binding.rvCommunity.linear().divider {
+
+        }.setup {
+            addType<ArticleModel> { R.layout.item_community_article }
+            onBind {
+                val data = getModel<ArticleModel>()
+                val item = getBinding<ItemCommunityArticleBinding>()
+
+                item?.apply {
+                    tvTitle.text = data.title
+                    ivHead.load(data.imageurl)
+                    tvName.text = data.sysUser.nickName
+                }
+            }
+        }
+    }
+
     override fun onListens() {
+        binding.pglRefresh.run {
+            onRefresh {
+                viewModel.refresh()
+            }
+            onLoadMore {
+                viewModel.loadMore()
+            }
+        }
     }
 }

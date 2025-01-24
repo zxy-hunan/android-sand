@@ -15,6 +15,20 @@ class ARouterConfig {
             }
         }
 
+
+        object H5Act {
+
+            const val PATH = "$GROUP/page/act/h5Acy"
+            const val ARTICLE_URL = "ARTICLE_URL"
+
+            fun push(url:String="") {
+                ARouter.getInstance()
+                    .build(PATH)
+                    .withString(ARTICLE_URL,url)
+                    .navigation()
+            }
+        }
+
     }
 
     object Post{

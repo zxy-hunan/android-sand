@@ -5,6 +5,7 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.xy.mviframework.base.BaseApp
+import com.xy.mviframework.network.tool.SHOW_LOG
 
 /**
  * @file App
@@ -19,6 +20,7 @@ class App :BaseApp() {
         initNetWork()
         initArouter()
         smartRefreshInit()
+        SHOW_LOG = true
     }
 
     private fun initNetWork() {

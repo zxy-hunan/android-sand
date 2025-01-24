@@ -54,6 +54,8 @@ dependencies {
 
     api 'com.github.DylanCaiCoding:MMKV-KTX:1.2.14'
 
+    api 'io.github.justson:agentweb-core:v5.1.1-androidx'
+
     api rootProject.ext.dependenciesroot["banner"]
 
     kapt rootProject.ext.dependenciesroot["arouterCompiler"]

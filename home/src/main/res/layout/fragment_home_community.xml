@@ -20,6 +20,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="test"
+            android:textColor="@color/black_font_color"
+            android:textSize="22sp"
+            android:textStyle="bold"
             android:layout_marginLeft="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,14 +59,16 @@
         app:banner_orientation="vertical" />
 
     <com.drake.brv.PageRefreshLayout
+        android:id="@+id/pgl_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:srlEnableLoadMore="true"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_community"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_article" />
+            tools:listitem="@layout/item_community_article" />
 
     </com.drake.brv.PageRefreshLayout>
 

@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.blankj.utilcode.util.ColorUtils
 import com.blankj.utilcode.util.FragmentUtils
 import com.gyf.immersionbar.ktx.immersionBar
+import com.tencent.qcloud.tuikit.tuiconversation.classicui.page.TUIConversationFragment
 import com.tencent.qcloud.tuikit.tuiconversation.minimalistui.page.TUIConversationMinimalistFragment
 import com.xy.common.util.initFragment
 import com.xy.home.R
@@ -19,6 +20,7 @@ import com.xy.home.page.frg.HomeFrg
 import com.xy.home.vm.MainVm
 import com.xy.im.page.frg.NotiFrg
 import com.xy.mviframework.base.ui.vb.MviAcy
+import com.xy.mviframework.network.tool.SHOW_LOG
 import com.xy.user.page.frg.UserFrg
 import me.majiajie.pagerbottomtabstrip.NavigationController
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener
@@ -48,7 +50,8 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
         frgList.add(HomeFrg())
         frgList.add(HomeCommunityFrg())
 //        frgList.add(NotiFrg())
-        frgList.add(TUIConversationMinimalistFragment())
+//        frgList.add(TUIConversationMinimalistFragment())
+        frgList.add(TUIConversationFragment())
         frgList.add(UserFrg())
     }
 

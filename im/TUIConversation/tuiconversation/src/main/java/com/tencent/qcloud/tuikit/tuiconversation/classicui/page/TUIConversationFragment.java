@@ -16,6 +16,7 @@ import android.widget.PopupWindow;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.tencent.qcloud.tuicore.TUIConstants;
 import com.tencent.qcloud.tuicore.TUICore;
 import com.tencent.qcloud.tuicore.interfaces.TUIExtensionEventListener;
@@ -55,13 +56,24 @@ public class TUIConversationFragment extends Fragment {
 
     private ConversationPresenter presenter;
 
+    private View viewLine = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         TUIConversationLog.d(TAG, "TUIConversationFragment onCreateView");
         mBaseView = inflater.inflate(R.layout.conversation_fragment, container, false);
+        viewLine = mBaseView.findViewById(R.id.view_line);
+        immersionBarSet();
         initView();
         return mBaseView;
+    }
+
+
+    private void immersionBarSet() {
+        if (viewLine != null) {
+            ImmersionBar.setTitleBarMarginTop(this, viewLine);
+        }
     }
 
     @Override

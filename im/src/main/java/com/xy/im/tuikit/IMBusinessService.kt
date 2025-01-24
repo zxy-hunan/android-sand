@@ -7,11 +7,14 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.tencent.imsdk.v2.V2TIMManager
 import com.tencent.qcloud.tuicore.ServiceInitializer
 import com.tencent.qcloud.tuicore.TUILogin
 import com.tencent.qcloud.tuicore.interfaces.ITUINotification
 import com.tencent.qcloud.tuicore.interfaces.TUICallback
 import com.xy.common.util.MmkvRepository
+import com.xy.mviframework.network.tool.LOG_TAG
+import com.xy.mviframework.network.tool.logE
 
 /**
  * @file IMBusinessService
@@ -19,16 +22,24 @@ import com.xy.common.util.MmkvRepository
  * @date 2025/1/23 16:31
  * @brief
  */
-class IMBusinessService : ServiceInitializer(),ITUINotification {
+class IMBusinessService : ServiceInitializer(), ITUINotification {
+    var userSig = "eJwtzE0LgkAUheH-MuuQ*fBqCK3CCpEyrIR2AzPK1UpzLhFE-z1Tl*c58H7YKc29l*1ZxKTH2WLcaOyDsMSRyTqa3ZlGdx0aFomAc*6DBH967LvD3g4OAHK4JiW8-y1UYbAMlJJzBashm7S53mfXLD5SJVse7*rmWYTJpUgFOHkmu96CFvVhc3Mr9v0B7pswxQ__"
     fun checkIMLogin(onLoginCallBack: () -> Unit = { }) {
-        TUILogin.login(getAppContext(), MmkvRepository.imAppId,"test","",object : TUICallback() {
-            override fun onSuccess() {
-            }
 
-            override fun onError(errorCode: Int, errorMessage: String?) {
-            }
+        if (!TUILogin.isUserLogined() && V2TIMManager.getInstance().loginStatus != V2TIMManager.V2TIM_STATUS_LOGINING) {
 
-        })
+            TUILogin.login(getAppContext(), MmkvRepository.imAppId, "test", userSig, object : TUICallback() {
+                override fun onSuccess() {
+                    logE(LOG_TAG, "im login onSuccess")
+                }
+
+                override fun onError(errorCode: Int, errorMessage: String?) {
+                    logE(LOG_TAG, "im login onError,errorCode:$errorCode,errorMessage,$errorMessage")
+                }
+
+            })
+
+        }
     }
 
     override fun onNotifyEvent(key: String?, subKey: String?, param: MutableMap<String, Any>?) {
@@ -40,9 +51,9 @@ class IMBusinessService : ServiceInitializer(),ITUINotification {
         initIMLogin()
     }
 
-    private fun initIMLogin(){
+    private fun initIMLogin() {
         val fragmentLifecycleCallbacksImpl = FragmentLifecycleCallbacksImpl()
-        (context as Application).registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks{
+        (context as Application).registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 when (activity.javaClass.simpleName) {
                     "MainActivity" -> {
