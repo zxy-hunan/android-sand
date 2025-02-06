@@ -1,5 +1,6 @@
 package com.xy.common.data
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -11,3 +12,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 class BaseModel {
 }
+
+@Serializable
+data class BaseResultModel(
+    @SerialName("msg")
+    val msg: String = "",
+    @SerialName("code")
+    val code: Int ,
+    @SerialName("token")
+    val token: String="",
+)

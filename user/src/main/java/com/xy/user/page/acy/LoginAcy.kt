@@ -5,6 +5,7 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.arouter.user.ARouterConfig
+import com.xy.common.util.clickDebounce
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.user.databinding.ActivityLoginBinding
 import com.xy.user.intent.UserIntent
@@ -23,8 +24,11 @@ class LoginAcy : MviAcy<ActivityLoginBinding, UserVm, UserIntent>(UserVm::class.
 
     override fun initView() {
         immersionBar(binding.view)
-        binding.llLogin.setOnClickListener {
-            
+        binding.llLogin.clickDebounce {
+            val userName=binding.shapeEditText.text.toString().trim()
+            val password=binding.shapeEditText2.text.toString().trim()
+            if(userName.isEmpty()||password.isEmpty()) return@clickDebounce
+            viewModel.login(userName, password)
         }
     }
 

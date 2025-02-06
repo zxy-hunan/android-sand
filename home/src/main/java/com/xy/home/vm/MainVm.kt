@@ -1,8 +1,8 @@
 package com.xy.home.vm
 
+import UserApiService
 import android.annotation.SuppressLint
 import android.util.Log
-import com.xy.common.data.CommConfig
 import com.xy.common.data.Common
 import com.xy.home.api.MainApiService
 import com.xy.home.intent.MainIntent
