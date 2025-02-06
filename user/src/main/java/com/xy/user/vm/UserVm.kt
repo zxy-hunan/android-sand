@@ -2,6 +2,7 @@ package com.xy.user.vm
 
 import UserApiService
 import android.util.Log
+import com.xy.common.vm.ZhiNiaoBaseViewModel
 import com.xy.mviframework.base.vm.BaseViewModel
 import com.xy.mviframework.network.def.apiRetrofit
 import com.xy.user.R
@@ -15,7 +16,7 @@ import com.xy.user.intent.UserIntent
  * @date 2024/7/22 14:28
  * @brief user
  */
-class UserVm : BaseViewModel<UserIntent>() {
+class UserVm : ZhiNiaoBaseViewModel<UserIntent>() {
     val apiService: UserApiService by lazy {
         apiRetrofit.create(UserApiService::class.java)
     }
@@ -28,8 +29,10 @@ class UserVm : BaseViewModel<UserIntent>() {
         apiService.login(dftMap).HttpCoroutine(onError = {
             Log.e("UserVm", "articleList: onError")
         }, onSuccess = {
-            Log.e("UserVm", "articleList: onSuccess $it")
+
 //            _intent.emitCoroutine(MainIntent.ArticleList(it))
+        }, onCompleteData = {
+            Log.e("UserVm", "articleList: onSuccess ${it.toString()}")
         })
     }
 
