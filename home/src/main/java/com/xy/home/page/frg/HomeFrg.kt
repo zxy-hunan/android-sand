@@ -2,22 +2,17 @@ package com.xy.home.page.frg
 
 import android.graphics.Color
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
-import com.dylanc.longan.toast
-import com.dylanc.viewbinding.getBinding
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.home.R
-import com.xy.home.data.ArticleModel
+import com.xy.common.data.model.ArticleModel
+import com.xy.common.view.bindArticleList
 import com.xy.home.databinding.FragmentHomeBinding
-import com.xy.home.databinding.ItemArticleBinding
 import com.xy.home.databinding.ItemTopArticleBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.vm.MainVm
@@ -69,37 +64,8 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             setDivider(10, dp = true)
             setColor(Color.parseColor("#f5f5f5"))
             startVisible = true
-        }
-            .setup {
-                addType<ArticleModel>(R.layout.item_article)
-                onBind {
-                    val data = getModel<ArticleModel>()
-                    val item = getBinding<ItemArticleBinding>()
+        }.bindArticleList()
 
-                    item.tvTitle.text = data.title
-                    item.tvContent.text = data.content
-
-                    item.tvName.text = data.sysUser.nickName
-
-                    item.tvStar.text = data.comStar.toString()
-                    item.tvCommon.text = data.commNum.toString()
-
-                    item.ivHead.load(data.sysUser.avatar)
-
-                    if (data.imageurl.isEmpty()) {
-                        item.ivArticle.visibility = View.GONE
-                    } else {
-                        item.ivArticle.visibility = View.VISIBLE
-                        item.ivArticle.load(data.imageurl)
-                    }
-                }
-
-                R.id.cl_root.onClick {
-                    val data = getModelOrNull<ArticleModel>() ?: return@onClick
-                    ARouterConfig.Home.H5Act.push(data.arpath)
-                }
-
-            }
 
     }
 
@@ -118,7 +84,11 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                     if (it.list.size < 10) {
                         binding.prf.setNoMoreData(true)
                     }
-                    binding.rvList.addModels(it.list)
+                    if(viewModel.isRefresh){
+                        binding.rvList.models = it.list
+                    }else{
+                        binding.rvList.addModels(it.list)
+                    }
 
 
                     var topList = (binding.rvList.models as List<ArticleModel>).take(3)
@@ -143,9 +113,5 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 }
 
 
-fun ImageView.load(url: String) {
-    var transurl = if (url.startsWith("http")) url else "http://gyuelife.online" + url
-    Glide.with(this).load(transurl).placeholder(
-        com.xy.common.R.drawable.icon_default
-    ).into(this)
-}
+
+

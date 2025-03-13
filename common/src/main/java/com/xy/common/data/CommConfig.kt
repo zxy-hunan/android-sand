@@ -32,3 +32,25 @@ sealed class Common {
     }
 
 }
+
+
+sealed class ArticleTotalNum {
+    abstract val no: Int
+
+
+    object Common : ArticleTotalNum() {
+        override val no: Int
+            get() = 0
+    }
+
+    object Article : ArticleTotalNum() {
+        override val no: Int
+            get() = 1
+    }
+
+    object Star : ArticleTotalNum() {
+        override val no: Int
+            get() = 2
+    }
+
+}

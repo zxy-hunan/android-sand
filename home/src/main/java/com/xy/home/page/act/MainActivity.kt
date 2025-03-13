@@ -1,24 +1,18 @@
 package com.xy.home.page.act
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.blankj.utilcode.util.ColorUtils
-import com.blankj.utilcode.util.FragmentUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.tencent.qcloud.tuikit.tuiconversation.classicui.page.TUIConversationFragment
-import com.tencent.qcloud.tuikit.tuiconversation.minimalistui.page.TUIConversationMinimalistFragment
 import com.xy.common.util.initFragment
 import com.xy.home.R
-import com.xy.home.data.APPTAG
+import com.xy.common.data.model.APPTAG
 import com.xy.home.databinding.ActivityMainBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.page.frg.HomeCommunityFrg
 import com.xy.home.page.frg.HomeFrg
 import com.xy.home.vm.MainVm
-import com.xy.im.page.frg.NotiFrg
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.mviframework.network.tool.SHOW_LOG
 import com.xy.user.page.frg.UserFrg
@@ -40,6 +34,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     }
 
     override fun initView() {
+        SHOW_LOG = true
         immersionBar(binding.view)
         initFrg()
         navSelectedAction()

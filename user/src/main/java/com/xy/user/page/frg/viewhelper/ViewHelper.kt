@@ -9,6 +9,7 @@ import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.user.R
+import com.xy.user.data.ArticleTag
 import com.xy.user.data.UserTag
 import com.xy.user.data.UserTagModel
 import com.xy.user.databinding.ItemSettingBinding
@@ -34,7 +35,7 @@ fun RecyclerView.rvSetting(){
         onClick(R.id.ll_item, R.id.ll_item) {
             val item = getModel<UserTagModel>()
             when (item.tag) {
-                UserTag.SETTING -> {
+                UserTag.SETTING.tag -> {
                     ARouterConfig.User.SettingsAct.push()
                 }
 
@@ -58,7 +59,7 @@ fun RecyclerView.rvTop(){
         onClick(R.id.ll_item, R.id.ll_item) {
             val item = getModel<UserTagModel>()
             when (item.tag) {
-                UserTag.SETTING -> {
+                UserTag.SETTING.tag -> {
 //                    gotoLogin()
                 }
 
@@ -82,13 +83,7 @@ fun RecyclerView.rvBase(){
         }
         onClick(R.id.ll_item, R.id.ll_item) {
             val item = getModel<UserTagModel>()
-            when (item.tag) {
-                UserTag.SETTING -> {
-//                    gotoLogin()
-                }
-
-                else -> {}
-            }
+            ARouterConfig.User.ArticleClassifyAct.push(item.tag.toInt())
         }
     }
 }

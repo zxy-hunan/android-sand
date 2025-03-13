@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.xy.home.R
-import com.xy.home.data.ArticleModel
+import com.xy.common.data.model.ArticleModel
 import com.youth.banner.adapter.BannerAdapter
 import com.youth.banner.util.BannerUtils
 

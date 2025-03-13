@@ -1,9 +1,9 @@
-package com.xy.home.data
+package com.xy.common.data.model
 
 data class ArticleModel(
     val comId: Int,
-    val comStar: Int=0,
-    val commNum: Int=0,
+    val comStar: Int?=0,
+    val commNum: Int?=0,
     val content: String,
     val createTime: String,
     val id: Int,
@@ -11,7 +11,8 @@ data class ArticleModel(
     val arpath: String,
     val status:Int,
     val title:String,
-    var sysUser:SysUserModel
+    var sysUser: SysUserModel,
+    var starNum:Int?=0,
 )
 
 

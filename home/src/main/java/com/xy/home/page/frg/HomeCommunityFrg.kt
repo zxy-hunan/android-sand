@@ -1,22 +1,17 @@
 package com.xy.home.page.frg
 
-import androidx.databinding.DataBindingUtil.getBinding
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.gyf.immersionbar.ktx.immersionBar
-import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import com.xy.common.data.Common
 import com.xy.common.util.clickDebounce
 import com.xy.home.R
-import com.xy.home.data.ArticleModel
+import com.xy.common.data.model.ArticleModel
+import com.xy.common.view.load
 import com.xy.home.databinding.FragmentHomeCommunityBinding
-import com.xy.home.databinding.ItemArticleBinding
 import com.xy.home.databinding.ItemCommunityArticleBinding
-import com.xy.home.databinding.ItemTopArticleBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.page.adapter.CommunityTopAdapter
 import com.xy.home.vm.MainVm

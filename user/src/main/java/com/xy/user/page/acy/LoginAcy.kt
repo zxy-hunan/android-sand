@@ -3,6 +3,7 @@ package com.xy.user.page.acy
 import android.os.Bundle
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.common.util.clickDebounce
@@ -33,6 +34,15 @@ class LoginAcy : MviAcy<ActivityLoginBinding, UserVm, UserIntent>(UserVm::class.
     }
 
     override fun observe() {
+        intentCallBack {
+            when(it){
+                is UserIntent.LoginSuccess->{
+                    toast("login success")
+                    finish()
+                }
+                else -> {}
+            }
+        }
     }
 
     override fun onListener() {

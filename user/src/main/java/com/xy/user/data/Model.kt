@@ -7,7 +7,7 @@ package com.xy.user.data
  * @brief user model
  */
 
-data class UserTagModel(var tagName: String, var tagUrl: String, var tag: UserTag, var res: Int = 0)
+data class UserTagModel(var tagName: String, var tagUrl: String, var tag: String, var res: Int = 0)
 
 
 sealed class UserTag {
@@ -21,5 +21,29 @@ sealed class UserTag {
     object OTHER : UserTag() {
         override val tag: String
             get() = "2"
+    }
+}
+
+sealed class ArticleTag {
+    abstract val tag: String
+
+    object ZERO : ArticleTag() {
+        override val tag: String
+            get() = "0"
+    }
+
+    object ONE : ArticleTag() {
+        override val tag: String
+            get() = "1"
+    }
+
+    object TWO : ArticleTag() {
+        override val tag: String
+            get() = "2"
+    }
+
+    object THREE : ArticleTag() {
+        override val tag: String
+            get() = "3"
     }
 }

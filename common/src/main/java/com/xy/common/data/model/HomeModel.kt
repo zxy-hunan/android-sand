@@ -1,4 +1,4 @@
-package com.xy.home.data
+package com.xy.common.data.model
 
 /**
  * @file HomeModel

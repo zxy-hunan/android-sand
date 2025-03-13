@@ -1,10 +1,18 @@
 package com.xy.common.vm
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.xy.common.api.ArticleApiService
+import com.xy.common.data.ArticleTotalNum
+import com.xy.common.data.model.ArticleModel
 import com.xy.mviframework.base.vm.BaseIntent
 import com.xy.mviframework.base.vm.BaseViewModel
 import com.xy.mviframework.network.api.HttpBy
 import com.xy.mviframework.network.def.BaseRes
+import com.xy.mviframework.network.def.apiRetrofit
+import com.xy.mviframework.network.tool.LOG_TAG
+import com.xy.mviframework.network.tool.logD
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -16,8 +24,14 @@ import kotlinx.coroutines.launch
  * @brief
  */
 open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
-    protected fun <T> Flow<BaseRes<T>>.HttpCoroutine(onError: (Throwable) -> Unit = {}, onSuccess: (T) -> Unit = {},
-                                                     onCompleteData: (BaseRes<T>) -> Unit = {}): Job {
+    val baseApiRetrofit: ArticleApiService by lazy {
+        apiRetrofit.create(ArticleApiService::class.java)
+    }
+
+    protected fun <T> Flow<BaseRes<T>>.HttpCoroutine(
+        onError: (Throwable) -> Unit = {}, onSuccess: (T) -> Unit = {},
+        onCompleteData: (BaseRes<T>) -> Unit = {}
+    ): Job {
         return viewModelScope.launch {
             HttpBy(
                 onFail = {
@@ -35,6 +49,50 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
                 }
             )
         }
+    }
+
+    var page = 1
+
+    @SuppressLint("SuspiciousIndentation")
+    fun articleListReq(comId: String = "", onSuccess: (List<ArticleModel>) -> Unit = {}) {
+        val dftMap = mutableMapOf<String, String>("pageNum" to "$page", "pageSize" to "10")
+        if (comId.isNotBlank()) {
+            dftMap["comId"] = comId
+        }
+        baseApiRetrofit.articleList(dftMap).HttpCoroutine(onError = {
+            Log.e("MainVm", "articleList: onError")
+        }, onSuccess = {
+            Log.e("MainVm", "articleList: onSuccess $page ${it.size} $it")
+            onSuccess.invoke(it)
+        })
+    }
+
+    fun articleNumReq(userId: String = "", type: Int = ArticleTotalNum.Common.no, onSuccess: (Int) -> Unit = {}) {
+        if (userId.isEmpty()) return
+        val dftMap = mutableMapOf<String, String>("pageNum" to "$page", "pageSize" to "1000", "isSelf" to "0", "userId" to userId)
+
+        var req = baseApiRetrofit.articleCommList(dftMap)
+        when (type) {
+            ArticleTotalNum.Common.no -> {
+                req = baseApiRetrofit.articleCommList(dftMap)
+            }
+
+            ArticleTotalNum.Article.no -> {
+                req = baseApiRetrofit.articleTotalList(dftMap)
+            }
+
+            ArticleTotalNum.Star.no -> {
+                req = baseApiRetrofit.articleStarList(dftMap)
+            }
+        }
+
+        req.HttpCoroutine(onError = {
+            onSuccess.invoke(0)
+            logD(LOG_TAG, "onError")
+        }, onSuccess = {
+            logD(LOG_TAG, "onSuccess", it.size)
+            onSuccess.invoke(it.size)
+        })
     }
 
 }

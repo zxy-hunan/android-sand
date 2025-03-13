@@ -1,7 +1,6 @@
 package com.xy.home.intent
 
-import com.xy.common.data.BaseModel
-import com.xy.home.data.ArticleModel
+import com.xy.common.data.model.ArticleModel
 import com.xy.mviframework.base.vm.BaseIntent
 
 /**

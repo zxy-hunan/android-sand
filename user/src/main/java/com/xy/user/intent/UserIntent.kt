@@ -1,5 +1,6 @@
 package com.xy.user.intent
 
+import com.xy.common.data.model.ArticleModel
 import com.xy.mviframework.base.vm.BaseIntent
 
 /**
@@ -8,5 +9,8 @@ import com.xy.mviframework.base.vm.BaseIntent
  * @date 2024/7/22 14:28
  * @brief user
  */
-class UserIntent : BaseIntent() {
+sealed class UserIntent : BaseIntent() {
+    data class LoginSuccess(val token:String) : UserIntent()
+
+    data class ArticleList(val list:List<ArticleModel>) : UserIntent()
 }

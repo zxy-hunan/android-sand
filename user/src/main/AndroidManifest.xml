@@ -4,5 +4,6 @@
     <application>
         <activity android:name="com.xy.user.page.acy.LoginAcy" />
         <activity android:name=".page.acy.SettingsAcy"/>
+        <activity android:name=".page.acy.ArticleClassifyAcy"/>
     </application>
 </manifest>
