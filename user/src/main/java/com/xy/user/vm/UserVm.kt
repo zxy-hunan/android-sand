@@ -14,7 +14,10 @@ import com.xy.user.data.ArticleTag
 import com.xy.user.data.UserTag
 import com.xy.user.data.UserTagModel
 import com.xy.user.intent.UserIntent
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.SharedFlow
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 /**
  * @file UserVm
@@ -37,15 +40,25 @@ class UserVm : ZhiNiaoBaseViewModel<UserIntent>() {
         }, onSuccess = {
             Log.e("UserVm", "token: onSuccess ${it}")
             _intent.emitCoroutine(UserIntent.LoginSuccess(it))
-            MmkvRepository.loginToken = it
+            MmkvRepository.loginToken = "Bearer "+it
             SharedFlowBus.post(key = FlowBusTag.LoginSuccess(),
                 value = 0)
 
-        }, onCompleteData = {
-            Log.e("UserVm", "onCompleteData: ${it.toString()}")
         })
     }
 
+
+    fun getInfo(onSuccess: () -> Unit) {
+        apiService.getInfo(MmkvRepository.loginToken).HttpCoroutine(onError = {
+        }, onOriginSuccess = {
+            Log.e("UserVm", "token: onSuccess ${it}")
+            it.user?.let {
+                MmkvRepository.userModel = it
+                _intent.emitCoroutine(UserIntent.UserInfoSuccess(it))
+                onSuccess.invoke()
+            }
+        })
+    }
 
 
 
@@ -70,12 +83,19 @@ class UserVm : ZhiNiaoBaseViewModel<UserIntent>() {
     }
 
 
-    fun articleNum(userId: String = "", type: ArticleTotalNum = ArticleTotalNum.Common, onSuccess: (Int) -> Unit = {}){
+    fun articleNum(userId: String = "", type: ArticleTotalNum = ArticleTotalNum.Common, onSuccess: (Int) -> Unit = {}) {
         articleNumReq(userId, type.no, onSuccess)
     }
 
 
-
+    suspend fun wrapArticleNumRequest(
+        param: String,
+        type: ArticleTotalNum
+    ): String = suspendCoroutine { continuation ->
+        articleNum(param, type) { result ->
+            continuation.resume(result.toString())
+        }
+    }
 
     fun getSettingTagList(): MutableList<UserTagModel> {
         val list = mutableListOf<UserTagModel>()
@@ -89,9 +109,9 @@ class UserVm : ZhiNiaoBaseViewModel<UserIntent>() {
 
     fun getTopTagList(): MutableList<UserTagModel> {
         val list = mutableListOf<UserTagModel>()
-        list.add(UserTagModel("文章", "1", UserTag.OTHER.tag))
-        list.add(UserTagModel("点赞", "1", UserTag.OTHER.tag))
-        list.add(UserTagModel("评论", "1", UserTag.SETTING.tag))
+        list.add(UserTagModel("文章", "0", UserTag.OTHER.tag))
+        list.add(UserTagModel("点赞", "0", UserTag.OTHER.tag))
+        list.add(UserTagModel("评论", "0", UserTag.SETTING.tag))
         return list
     }
 

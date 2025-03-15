@@ -4,6 +4,7 @@ import com.dylanc.mmkv.MMKVOwner
 import com.dylanc.mmkv.mmkvInt
 import com.dylanc.mmkv.mmkvParcelable
 import com.dylanc.mmkv.mmkvString
+import com.xy.common.data.model.UserModel
 
 /**
  * @file MmkvRepository
@@ -18,5 +19,7 @@ object MmkvRepository : MMKVOwner{
     )
 
     var loginToken by mmkvString(default = "")
+
+    var userModel by mmkvParcelable<UserModel>(default = UserModel())
 
 }

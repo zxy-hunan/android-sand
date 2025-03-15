@@ -1,4 +1,5 @@
 import com.alibaba.android.arouter.launcher.ARouter
+import com.xy.common.data.model.ArticleModel
 
 class ARouterConfig {
     object Home{
@@ -20,14 +21,30 @@ class ARouterConfig {
 
             const val PATH = "$GROUP/page/act/h5Acy"
             const val ARTICLE_URL = "ARTICLE_URL"
+            const val ARTICLE_MODE = "ARTICLE_MODE"
 
-            fun push(url:String="") {
+            fun push(url:String="",model: ArticleModel) {
                 ARouter.getInstance()
                     .build(PATH)
+                    .withSerializable(ARTICLE_MODE,model)
                     .withString(ARTICLE_URL,url)
                     .navigation()
             }
         }
+
+        object MarkdownAct {
+
+            const val PATH = "$GROUP/page/act/MarkdownAcy"
+            const val ARTICLE_MODE = "ARTICLE_MODE"
+
+            fun push(model: ArticleModel) {
+                ARouter.getInstance()
+                    .build(PATH)
+                    .withSerializable(ARTICLE_MODE,model)
+                    .navigation()
+            }
+        }
+
 
     }
 

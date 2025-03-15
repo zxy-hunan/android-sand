@@ -49,6 +49,7 @@
         <activity android:name=".page.act.HomeDetailAcy"/>
         <activity android:name=".page.act.PostCommunityAct"/>
         <activity android:name=".page.act.H5Acy"/>
+        <activity android:name=".page.act.MarkdownAcy"/>
     </application>
 
 </manifest>

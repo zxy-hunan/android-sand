@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
-    <com.hjq.shape.layout.ShapeLinearLayout
+    <com.hjq.shape.layout.ShapeRelativeLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -38,7 +38,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/tv_origin"
+            android:paddingHorizontal="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="原文"/>
 
-    </com.hjq.shape.layout.ShapeLinearLayout>
+    </com.hjq.shape.layout.ShapeRelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

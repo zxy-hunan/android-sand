@@ -50,7 +50,7 @@ fun RecyclerView.bindArticleList() {
 
         R.id.cl_root.onClick {
             val data = getModelOrNull<ArticleModel>() ?: return@onClick
-            ARouterConfig.Home.H5Act.push(data.arpath)
+            ARouterConfig.Home.H5Act.push(data.arpath,data)
         }
 
     }

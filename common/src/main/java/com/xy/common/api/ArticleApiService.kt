@@ -1,9 +1,11 @@
 package com.xy.common.api
 
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.StarArticleModel
 import com.xy.mviframework.network.def.BaseRes
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.QueryMap
 
 /**
@@ -18,7 +20,7 @@ interface ArticleApiService {
 
     //总评论
     @GET("system/comm/list")
-    fun articleCommList(@QueryMap params: Map<String,String>): Flow<BaseRes<List<ArticleModel>>>
+    fun articleCommList(@Header("Authorization") token: String,@QueryMap params: Map<String,String>): Flow<BaseRes<List<ArticleModel>>>
 
     //总文
     @GET("system/article/list")
@@ -26,5 +28,5 @@ interface ArticleApiService {
 
     //总赞
     @GET("system/star/list")
-    fun articleStarList(@QueryMap params: Map<String,String>): Flow<BaseRes<List<ArticleModel>>>
+    fun articleStarList(@Header("Authorization") token: String,@QueryMap params: Map<String,String>): Flow<BaseRes<List<StarArticleModel>>>
 }

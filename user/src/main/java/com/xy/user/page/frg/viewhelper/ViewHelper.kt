@@ -36,7 +36,8 @@ fun RecyclerView.rvSetting(){
             val item = getModel<UserTagModel>()
             when (item.tag) {
                 UserTag.SETTING.tag -> {
-                    ARouterConfig.User.SettingsAct.push()
+//                    ARouterConfig.User.SettingsAct.push()
+                    ARouterConfig.User.LoginAct.push()
                 }
 
                 else -> {}

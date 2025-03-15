@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.xy.common.api.ArticleApiService
 import com.xy.common.data.ArticleTotalNum
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.util.MmkvRepository
 import com.xy.mviframework.base.vm.BaseIntent
 import com.xy.mviframework.base.vm.BaseViewModel
 import com.xy.mviframework.network.api.HttpBy
@@ -13,6 +14,7 @@ import com.xy.mviframework.network.def.BaseRes
 import com.xy.mviframework.network.def.apiRetrofit
 import com.xy.mviframework.network.tool.LOG_TAG
 import com.xy.mviframework.network.tool.logD
+import com.xy.mviframework.network.tool.logE
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -28,7 +30,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
         apiRetrofit.create(ArticleApiService::class.java)
     }
 
-    protected fun <T> Flow<BaseRes<T>>.HttpCoroutine(
+/*    protected fun <T> Flow<BaseRes<T>>.HttpCoroutine(
         onError: (Throwable) -> Unit = {}, onSuccess: (T) -> Unit = {},
         onCompleteData: (BaseRes<T>) -> Unit = {}
     ): Job {
@@ -49,7 +51,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
                 }
             )
         }
-    }
+    }*/
 
     var page = 1
 
@@ -60,9 +62,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
             dftMap["comId"] = comId
         }
         baseApiRetrofit.articleList(dftMap).HttpCoroutine(onError = {
-            Log.e("MainVm", "articleList: onError")
         }, onSuccess = {
-            Log.e("MainVm", "articleList: onSuccess $page ${it.size} $it")
             onSuccess.invoke(it)
         })
     }
@@ -70,29 +70,42 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
     fun articleNumReq(userId: String = "", type: Int = ArticleTotalNum.Common.no, onSuccess: (Int) -> Unit = {}) {
         if (userId.isEmpty()) return
         val dftMap = mutableMapOf<String, String>("pageNum" to "$page", "pageSize" to "1000", "isSelf" to "0", "userId" to userId)
-
-        var req = baseApiRetrofit.articleCommList(dftMap)
         when (type) {
             ArticleTotalNum.Common.no -> {
-                req = baseApiRetrofit.articleCommList(dftMap)
+                baseApiRetrofit.articleCommList(MmkvRepository.loginToken,dftMap).HttpCoroutine(onError = {
+                    logE(LOG_TAG,type, "onError:${it.message}")
+                    onSuccess.invoke(0)
+                }, onOriginSuccess = {
+                    logE(LOG_TAG,type, "onSuccess: ${it.total}")
+                    onSuccess.invoke(it.total)
+                })
             }
 
             ArticleTotalNum.Article.no -> {
-                req = baseApiRetrofit.articleTotalList(dftMap)
+                baseApiRetrofit.articleList(dftMap).HttpCoroutine(onError = {
+                    onSuccess.invoke(0)
+                    logE(LOG_TAG,type, "onError:${it.message}")
+                }, onOriginSuccess = {
+                    logE(LOG_TAG,type, "onSuccess: ${it.total}")
+                    onSuccess.invoke(it.total)
+                })
             }
 
             ArticleTotalNum.Star.no -> {
-                req = baseApiRetrofit.articleStarList(dftMap)
+                baseApiRetrofit.articleStarList(MmkvRepository.loginToken,dftMap).HttpCoroutine(onError = {
+                    logE(LOG_TAG,type, "onError:${it.message}")
+                    onSuccess.invoke(0)
+                }, onOriginSuccess = {
+                    logE(LOG_TAG,type, "onSuccess: ${it.total}")
+                    onSuccess.invoke(it.total)
+                })
+            }
+            else ->{
+                onSuccess.invoke(0)
             }
         }
 
-        req.HttpCoroutine(onError = {
-            onSuccess.invoke(0)
-            logD(LOG_TAG, "onError")
-        }, onSuccess = {
-            logD(LOG_TAG, "onSuccess", it.size)
-            onSuccess.invoke(it.size)
-        })
+
     }
 
 }

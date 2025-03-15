@@ -22,7 +22,9 @@ import com.just.agentweb.DefaultWebClient
 import com.just.agentweb.R
 import com.just.agentweb.WebChromeClient
 import com.just.agentweb.WebViewClient
+import com.xy.common.data.model.ArticleModel
 import com.xy.common.util.MmkvRepository
+import com.xy.common.util.clickDebounce
 import com.xy.home.databinding.ActivityH5Binding
 import com.xy.home.databinding.ActivityMainBinding
 import com.xy.home.intent.MainIntent
@@ -43,6 +45,8 @@ class H5Acy :MviAcy<ActivityH5Binding, MainVm, MainIntent>(MainVm::class.java, w
     private lateinit var mAgentWeb: AgentWeb
 
     private val URL by intentExtras(ARouterConfig.Home.H5Act.ARTICLE_URL, "")
+
+    private val articleModel by intentExtras<ArticleModel>(ARouterConfig.Home.H5Act.ARTICLE_MODE, ArticleModel())
     override fun initData(savedInstanceState: Bundle?) {
     }
 
@@ -52,6 +56,9 @@ class H5Acy :MviAcy<ActivityH5Binding, MainVm, MainIntent>(MainVm::class.java, w
             titleBarMarginTop(binding.viewLine)
         }
         initWebView()
+        binding.tvOrigin.clickDebounce {
+            ARouterConfig.Home.MarkdownAct.push(articleModel)
+        }
     }
 
     override fun observe() {
