@@ -8,7 +8,9 @@ import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
+import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
+import com.xy.common.data.Common
 import com.xy.home.R
 import com.xy.common.data.model.ArticleModel
 import com.xy.common.view.bindArticleList
@@ -101,12 +103,10 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
     override fun onListens() {
         binding.prf.run {
             onRefresh {
-                viewModel.page = 1
-                viewModel.articleList()
+                viewModel.refresh(Common.Default)
             }
             onLoadMore {
-                viewModel.page++
-                viewModel.articleList()
+                viewModel.loadMore(Common.Default)
             }
         }
     }

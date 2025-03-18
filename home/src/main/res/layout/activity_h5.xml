@@ -47,6 +47,78 @@
             android:gravity="center"
             android:text="原文"/>
 
+        <LinearLayout
+            android:layout_toLeftOf="@id/tv_origin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+        <LinearLayout
+            android:id="@+id/ll_share"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_like" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="12"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- -->
+
+        <RelativeLayout
+            android:id="@+id/ll_comm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/stv_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提交"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginHorizontal="10dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shape_radius="5dp"
+                app:shape_startColor="@color/color_2196f3"
+                app:shape_endColor="@color/color_64b5f6" />
+
+            <com.hjq.shape.view.ShapeEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/stv_sub"
+                app:shape_solidColor="@color/white"
+                app:shape_radius="10dp" />
+
+        </RelativeLayout>
+
+        </LinearLayout>
+
     </com.hjq.shape.layout.ShapeRelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,15 @@
 package com.xy.home.page.frg
 
+import android.graphics.Color
+import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
+import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
+import com.xy.common.data.Common
 import com.xy.common.util.clickDebounce
 import com.xy.home.R
 import com.xy.common.data.model.ArticleModel
@@ -50,6 +54,7 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
                     if (it.list.size < 10) {
                         binding.pglRefresh.setNoMoreData(true)
                     }
+
                     if(viewModel.isRefresh){
                         binding.rvCommunity.models=it.list
                     }else{
@@ -73,7 +78,9 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
 
     private fun setRv() {
         binding.rvCommunity.linear().divider {
-
+            orientation = DividerOrientation.HORIZONTAL
+            setDivider(10, dp = true)
+            setColor(Color.parseColor("#f5f5f5"))
         }.setup {
             addType<ArticleModel> { R.layout.item_community_article }
             onBind {
@@ -92,10 +99,10 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
     override fun onListens() {
         binding.pglRefresh.run {
             onRefresh {
-                viewModel.refresh()
+                viewModel.refresh(Common.Hot)
             }
             onLoadMore {
-                viewModel.loadMore()
+                viewModel.loadMore(Common.Hot)
             }
         }
     }

@@ -8,6 +8,7 @@ import com.tencent.qcloud.tuikit.tuiconversation.classicui.page.TUIConversationF
 import com.xy.common.util.initFragment
 import com.xy.home.R
 import com.xy.common.data.model.APPTAG
+import com.xy.common.util.asColor
 import com.xy.home.databinding.ActivityMainBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.page.frg.HomeCommunityFrg
@@ -73,10 +74,10 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
     private fun navSelectedAction() {
 
         val navigationController: NavigationController = binding.bnv.material()
-            .addItem(R.mipmap.home, "首页")
-            .addItem(R.mipmap.coummity, "热议")
-            .addItem(R.mipmap.chat, "会话")
-            .addItem(R.mipmap.me, "我").setMode(4)
+            .addItem(R.mipmap.home, "首页",com.xy.common.R.color.color_2196f3.asColor())
+            .addItem(R.mipmap.coummity, "沸点",com.xy.common.R.color.color_2196f3.asColor())
+            .addItem(R.mipmap.chat, "聊天",com.xy.common.R.color.color_2196f3.asColor())
+            .addItem(R.mipmap.me, "我", com.xy.common.R.color.color_2196f3.asColor()).setMode(4)
             .build()
 
         binding.mainVp.run {

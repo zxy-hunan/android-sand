@@ -17,10 +17,10 @@
 
     <ImageView
         android:id="@+id/iv_scan"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_margin="20dp"
-        android:src="@drawable/shape_recommend_bg"
+        android:src="@drawable/ic_scan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
@@ -29,7 +29,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_margin="20dp"
-        android:src="@drawable/shape_recommend_bg"
+        android:src="@drawable/ic_noti"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
@@ -70,7 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         app:layout_constraintEnd_toEndOf="@+id/iv_setting"
         app:layout_constraintStart_toStartOf="@+id/iv_scan"
         app:layout_constraintTop_toBottomOf="@+id/iv_head">
