@@ -96,6 +96,10 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                     var topList = (binding.rvList.models as List<ArticleModel>).take(3)
                     binding.rvTop.models = topList
                 }
+
+                else -> {
+
+                }
             }
         }
     }

@@ -55,9 +55,19 @@ class H5Acy :MviAcy<ActivityH5Binding, MainVm, MainIntent>(MainVm::class.java, w
             statusBarDarkFont(true)
             titleBarMarginTop(binding.viewLine)
         }
+        binding.tblNav.setTitle("详情")
         initWebView()
-        binding.tvOrigin.clickDebounce {
+        binding.clLayout.tvOrigin.clickDebounce {
             ARouterConfig.Home.MarkdownAct.push(articleModel)
+        }
+
+        binding.clLayout.stvSub.clickDebounce {
+            binding.clLayout.setContent.text?.let {
+                if(it.isEmpty()) return@clickDebounce
+                viewModel.articleComm(it.trim().toString(),"${MmkvRepository.userModel.userId}","${articleModel.id}", onSuccess = {
+                    binding.clLayout.setContent.setText("")
+                })
+            }
         }
     }
 
@@ -121,6 +131,7 @@ class H5Acy :MviAcy<ActivityH5Binding, MainVm, MainIntent>(MainVm::class.java, w
 
 
     private val mWebViewClient = object : WebViewClient() {
+
         override fun shouldOverrideUrlLoading(
             view: WebView?,
             request: WebResourceRequest?,

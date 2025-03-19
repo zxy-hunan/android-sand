@@ -1,7 +1,9 @@
 package com.xy.home.vm
 
+import android.widget.Toast
 import com.xy.common.data.Common
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.util.MmkvRepository
 import com.xy.common.vm.ZhiNiaoBaseViewModel
 import com.xy.home.api.MainApiService
 import com.xy.home.intent.MainIntent
@@ -43,7 +45,7 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
 
 //    {content: "哈哈", userId: 100, articleId: 74, parId: null, replyId: null}
 
-    fun articleComm(content: String = "",userId:String="",articleId:String="",parId:String="",replyId:String="")  {
+    fun articleComm(content: String = "",userId:String="",articleId:String="",parId:String="",replyId:String="",onSuccess:()->Unit={})  {
         val dftMap = mutableMapOf<String, String>()
         dftMap["content"] = content
         dftMap["userId"] = userId
@@ -51,8 +53,24 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
         dftMap["parId"] = parId
         dftMap["replyId"] = replyId
 
-        mainService.articleComm(dftMap).HttpCoroutine(onError = {
+        mainService.articleComm(MmkvRepository.loginToken,dftMap).HttpCoroutine(onError = {
         }, onSuccess = {
+            onSuccess.invoke()
         })
     }
+
+
+    fun commList(pageNum: Int = 1,articleId:String="")  {
+        val dftMap = mutableMapOf<String, String>()
+        dftMap["pageNum"] = "$pageNum"
+        dftMap["pageSize"] = "10"
+        dftMap["articleId"] = articleId
+
+        mainService.commList(MmkvRepository.loginToken,dftMap).HttpCoroutine(
+            onError = {
+        }, onSuccess = {
+            _intent.emitCoroutine(MainIntent.CommList(it))
+        })
+    }
+
 }

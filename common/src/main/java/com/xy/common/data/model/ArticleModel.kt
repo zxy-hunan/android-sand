@@ -40,7 +40,7 @@ data class SysUserModel(
     @SerialName("avatar")
     val avatar: String = "",
     @SerialName("userId")
-    val userId: Int = 0,
+    val userId: Int? = 0,
 ): java.io.Serializable
 
 data class StarArticleModel(
@@ -65,3 +65,20 @@ data class StarArticleModel(
 "parId": 0,
 "content": "HELLO",
 "selUserId": null,*/
+
+
+@Serializable
+data class CommModel(
+    @SerialName("id")
+    val id: Int = 0,
+    @SerialName("parId")
+    val parId: Int = 0,
+    @SerialName("content")
+    val content: String = "",
+    @SerialName("comComm")
+    val comComm: List<CommModel> = mutableListOf(),
+    @SerialName("sysUser")
+    val sysUser: SysUserModel = SysUserModel(),
+    @SerialName("sysUserRe")
+    val sysUserRe: SysUserModel = SysUserModel(),
+): java.io.Serializable

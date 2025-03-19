@@ -62,6 +62,9 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
                     }
 
                 }
+                else ->{
+
+                }
             }
         }
     }

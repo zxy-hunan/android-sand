@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    app:shape_solidColor="#f7f7f7"
+    app:shape_topLeftRadius="@dimen/dp_10"
+    app:shape_topRightRadius="@dimen/dp_10"
+    tools:ignore="MissingDefaultResource">
+
+    <TextView
+        android:id="@+id/tv_origin"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:text="原文" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/tv_origin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_share"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_like" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="12"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- -->
+
+        <RelativeLayout
+            android:id="@+id/ll_comm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/stv_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="10dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:shape_endColor="@color/color_64b5f6"
+                app:shape_radius="5dp"
+                app:shape_startColor="@color/color_2196f3" />
+
+            <com.hjq.shape.view.ShapeEditText
+                android:id="@+id/set_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/stv_sub"
+                android:textSize="@dimen/sp_12"
+                app:shape_radius="10dp"
+                app:shape_solidColor="@color/white" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</com.hjq.shape.layout.ShapeRelativeLayout>
