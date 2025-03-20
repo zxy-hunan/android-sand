@@ -56,9 +56,10 @@
         app:layout_constraintTop_toTopOf="@+id/iv_head" />
 
     <TextView
+        android:id="@+id/tv_slogen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sign in coummnity1"
+        android:text="陪伴技术成长的每一瞬间"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_head"
         app:layout_constraintStart_toStartOf="@+id/tv_name" />
@@ -131,12 +132,13 @@
         app:shape_solidColor="#fff">
 
         <TextView
+            android:id="@+id/tv_center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="5dp"
             android:text="创作者中心"
             android:textColor="#000"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             tools:text="test" />
 
@@ -165,12 +167,13 @@
         tools:layout_editor_absoluteX="20dp">
 
         <TextView
+            android:id="@+id/tv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="5dp"
             android:text="更多功能"
             android:textColor="#000"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             tools:text="test" />
 

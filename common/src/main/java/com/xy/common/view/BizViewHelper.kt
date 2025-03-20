@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.drake.brv.utils.setup
 import com.xy.common.R
+import com.xy.common.data.AppFontsType
 import com.xy.common.data.model.ArticleModel
 import com.xy.common.databinding.ItemArticleBinding
+import com.xy.common.util.AppFontsUtil
+import com.xy.common.util.mContext
 
 /**
  * @file BizViewHelper
@@ -25,8 +28,11 @@ fun RecyclerView.bindArticleList() {
 
             item.tvTitle.text = data.title
             item.tvContent.text = data.content
+            AppFontsUtil.setControlFonts(mContext, item.tvTitle, AppFontsType.BARLOW_SEMI_BOLD)
+            AppFontsUtil.setControlFonts(mContext, item.tvContent, AppFontsType.ALI_MA_MA)
 
             item.tvName.text = data.sysUser.nickName
+            AppFontsUtil.setControlFonts(mContext, item.tvName, AppFontsType.BARLOW_SEMI_BOLD)
             if (data.starNum != null) {
                 item.tvStar.text = "${data.starNum}"
             } else {

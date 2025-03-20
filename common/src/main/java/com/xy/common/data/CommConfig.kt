@@ -1,5 +1,6 @@
 package com.xy.common.data
 
+import android.graphics.Typeface
 import com.xy.common.R
 
 /**
@@ -51,6 +52,32 @@ sealed class ArticleTotalNum {
     object Star : ArticleTotalNum() {
         override val no: Int
             get() = 2
+    }
+
+}
+
+
+sealed class AppFontsType {
+    abstract val appFontsType: String
+
+    object DEFAULT : AppFontsType() {
+        override val appFontsType: String
+            get() = Typeface.DEFAULT.toString()
+    }
+
+    object BOLD : AppFontsType() {
+        override val appFontsType: String
+            get() = Typeface.BOLD.toString()
+    }
+
+    object BARLOW_SEMI_BOLD : AppFontsType() {
+        override val appFontsType: String
+            get() = "fonts/Barlow-SemiBold.ttf"
+    }
+
+    object ALI_MA_MA : AppFontsType() {
+        override val appFontsType: String
+            get() = "fonts/AlimamaAgileVF-Thin.ttf"
     }
 
 }

@@ -27,5 +27,8 @@ interface MainApiService {
     @GET("system/comm/list")
     fun commList(@Header("Authorization") token: String, @QueryMap params: Map<String,String>): Flow<BaseRes<List<CommModel>>>
 
+    @POST("system/star")
+    fun articleStar(@Header("Authorization") token: String, @Body params: Map<String,String>): Flow<BaseRes<BaseModel>>
+
 
 }

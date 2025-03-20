@@ -1,6 +1,7 @@
 package com.xy.sand
 
 import com.alibaba.android.arouter.launcher.ARouter
+import com.drake.statelayout.StateConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -20,7 +21,16 @@ class App :BaseApp() {
         initNetWork()
         initArouter()
         smartRefreshInit()
+        initStateConfig()
         SHOW_LOG = true
+    }
+
+    private fun initStateConfig() {
+        StateConfig.apply {
+            emptyLayout= com.xy.common.R.layout.layout_empty
+            errorLayout= com.xy.common.R.layout.layout_error
+            loadingLayout= com.xy.common.R.layout.layout_loading
+        }
     }
 
     private fun initNetWork() {

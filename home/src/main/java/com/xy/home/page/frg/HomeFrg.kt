@@ -10,9 +10,12 @@ import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
+import com.xy.common.data.AppFontsType
 import com.xy.common.data.Common
 import com.xy.home.R
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.util.AppFontsUtil
+import com.xy.common.util.setSemiBoldFonts
 import com.xy.common.view.bindArticleList
 import com.xy.home.databinding.FragmentHomeBinding
 import com.xy.home.databinding.ItemTopArticleBinding
@@ -48,6 +51,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                 val item = getBinding<ItemTopArticleBinding>()
 
                 item.tvNum.text = (position + 1).toString() + ""
+                item.tvNum.setSemiBoldFonts()
 
                 item.tvNum.shapeDrawableBuilder.solidColor = when (modelPosition) {
                     0 -> Color.parseColor("#F75000")
@@ -58,6 +62,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                 item.tvNum.shapeDrawableBuilder.intoBackground()
 
                 item.tvConetent.text = data.title
+                AppFontsUtil.setControlFonts(mContext, item.tvConetent, AppFontsType.BARLOW_SEMI_BOLD)
             }
         }
 
@@ -67,12 +72,11 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             setColor(Color.parseColor("#f5f5f5"))
             startVisible = true
         }.bindArticleList()
-
-
+        startRefresh()
     }
 
     override fun lazyLoad() {
-        binding.prf.refresh()
+//        binding.prf.refresh()
     }
 
     override fun observe() {
@@ -83,6 +87,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 //                    toast("it.size:${it.list.size}")
                     binding.prf.finishRefresh()
                     binding.prf.finishLoadMore()
+                    binding.slRoot.showContent()
                     if (it.list.size < 10) {
                         binding.prf.setNoMoreData(true)
                     }
@@ -104,10 +109,15 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
         }
     }
 
+    fun startRefresh() {
+        binding.slRoot.showLoading()
+        viewModel.refresh(Common.Default)
+    }
+
     override fun onListens() {
         binding.prf.run {
             onRefresh {
-                viewModel.refresh(Common.Default)
+                startRefresh()
             }
             onLoadMore {
                 viewModel.loadMore(Common.Default)

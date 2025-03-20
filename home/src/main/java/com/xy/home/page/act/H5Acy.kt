@@ -69,6 +69,13 @@ class H5Acy :MviAcy<ActivityH5Binding, MainVm, MainIntent>(MainVm::class.java, w
                 })
             }
         }
+
+        binding.clLayout.tvStar.text = articleModel.starNum.toString()
+        binding.clLayout.llStar.clickDebounce{
+            viewModel.articleStar("${articleModel.id}","${MmkvRepository.userModel.userId}",onSuccess = {
+                binding.clLayout.tvStar.text = (articleModel.starNum?.plus(1)).toString()
+            })
+        }
     }
 
     override fun observe() {

@@ -8,6 +8,9 @@ import com.xy.common.vm.ZhiNiaoBaseViewModel
 import com.xy.home.api.MainApiService
 import com.xy.home.intent.MainIntent
 import com.xy.mviframework.network.def.apiRetrofit
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonNull.content
 
 /**
@@ -38,7 +41,10 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
 
     fun articleList(comId: String = "${Common.Hot.no}") {
         articleListReq(comId) {
-            _intent.emitCoroutine(MainIntent.ArticleList(it))
+            GlobalScope.launch{
+                delay(2500)
+                _intent.emitCoroutine(MainIntent.ArticleList(it))
+            }
         }
     }
 
@@ -70,6 +76,18 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
             onError = {
         }, onSuccess = {
             _intent.emitCoroutine(MainIntent.CommList(it))
+        })
+    }
+
+
+    fun articleStar(articleId: String = "",userId:String="",onSuccess:()->Unit={})  {
+        val dftMap = mutableMapOf<String, String>()
+        dftMap["articleId"] = articleId
+        dftMap["userId"] = userId
+
+        mainService.articleStar(MmkvRepository.loginToken,dftMap).HttpCoroutine(onError = {
+        }, onSuccess = {
+            onSuccess.invoke()
         })
     }
 

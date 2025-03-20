@@ -13,6 +13,7 @@ import com.xy.common.data.Common
 import com.xy.common.util.clickDebounce
 import com.xy.home.R
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.util.setSemiBoldFonts
 import com.xy.common.view.load
 import com.xy.home.databinding.FragmentHomeCommunityBinding
 import com.xy.home.databinding.ItemCommunityArticleBinding
@@ -92,6 +93,7 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
 
                 item?.apply {
                     tvTitle.text = data.title
+                    tvTitle.setSemiBoldFonts()
                     ivHead.load(data.imageurl)
                     tvName.text = data.sysUser.nickName
                 }

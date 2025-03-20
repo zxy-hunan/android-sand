@@ -2,6 +2,12 @@ package com.xy.home.page.act
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.drake.brv.annotaion.DividerOrientation
@@ -13,8 +19,10 @@ import com.dylanc.longan.intentExtras
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.data.model.ArticleModel
 import com.xy.common.data.model.CommModel
+import com.xy.common.util.RxKeyboardTool
 import com.xy.common.util.clickDebounce
 import com.xy.common.util.remove
+import com.xy.common.util.setAliFonts
 import com.xy.common.view.load
 import com.xy.home.R
 import com.xy.home.databinding.ActivityMarkdownBinding
@@ -48,8 +56,11 @@ class MarkdownAcy : MviAcy<ActivityMarkdownBinding, MainVm, MainIntent>(MainVm::
         binding.clLayout.tvOrigin.remove()
 
         Markwon.create(mContext).setMarkdown(binding.tvContent, articleModel.content)
+        binding.tvContent.setAliFonts()
         viewModel.commList(1, "${articleModel.id}")
-        binding.rvComm.bindCommList()
+        binding.rvComm.bindCommList(){
+            RxKeyboardTool.showSoftInput(mContext, binding.clLayout.setContent)
+        }
     }
 
     override fun observe() {
@@ -72,7 +83,7 @@ class MarkdownAcy : MviAcy<ActivityMarkdownBinding, MainVm, MainIntent>(MainVm::
 
 }
 
-fun RecyclerView.bindCommList() {
+fun RecyclerView.bindCommList(click: (CommModel) -> Unit = {}) {
     this.linear().divider {
         orientation = DividerOrientation.HORIZONTAL
         setDivider(5, dp = true)
@@ -81,7 +92,7 @@ fun RecyclerView.bindCommList() {
         addType<CommModel>(R.layout.item_comm_layout)
         onCreate {
             val item = getBinding<ItemCommLayoutBinding>()
-            item.rvChildComm.bindCommList()
+            item.rvChildComm.bindCommList(click)
         }
 
         onBind {
@@ -90,7 +101,20 @@ fun RecyclerView.bindCommList() {
 
             item.tvName.text = data.sysUser.nickName
             item.ivHead.load(data.sysUser.avatar)
-            item.tvTitle.text = data.content
+//            item.tvTitle.text = data.content
+            if(data.content.isNotEmpty()){
+                val spannableString = SpannableString("${data.content} 回复")
+                val clickableSpan = object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+//                        Toast.makeText(widget.context, "click", Toast.LENGTH_SHORT).show()
+                        click.invoke(data)
+                    }
+                }
+                spannableString.setSpan(clickableSpan, spannableString.length - 2, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                item.tvTitle.text = spannableString
+                item.tvTitle.movementMethod = LinkMovementMethod.getInstance()
+            }
+
             item.rvChildComm.models = data.comComm
 
         }
