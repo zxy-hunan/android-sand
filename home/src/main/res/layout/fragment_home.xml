@@ -60,17 +60,15 @@
 
     <com.drake.brv.PageRefreshLayout
         android:id="@+id/prf"
+        app:loading_layout="@layout/layout_loading"
+        app:error_layout="@layout/layout_error"
+        app:stateEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <com.drake.statelayout.StateLayout
-                android:id="@+id/sl_root"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
@@ -114,7 +112,6 @@
                         tools:listitem="@layout/item_article" />
 
                 </LinearLayout>
-            </com.drake.statelayout.StateLayout>
         </androidx.core.widget.NestedScrollView>
     </com.drake.brv.PageRefreshLayout>
 

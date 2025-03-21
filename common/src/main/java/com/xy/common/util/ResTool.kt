@@ -9,7 +9,14 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.xy.mviframework.base.BaseApp
+import com.xy.mviframework.network.tool.LOG_TAG
+import com.xy.mviframework.network.tool.gson
+import com.xy.mviframework.network.tool.logE
+import java.io.InputStream
+import java.nio.charset.Charset
 
 /**
  * 资源文件扩展函数
@@ -51,3 +58,31 @@ fun String.asBitmap(context: Context = BaseApp.instance.applicationContext): Bit
     return BitmapFactory.decodeFile(this)
 }
 
+@JvmOverloads
+fun readJsonFile(fileName: String, context: Context): String {
+    var str = ""
+    try {
+        val inputStream: InputStream = context.assets.open("culture/$fileName")
+        val size: Int = inputStream.available()
+        val buffer = ByteArray(size)
+        inputStream.read(buffer)
+        inputStream.close()
+        logE(LOG_TAG, "readJsonFile inputStream close:")
+        str = String(buffer, Charset.forName("UTF-8"))
+    } catch (e: Exception) {
+        logE(LOG_TAG, "readJsonFile error:${e.message}")
+    }
+    return str
+}
+
+@JvmOverloads
+inline fun <reified T> String.parseJson(jsonString: String): T {
+    val t = gson.fromJson(jsonString, T::class.java)
+    return t
+}
+@JvmOverloads
+inline fun <reified T> String.parseCultureJson(): List<T> {
+    val gson = Gson()
+    val listType = object : TypeToken<List<T>>() {}.type
+    return gson.fromJson(this, listType)
+}

@@ -42,6 +42,11 @@
             android:visibility="visible"
             android:src="@drawable/icon_default"
             />
+        <com.xy.common.widget.htextview.HTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:animateType="scale"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

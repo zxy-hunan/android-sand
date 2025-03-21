@@ -10,7 +10,7 @@
     <View
         android:id="@+id/view_line"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,11 +19,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:text="沸点"
             android:textColor="@color/black_font_color"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginStart="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,44 +32,61 @@
             android:id="@+id/stv_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
             android:paddingHorizontal="10dp"
             android:paddingVertical="5dp"
             android:text="发布"
-            android:layout_marginEnd="20dp"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shape_endColor="@color/color_64b5f6"
             app:shape_radius="10dp"
-            app:shape_startColor="@color/color_2196f3"
-            app:shape_endColor="@color/color_64b5f6" />
+            app:shape_startColor="@color/color_2196f3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.youth.banner.Banner
-        android:id="@+id/community_top"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="@dimen/dp_10"
-        app:banner_auto_loop="true"
-        app:banner_loop_time="5000"
-        app:banner_orientation="vertical" />
 
     <com.drake.brv.PageRefreshLayout
         android:id="@+id/pgl_refresh"
         android:layout_width="match_parent"
-        app:srlEnableLoadMore="true"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:error_layout="@layout/layout_error"
+        app:loading_layout="@layout/layout_loading"
+        app:stateEnabled="true">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_community"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_community_article" />
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/community_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="59dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="@dimen/dp_10"
+                    app:banner_auto_loop="true"
+                    app:banner_loop_time="5000"
+                    app:banner_orientation="vertical" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_community"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_community_article" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.core.widget.NestedScrollView>
 
     </com.drake.brv.PageRefreshLayout>
 

@@ -1,6 +1,7 @@
 package com.xy.home.page.frg
 
 import android.graphics.Color
+import androidx.databinding.DataBindingUtil.getBinding
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.divider
@@ -41,7 +42,7 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
     }
 
     override fun lazyLoad() {
-        binding.pglRefresh.refresh()
+
     }
 
 
@@ -52,6 +53,7 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
                 is MainIntent.ArticleList -> {
                     binding.pglRefresh.finishLoadMore()
                     binding.pglRefresh.finishRefresh()
+                    binding.pglRefresh.showContent()
                     if (it.list.size < 10) {
                         binding.pglRefresh.setNoMoreData(true)
                     }
@@ -110,5 +112,6 @@ class HomeCommunityFrg() : MviFragment<FragmentHomeCommunityBinding, MainVm, Mai
                 viewModel.loadMore(Common.Hot)
             }
         }
+        binding.pglRefresh.refreshing()
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_root"
+    android:layout_gravity="center"
+    android:gravity="center"
+    app:shape_solidColor="@color/white"
+    app:shape_radius="20dp"
+    android:layout_margin="20dp"
+    android:paddingVertical="30dp"
+    android:paddingHorizontal="20dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+</com.hjq.shape.layout.ShapeLinearLayout>

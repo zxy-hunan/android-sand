@@ -51,7 +51,7 @@ class ArticleListFrg : MviFragment<FragmentArticleListBinding, UserVm, UserInten
 
 
     override fun lazyLoad() {
-        binding.prf.refresh()
+
     }
 
     override fun observe() {
@@ -60,6 +60,7 @@ class ArticleListFrg : MviFragment<FragmentArticleListBinding, UserVm, UserInten
                 is UserIntent.ArticleList -> {
                     binding.prf.finishRefresh()
                     binding.prf.finishLoadMore()
+                    binding.prf.showContent()
                     if (it.list.size < 10) {
                         binding.prf.setNoMoreData(true)
                     }
@@ -78,6 +79,7 @@ class ArticleListFrg : MviFragment<FragmentArticleListBinding, UserVm, UserInten
 
     override fun onListens() {
         binding.prf.run {
+
             onRefresh {
                 viewModel.refresh("$comId")
             }
@@ -85,6 +87,7 @@ class ArticleListFrg : MviFragment<FragmentArticleListBinding, UserVm, UserInten
                 viewModel.loadMore("$comId")
             }
         }
+        binding.prf.refreshing()
     }
 
 

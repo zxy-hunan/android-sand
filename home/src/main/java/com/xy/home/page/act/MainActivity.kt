@@ -8,6 +8,7 @@ import com.tencent.qcloud.tuikit.tuiconversation.classicui.page.TUIConversationF
 import com.xy.common.util.initFragment
 import com.xy.home.R
 import com.xy.common.data.model.APPTAG
+import com.xy.common.dialog.CultureDialog
 import com.xy.common.util.asColor
 import com.xy.home.databinding.ActivityMainBinding
 import com.xy.home.intent.MainIntent
@@ -39,7 +40,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
         immersionBar(binding.view)
         initFrg()
         navSelectedAction()
-
+        CultureDialog.dayCultureDialog()
     }
 
     private fun initFrg() {

@@ -72,11 +72,12 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             setColor(Color.parseColor("#f5f5f5"))
             startVisible = true
         }.bindArticleList()
-        startRefresh()
+
     }
 
     override fun lazyLoad() {
 //        binding.prf.refresh()
+
     }
 
     override fun observe() {
@@ -87,7 +88,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 //                    toast("it.size:${it.list.size}")
                     binding.prf.finishRefresh()
                     binding.prf.finishLoadMore()
-                    binding.slRoot.showContent()
+                    binding.prf.showContent()
                     if (it.list.size < 10) {
                         binding.prf.setNoMoreData(true)
                     }
@@ -110,7 +111,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
     }
 
     fun startRefresh() {
-        binding.slRoot.showLoading()
+
         viewModel.refresh(Common.Default)
     }
 
@@ -123,6 +124,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                 viewModel.loadMore(Common.Default)
             }
         }
+        binding.prf.refreshing()
     }
 }
 

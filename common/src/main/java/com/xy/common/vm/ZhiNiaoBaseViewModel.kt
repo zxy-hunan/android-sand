@@ -15,9 +15,12 @@ import com.xy.mviframework.network.def.apiRetrofit
 import com.xy.mviframework.network.tool.LOG_TAG
 import com.xy.mviframework.network.tool.logD
 import com.xy.mviframework.network.tool.logE
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 /**
  * @file ZhiNiaoBaseViewModel
@@ -63,7 +66,10 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
         }
         baseApiRetrofit.articleList(dftMap).HttpCoroutine(onError = {
         }, onSuccess = {
-            onSuccess.invoke(it)
+            GlobalScope.launch{
+                delay(Random.nextInt(100, 2501).toLong())
+                onSuccess.invoke(it)
+            }
         })
     }
 

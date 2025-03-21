@@ -62,6 +62,8 @@ dependencies {
 
     api "io.noties.markwon:core:4.6.2"
 
+    api "com.github.goweii:Layer:1.0.7"
+
     api rootProject.ext.dependenciesroot["banner"]
 
     kapt rootProject.ext.dependenciesroot["arouterCompiler"]
