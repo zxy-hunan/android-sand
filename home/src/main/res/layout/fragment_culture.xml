@@ -58,35 +58,13 @@
         app:loading_layout="@layout/layout_loading"
         app:stateEnabled="true">
 
-        <androidx.core.widget.NestedScrollView
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_community"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_community_article" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <com.youth.banner.Banner
-                    android:id="@+id/community_top"
-                    android:layout_width="match_parent"
-                    android:layout_height="59dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="@dimen/dp_10"
-                    app:banner_auto_loop="true"
-                    app:banner_loop_time="5000"
-                    app:banner_orientation="vertical" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_community"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/item_culture" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.core.widget.NestedScrollView>
 
     </com.drake.brv.PageRefreshLayout>
 

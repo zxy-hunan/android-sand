@@ -82,3 +82,36 @@ data class CommModel(
     @SerialName("sysUserRe")
     val sysUserRe: SysUserModel = SysUserModel(),
 ): java.io.Serializable
+
+
+
+@Serializable
+class KyBaseModel<T>(
+    @SerialName("code")
+    val code: Int = 0,
+    @SerialName("message")
+    val message: String = "",
+    @SerialName("result")
+    val result: T
+): java.io.Serializable
+
+
+@Serializable
+class KyImageResultModel(
+    @SerialName("total")
+    val total: Int = 0,
+    @SerialName("list")
+    val list: List<KyImageModel> = listOf(),
+): java.io.Serializable
+
+@Serializable
+ class KyImageModel(
+    @SerialName("id")
+    val id: Int = 0,
+    @SerialName("title")
+    val title: String = "",
+    @SerialName("url")
+    val url: String = "",
+    @SerialName("type")
+    val type: String = "",
+): java.io.Serializable

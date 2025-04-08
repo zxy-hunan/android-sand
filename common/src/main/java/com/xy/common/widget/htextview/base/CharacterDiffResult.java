@@ -1,4 +1,4 @@
-package com.xy.common.widget.htextview.animatetext;
+package com.xy.common.widget.htextview.base;
 /**
  * Created by hanks on 15-12-14.
  */

@@ -1,26 +1,28 @@
 package com.xy.common.vm
 
 import android.annotation.SuppressLint
-import android.util.Log
-import androidx.lifecycle.viewModelScope
+import com.dylanc.longan.topActivity
 import com.xy.common.api.ArticleApiService
+import com.xy.common.api.KaiyApiService
 import com.xy.common.data.ArticleTotalNum
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.KyBaseModel
+import com.xy.common.data.model.KyImageModel
+import com.xy.common.data.model.KyImageResultModel
 import com.xy.common.util.MmkvRepository
-import com.xy.mviframework.base.vm.BaseIntent
 import com.xy.mviframework.base.vm.BaseViewModel
-import com.xy.mviframework.network.api.HttpBy
-import com.xy.mviframework.network.def.BaseRes
 import com.xy.mviframework.network.def.apiRetrofit
 import com.xy.mviframework.network.tool.LOG_TAG
-import com.xy.mviframework.network.tool.logD
 import com.xy.mviframework.network.tool.logE
+import com.zyx_hunan.baseutil.net.util.MyObserver
+import com.zyx_hunan.baseutil.net.util.NetUtil
+import com.zyx_hunan.baseutil.net.util.RxHelper
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.compose
 import kotlinx.coroutines.launch
 import kotlin.random.Random
+
 
 /**
  * @file ZhiNiaoBaseViewModel
@@ -33,28 +35,42 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
         apiRetrofit.create(ArticleApiService::class.java)
     }
 
-/*    protected fun <T> Flow<BaseRes<T>>.HttpCoroutine(
-        onError: (Throwable) -> Unit = {}, onSuccess: (T) -> Unit = {},
-        onCompleteData: (BaseRes<T>) -> Unit = {}
-    ): Job {
-        return viewModelScope.launch {
-            HttpBy(
-                onFail = {
-                    _baseIntent.emitCoroutine(BaseIntent.ShowLoading(it))
-                },
-                onError = {
-                    _baseIntent.emitCoroutine(BaseIntent.ShowLoading("${it.message}"))
-                    onError.invoke(it)
-                }, onSuccess = {
-//                    _baseIntent.emitCoroutine(BaseIntent.CompletionRefreshOrLoadSuccess())
-                    onSuccess.invoke(it)
-                },
-                onCompleteData = {
-                    onCompleteData.invoke(it)
+    private fun initKYNet() {
+        NetUtil.options().setApiPath(KaiyApiService::class.java)
+            .setDefault_time(100)
+            .setEnableLog(false)
+            .setUrl("https://api.apiopen.top/api/")
+    }
+
+
+    fun getKyImages(onSuccess: (List<KyImageModel>) -> Unit = {}) {
+        initKYNet()
+        var map= mutableMapOf<String, String>()
+        map["page"] = "1"
+        map["size"] = "10"
+        map["type"] = "beauty"
+
+        val kyService: KaiyApiService = NetUtil.getApiPath() as KaiyApiService
+        kyService.getImages(map)
+            .compose(RxHelper.observableIO2Main(topActivity))
+            .subscribe(object :MyObserver<KyBaseModel<KyImageResultModel>>(topActivity){
+                override fun onComplete(isError: Boolean?) {
                 }
-            )
-        }
-    }*/
+
+                override fun onFailure(e: Throwable?, errorMsg: String?) {
+                }
+
+                override fun onSuccess(result: KyBaseModel<KyImageResultModel>?) {
+                    logE(LOG_TAG, "onSuccess result: ${result?.result?.total}")
+                    result?.result?.list?.let {
+                        logE(LOG_TAG, "onSuccess list: ${it}")
+                        onSuccess.invoke(it) }
+                }
+
+
+            })
+    }
+
 
     var page = 1
 

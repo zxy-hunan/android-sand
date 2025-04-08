@@ -1,8 +1,7 @@
-package com.xy.common.widget.htextview.animatetext;
+package com.xy.common.widget.htextview.base;
+
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-
-import com.xy.common.widget.htextview.HTextView;
 
 /**
  * interface used in HTextView
@@ -10,7 +9,10 @@ import com.xy.common.widget.htextview.HTextView;
  */
 public interface IHText {
     void init(HTextView hTextView, AttributeSet attrs, int defStyle);
+
     void animateText(CharSequence text);
+
     void onDraw(Canvas canvas);
-    void reset(CharSequence text);
+
+    void setAnimationListener(AnimationListener listener);
 }

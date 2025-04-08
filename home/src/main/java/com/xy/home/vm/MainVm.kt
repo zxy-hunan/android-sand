@@ -1,6 +1,7 @@
 package com.xy.home.vm
 
 import com.xy.common.data.Common
+import com.xy.common.data.model.KyImageModel
 import com.xy.common.util.MmkvRepository
 import com.xy.common.vm.ZhiNiaoBaseViewModel
 import com.xy.home.api.MainApiService
@@ -81,6 +82,27 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
         }, onSuccess = {
             onSuccess.invoke()
         })
+    }
+
+
+    fun getKyImagesResult() {
+        getKyImages{
+            _intent.emitCoroutine(MainIntent.KyImageModelList(it))
+        }
+    }
+
+
+
+
+
+
+    fun getCultureList() {
+        var list = listOf(
+            "唐",
+            "宋",
+            "花间",
+            "南唐",)
+        _intent.emitCoroutine(MainIntent.CultureList(list))
     }
 
 }

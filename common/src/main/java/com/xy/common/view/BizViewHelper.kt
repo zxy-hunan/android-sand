@@ -11,6 +11,7 @@ import com.xy.common.data.model.ArticleModel
 import com.xy.common.databinding.ItemArticleBinding
 import com.xy.common.util.AppFontsUtil
 import com.xy.common.util.mContext
+import com.xy.mviframework.network.tool.logI
 
 /**
  * @file BizViewHelper
@@ -64,7 +65,8 @@ fun RecyclerView.bindArticleList() {
 
 
 fun ImageView.load(url: String) {
-    var transurl = if (url.startsWith("http")) url else "http://gyuelife.online" + url
+    logI("load url:$url")
+    var transurl = if (url.startsWith("http")||url.startsWith("https")) url else "http://gyuelife.online" + url
     Glide.with(this).load(transurl).placeholder(
         com.xy.common.R.drawable.icon_default
     ).into(this)

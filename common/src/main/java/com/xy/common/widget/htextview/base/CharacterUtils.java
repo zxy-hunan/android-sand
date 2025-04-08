@@ -1,13 +1,12 @@
-package com.xy.common.widget.htextview.util;
-
-
-import com.xy.common.widget.htextview.base.CharacterDiffResult;
+package com.xy.common.widget.htextview.base;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 /**
+ * CharacterUtils
  * Created by hanks on 15-12-14.
  */
 public class CharacterUtils {
@@ -52,19 +51,18 @@ public class CharacterUtils {
         return false;
     }
 
-    /**
-     * @return
-     */
-    public static float getOffset(int from, int move, float progress, float startX, float oldStartX, float[] gaps, float[] oldGaps) {
+
+    public static float getOffset(int from, int move, float progress, float startX, float oldStartX,
+                                  List<Float> gaps, List<Float> oldGaps) {
 
         float dist = startX;
         for (int i = 0; i < move; i++) {
-            dist += gaps[i];
+            dist += gaps.get(i);
         }
 
         float cur = oldStartX;
         for (int i = 0; i < from; i++) {
-            cur += oldGaps[i];
+            cur += oldGaps.get(i);
         }
 
         return cur + (dist - cur) * progress;
