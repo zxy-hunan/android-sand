@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hjq.shape.layout.ShapeConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:id="@+id/scl_culture_root"
+    android:background="@color/translucent"
+    tools:ignore="MissingDefaultResource">
+
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_child_title"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/shape_img_10ran"
+        app:shapeAppearance="@style/CircleStyle1"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="visible"
+        android:src="@drawable/ic_cn1"
+        />
+
+    <TextView
+        android:id="@+id/tv_child_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_child_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="first" />
+
+
+</com.hjq.shape.layout.ShapeConstraintLayout>

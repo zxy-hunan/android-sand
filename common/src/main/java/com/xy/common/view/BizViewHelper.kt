@@ -9,7 +9,9 @@ import com.xy.common.R
 import com.xy.common.data.AppFontsType
 import com.xy.common.data.model.ArticleModel
 import com.xy.common.databinding.ItemArticleBinding
+import com.xy.common.databinding.ItemVideoBinding
 import com.xy.common.util.AppFontsUtil
+import com.xy.common.util.glide.loadAny
 import com.xy.common.util.mContext
 import com.xy.mviframework.network.tool.logI
 
@@ -22,37 +24,59 @@ import com.xy.mviframework.network.tool.logI
 
 fun RecyclerView.bindArticleList() {
     this.setup {
-        addType<ArticleModel>(com.xy.common.R.layout.item_article)
+        addType<ArticleModel>{
+            when (this.videos) {
+                null -> R.layout.item_article
+                else -> R.layout.item_video
+            }
+        }
         onBind {
-            val data = getModel<ArticleModel>()
-            val item = getBinding<ItemArticleBinding>()
+            when (itemViewType) {
+                R.layout.item_article -> {
 
-            item.tvTitle.text = data.title
-            item.tvContent.text = data.content
-            AppFontsUtil.setControlFonts(mContext, item.tvTitle, AppFontsType.BARLOW_SEMI_BOLD)
-            AppFontsUtil.setControlFonts(mContext, item.tvContent, AppFontsType.ALI_MA_MA)
+                    val data = getModel<ArticleModel>()
+                    val item = getBinding<ItemArticleBinding>()
 
-            item.tvName.text = data.sysUser.nickName
-            AppFontsUtil.setControlFonts(mContext, item.tvName, AppFontsType.BARLOW_SEMI_BOLD)
-            if (data.starNum != null) {
-                item.tvStar.text = "${data.starNum}"
-            } else {
-                item.tvStar.text = "0"
-            }
-            if (data.commNum != null) {
-                item.tvCommon.text = "${data.commNum}"
-            } else {
-                item.tvCommon.text = "0"
-            }
+                    item.tvTitle.text = data.title
+                    item.tvContent.text = data.content
+                    AppFontsUtil.setControlFonts(mContext, item.tvTitle, AppFontsType.BARLOW_SEMI_BOLD)
+                    AppFontsUtil.setControlFonts(mContext, item.tvContent, AppFontsType.ALI_MA_MA)
 
-            item.ivHead.load(data.sysUser.avatar)
+                    item.tvName.text = data.sysUser.nickName
+                    AppFontsUtil.setControlFonts(mContext, item.tvName, AppFontsType.BARLOW_SEMI_BOLD)
+                    if (data.starNum != null) {
+                        item.tvStar.text = "${data.starNum}"
+                    } else {
+                        item.tvStar.text = "0"
+                    }
+                    if (data.commNum != null) {
+                        item.tvCommon.text = "${data.commNum}"
+                    } else {
+                        item.tvCommon.text = "0"
+                    }
 
-            if (data.imageurl.isEmpty()) {
-                item.ivArticle.visibility = View.GONE
-            } else {
-                item.ivArticle.visibility = View.VISIBLE
-                item.ivArticle.load(data.imageurl)
-            }
+                    item.ivHead.load(data.sysUser.avatar)
+
+                    if (data.imageurl.isEmpty()) {
+                        item.ivArticle.visibility = View.GONE
+                    } else {
+                        item.ivArticle.visibility = View.VISIBLE
+                        item.ivArticle.load(data.imageurl)
+                    }
+
+                }
+                R.layout.item_video ->{
+
+                    val data = getModel<ArticleModel>()
+                    val item = getBinding<ItemVideoBinding>()
+
+                    item.ivVideo.loadAny(data.videos?.coverUrl?:"")
+                }
+                else -> {
+
+                }
+             }
+
         }
 
         R.id.cl_root.onClick {

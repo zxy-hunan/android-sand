@@ -12,8 +12,7 @@ import com.xy.common.dialog.CultureDialog
 import com.xy.common.util.asColor
 import com.xy.home.databinding.ActivityMainBinding
 import com.xy.home.intent.MainIntent
-import com.xy.home.page.frg.HomeCommunityFrg
-import com.xy.home.page.frg.HomeCultureFrg
+import com.xy.home.page.frg.HomeCNFrg
 import com.xy.home.page.frg.HomeFrg
 import com.xy.home.vm.MainVm
 import com.xy.mviframework.base.ui.vb.MviAcy
@@ -46,7 +45,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
 
     private fun initFrg() {
         frgList.add(HomeFrg())
-        frgList.add(HomeCultureFrg())
+        frgList.add(HomeCNFrg())
 //        frgList.add(NotiFrg())
 //        frgList.add(TUIConversationMinimalistFragment())
         frgList.add(TUIConversationFragment())

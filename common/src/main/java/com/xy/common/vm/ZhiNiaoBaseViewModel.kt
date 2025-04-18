@@ -9,6 +9,8 @@ import com.xy.common.data.model.ArticleModel
 import com.xy.common.data.model.KyBaseModel
 import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyImageResultModel
+import com.xy.common.data.model.KyVideoModel
+import com.xy.common.data.model.KyVideoResultModel
 import com.xy.common.util.MmkvRepository
 import com.xy.mviframework.base.vm.BaseViewModel
 import com.xy.mviframework.network.def.apiRetrofit
@@ -45,7 +47,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
 
     fun getKyImages(onSuccess: (List<KyImageModel>) -> Unit = {}) {
         initKYNet()
-        var map= mutableMapOf<String, String>()
+        var map = mutableMapOf<String, String>()
         map["page"] = "1"
         map["size"] = "10"
         map["type"] = "beauty"
@@ -53,7 +55,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
         val kyService: KaiyApiService = NetUtil.getApiPath() as KaiyApiService
         kyService.getImages(map)
             .compose(RxHelper.observableIO2Main(topActivity))
-            .subscribe(object :MyObserver<KyBaseModel<KyImageResultModel>>(topActivity){
+            .subscribe(object : MyObserver<KyBaseModel<KyImageResultModel>>(topActivity) {
                 override fun onComplete(isError: Boolean?) {
                 }
 
@@ -64,7 +66,41 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
                     logE(LOG_TAG, "onSuccess result: ${result?.result?.total}")
                     result?.result?.list?.let {
                         logE(LOG_TAG, "onSuccess list: ${it}")
-                        onSuccess.invoke(it) }
+                        onSuccess.invoke(it)
+                    }
+                }
+
+
+            })
+    }
+
+
+    fun getKyVideos(page: Int = 1, size: Int = 10, onSuccess: (List<KyVideoModel>) -> Unit = {}) {
+        initKYNet()
+        //https://api.apiopen.top/api/getHaoKanVideo?page=1&size=10
+        var map = mutableMapOf<String, String>()
+        map["page"] = "$page"
+        map["size"] = "$size"
+
+        val kyService: KaiyApiService = NetUtil.getApiPath() as KaiyApiService
+        kyService.getHaoKanVideo(map)
+            .compose(RxHelper.observableIO2Main(topActivity))
+            .subscribe(object : MyObserver<KyBaseModel<KyVideoResultModel>>(topActivity) {
+                override fun onComplete(isError: Boolean?) {
+                    logE(LOG_TAG, "onComplete : $isError")
+                }
+
+                override fun onFailure(e: Throwable?, errorMsg: String?) {
+                    logE(LOG_TAG, "onFailure : $errorMsg")
+                    onSuccess.invoke(listOf())
+                }
+
+                override fun onSuccess(result: KyBaseModel<KyVideoResultModel>?) {
+                    logE(LOG_TAG, "onSuccess result: ${result?.result?.total}")
+                    result?.result?.list?.let {
+                        logE(LOG_TAG, "onSuccess list: ${it}")
+                        onSuccess.invoke(it)
+                    }
                 }
 
 
@@ -82,7 +118,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
         }
         baseApiRetrofit.articleList(dftMap).HttpCoroutine(onError = {
         }, onSuccess = {
-            GlobalScope.launch{
+            GlobalScope.launch {
                 delay(Random.nextInt(100, 2501).toLong())
                 onSuccess.invoke(it)
             }
@@ -94,11 +130,11 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
         val dftMap = mutableMapOf<String, String>("pageNum" to "$page", "pageSize" to "1000", "isSelf" to "0", "userId" to userId)
         when (type) {
             ArticleTotalNum.Common.no -> {
-                baseApiRetrofit.articleCommList(MmkvRepository.loginToken,dftMap).HttpCoroutine(onError = {
-                    logE(LOG_TAG,type, "onError:${it.message}")
+                baseApiRetrofit.articleCommList(MmkvRepository.loginToken, dftMap).HttpCoroutine(onError = {
+                    logE(LOG_TAG, type, "onError:${it.message}")
                     onSuccess.invoke(0)
                 }, onOriginSuccess = {
-                    logE(LOG_TAG,type, "onSuccess: ${it.total}")
+                    logE(LOG_TAG, type, "onSuccess: ${it.total}")
                     onSuccess.invoke(it.total)
                 })
             }
@@ -106,23 +142,24 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
             ArticleTotalNum.Article.no -> {
                 baseApiRetrofit.articleList(dftMap).HttpCoroutine(onError = {
                     onSuccess.invoke(0)
-                    logE(LOG_TAG,type, "onError:${it.message}")
+                    logE(LOG_TAG, type, "onError:${it.message}")
                 }, onOriginSuccess = {
-                    logE(LOG_TAG,type, "onSuccess: ${it.total}")
+                    logE(LOG_TAG, type, "onSuccess: ${it.total}")
                     onSuccess.invoke(it.total)
                 })
             }
 
             ArticleTotalNum.Star.no -> {
-                baseApiRetrofit.articleStarList(MmkvRepository.loginToken,dftMap).HttpCoroutine(onError = {
-                    logE(LOG_TAG,type, "onError:${it.message}")
+                baseApiRetrofit.articleStarList(MmkvRepository.loginToken, dftMap).HttpCoroutine(onError = {
+                    logE(LOG_TAG, type, "onError:${it.message}")
                     onSuccess.invoke(0)
                 }, onOriginSuccess = {
-                    logE(LOG_TAG,type, "onSuccess: ${it.total}")
+                    logE(LOG_TAG, type, "onSuccess: ${it.total}")
                     onSuccess.invoke(it.total)
                 })
             }
-            else ->{
+
+            else -> {
                 onSuccess.invoke(0)
             }
         }

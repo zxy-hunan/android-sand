@@ -1,5 +1,6 @@
 package com.xy.common.data.model
 
+import android.graphics.drawable.Drawable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -28,6 +29,8 @@ data class ArticleModel(
     var sysUser: SysUserModel = SysUserModel(),
     @SerialName("starNum")
     var starNum: Int? = 0,
+    @SerialName("videos")
+    var videos: KyVideoModel? = null,
 ) : java.io.Serializable
 
 
@@ -41,7 +44,7 @@ data class SysUserModel(
     val avatar: String = "",
     @SerialName("userId")
     val userId: Int? = 0,
-): java.io.Serializable
+) : java.io.Serializable
 
 data class StarArticleModel(
     val createBy: String? = "",
@@ -81,8 +84,22 @@ data class CommModel(
     val sysUser: SysUserModel = SysUserModel(),
     @SerialName("sysUserRe")
     val sysUserRe: SysUserModel = SysUserModel(),
-): java.io.Serializable
+) : java.io.Serializable
 
+
+@Serializable
+data class CnModel(
+    @SerialName("id")
+    val id: Int = 0,
+    @SerialName("type")
+    val type: Int = 0,
+    @SerialName("name")
+    val name: String = "分类",
+    @SerialName("list")
+    val list: List<CnModel> = mutableListOf(),
+    @SerialName("url")
+    val url: Int = 0,
+) : java.io.Serializable
 
 
 @Serializable
@@ -93,7 +110,7 @@ class KyBaseModel<T>(
     val message: String = "",
     @SerialName("result")
     val result: T
-): java.io.Serializable
+) : java.io.Serializable
 
 
 @Serializable
@@ -102,10 +119,10 @@ class KyImageResultModel(
     val total: Int = 0,
     @SerialName("list")
     val list: List<KyImageModel> = listOf(),
-): java.io.Serializable
+) : java.io.Serializable
 
 @Serializable
- class KyImageModel(
+class KyImageModel(
     @SerialName("id")
     val id: Int = 0,
     @SerialName("title")
@@ -114,4 +131,30 @@ class KyImageResultModel(
     val url: String = "",
     @SerialName("type")
     val type: String = "",
-): java.io.Serializable
+) : java.io.Serializable
+
+
+@Serializable
+class KyVideoResultModel(
+    @SerialName("total")
+    val total: Int = 0,
+    @SerialName("list")
+    val list: List<KyVideoModel> = listOf(),
+) : java.io.Serializable
+@Serializable
+class KyVideoModel(
+    @SerialName("id")
+    val id: Int = 0,
+    @SerialName("title")
+    val title: String = "",
+    @SerialName("userName")
+    val userName: String = "",
+    @SerialName("userPic")
+    val userPic: String = "",
+    @SerialName("coverUrl")
+    val coverUrl: String = "",
+    @SerialName("playUrl")
+    val playUrl: String = "",
+    @SerialName("duration")
+    val duration: String = "",
+) : java.io.Serializable

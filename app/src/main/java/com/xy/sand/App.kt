@@ -21,6 +21,10 @@ import javax.net.ssl.X509TrustManager
  * @date 2024/7/19 8:14
  * @brief application
  * https://api.apiopen.top/swagger/index.html#/%E5%BC%80%E6%94%BE%E6%8E%A5%E5%8F%A3/get_api_getMiniVideo
+ *
+ * https://zhuanlan.zhihu.com/p/339180011
+ * https://zhuanlan.zhihu.com/p/272164713
+ * https://www.mockplus.cn/example/rp/100009/?hmsr=zhihu
  */
 class App :BaseApp() {
 

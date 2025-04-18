@@ -1,9 +1,11 @@
 package com.xy.home.intent
 
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.CnModel
 import com.xy.common.data.model.CommModel
 import com.xy.common.data.model.Culture
 import com.xy.common.data.model.KyImageModel
+import com.xy.common.data.model.KyVideoModel
 import com.xy.mviframework.base.vm.BaseIntent
 
 /**
@@ -17,8 +19,9 @@ sealed class MainIntent : BaseIntent() {
 
     data class CommList(val list:List<CommModel>) : MainIntent()
 
-    data class CultureList(val list:List<String>) : MainIntent()
-
+    data class CultureList(val list:List<CnModel>) : MainIntent()
 
     data class KyImageModelList(val list:List<KyImageModel>) : MainIntent()
+
+    data class KyVideoModelList(val list:List<KyVideoModel>) : MainIntent()
 }

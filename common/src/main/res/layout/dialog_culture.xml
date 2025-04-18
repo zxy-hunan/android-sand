@@ -2,15 +2,32 @@
 <com.hjq.shape.layout.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll_root"
     android:layout_gravity="center"
     android:gravity="center"
-    app:shape_solidColor="@color/white"
     app:shape_radius="20dp"
+    app:shape_startColor="@color/white"
+    app:shape_endColor="@color/color_2196f3"
+    app:shape_angle="270"
     android:layout_margin="20dp"
     android:paddingVertical="30dp"
     android:paddingHorizontal="20dp"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_root"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 
 </com.hjq.shape.layout.ShapeLinearLayout>
