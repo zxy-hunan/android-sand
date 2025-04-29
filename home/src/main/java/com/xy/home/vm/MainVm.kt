@@ -1,8 +1,13 @@
 package com.xy.home.vm
 
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import com.drake.brv.utils.models
+import com.xy.common.data.ArticleTotalNum
 import com.xy.common.data.Common
 import com.xy.common.data.model.ArticleModel
 import com.xy.common.data.model.CnModel
+import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyVideoModel
 import com.xy.common.util.MmkvRepository
 import com.xy.common.vm.ZhiNiaoBaseViewModel
@@ -12,8 +17,13 @@ import com.xy.home.intent.MainIntent
 import com.xy.mviframework.network.def.apiRetrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 /**
  * @file MainVm
@@ -29,34 +39,54 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
 
     var isRefresh = true
 
-    fun refresh(com: Common) {
+    fun refresh(com: Common,list:List<ArticleModel> = mutableListOf()) {
         isRefresh = true
-        page = 1
-        articleList("${com.no}")
+
+        articleList("${com.no}",list)
     }
 
-    fun loadMore(com: Common) {
+    fun loadMore(com: Common,list:List<ArticleModel> = mutableListOf()) {
         isRefresh = false
-        page++
-        articleList("${com.no}")
+
+        articleList("${com.no}",list)
     }
 
-    fun articleList(comId: String = "${Common.Hot.no}") {
+    fun articleList(comId: String = "${Common.Hot.no}",list:List<ArticleModel> = mutableListOf()) {
         articleListReq(comId) {
             val allList = mutableListOf<ArticleModel>()
             allList.addAll(it)
-            getKyVideoResult(page) {
+            allList.addAll(list)
+
+       /*     getKyVideoResult(page) {
                 val videoList = mutableListOf<ArticleModel>()
                 it.forEach {
                     val model = ArticleModel()
                     model.videos = it
                     videoList.add(model)
                 }
-                allList.addAll(videoList)
+                allList.addAll(videoList)*/
                 allList.shuffle()
                 _intent.emitCoroutine(MainIntent.ArticleList(allList))
+        }
+    }
+
+
+    suspend fun wrapKyMediaRequest(
+        param: String
+    ): List<Any> = suspendCoroutine { continuation ->
+        when(param){
+            "video" ->{
+                getKyVideoResult(page) { result ->
+                    continuation.resume(result)
+                }
+            }
+            "image" ->{
+                getKyImages(page){result ->
+                    continuation.resume(result)
+                }
             }
         }
+
     }
 
 

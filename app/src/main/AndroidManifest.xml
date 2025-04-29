@@ -18,9 +18,9 @@
         tools:replace="android:allowBackup"
         tools:targetApi="31">
 
-        <meta-data
+        <!--<meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
-            android:value="MyGlideModule" />
+            android:value="MyGlideModule" />-->
 
     </application>
 

@@ -45,10 +45,10 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
     }
 
 
-    fun getKyImages(onSuccess: (List<KyImageModel>) -> Unit = {}) {
+    fun getKyImages(page: Int = 1,onSuccess: (List<KyImageModel>) -> Unit = {}) {
         initKYNet()
         var map = mutableMapOf<String, String>()
-        map["page"] = "1"
+        map["page"] = page.toString()
         map["size"] = "10"
         map["type"] = "beauty"
 
@@ -119,7 +119,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
         baseApiRetrofit.articleList(dftMap).HttpCoroutine(onError = {
         }, onSuccess = {
             GlobalScope.launch {
-                delay(Random.nextInt(100, 2501).toLong())
+//                delay(Random.nextInt(100, 2501).toLong())
                 onSuccess.invoke(it)
             }
         })

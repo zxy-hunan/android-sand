@@ -2,6 +2,7 @@ package com.xy.home.page.frg
 
 import android.graphics.Color
 import androidx.databinding.DataBindingUtil.getBinding
+import androidx.lifecycle.lifecycleScope
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.divider

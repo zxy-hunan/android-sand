@@ -31,6 +31,8 @@ data class ArticleModel(
     var starNum: Int? = 0,
     @SerialName("videos")
     var videos: KyVideoModel? = null,
+    @SerialName("images")
+    var images: List<KyImageModel>? = null,
 ) : java.io.Serializable
 
 

@@ -1,16 +1,23 @@
 package com.xy.sand
 
 import com.alibaba.android.arouter.launcher.ARouter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
+import com.bumptech.glide.load.model.GlideUrl
 import com.drake.statelayout.StateConfig
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.xy.mviframework.base.BaseApp
 import com.xy.mviframework.network.tool.SHOW_LOG
+import okhttp3.OkHttpClient
+import java.io.InputStream
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
+import java.util.concurrent.TimeUnit
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
@@ -44,6 +51,9 @@ class App :BaseApp() {
             errorLayout= com.xy.common.R.layout.layout_error
             loadingLayout= com.xy.common.R.layout.layout_loading
         }
+
+        Glide.get(this).registry.replace<GlideUrl, InputStream>(GlideUrl::class.java, InputStream::class.java,
+            OkHttpUrlLoader.Factory(getNoCheckOkHttpClient()!!))
     }
 
     private fun initNetWork() {
@@ -84,5 +94,53 @@ class App :BaseApp() {
         }
     }
 
+
+    fun getNoCheckOkHttpClient(): OkHttpClient? {
+        val ssl: SSLSocketFactory? = getNoCheckSSLSocketFactory()
+        val trustManager: X509TrustManager? = getTrustManager()
+        return ssl?.let {
+            trustManager?.let { it1 ->
+                OkHttpClient.Builder()
+                    .connectTimeout(TimeUnit.SECONDS.toMillis(30), TimeUnit.SECONDS)
+                    .readTimeout(TimeUnit.SECONDS.toMillis(30), TimeUnit.SECONDS)
+                    .writeTimeout(TimeUnit.SECONDS.toMillis(30), TimeUnit.SECONDS)
+                    .sslSocketFactory(it, it1)
+                    .hostnameVerifier { hostname, session -> true }
+                    .retryOnConnectionFailure(true)
+                    .build()
+            }
+        }
+    }
+
+    fun getNoCheckSSLSocketFactory(): SSLSocketFactory? {
+        return try {
+            val sslContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, arrayOf<TrustManager>(getTrustManager()), SecureRandom())
+            sslContext.socketFactory
+        } catch (e: java.lang.Exception) {
+            throw RuntimeException(e)
+        }
+    }
+
+
+    /**
+     * 获得信任管理器TrustManager,不做任何校验
+     *
+     * @return X509TrustManager
+     */
+    fun getTrustManager(): X509TrustManager {
+        return object : X509TrustManager {
+            override fun checkClientTrusted(serverX509Certificates: Array<X509Certificate>, s: String) {}
+
+            /**
+             * 只支持正序或者逆序存放的证书链，如果证书链顺序打乱的将不支持 我们以下认定x509Certificates数组里从0-end如果是设备证书到ca root证书是正序的
+             * 反之是倒序的
+             */
+            override fun checkServerTrusted(x509Certificates: Array<X509Certificate>, s: String) {}
+            override fun getAcceptedIssuers(): Array<X509Certificate?> {
+                return arrayOfNulls(0)
+            }
+        }
+    }
 
 }

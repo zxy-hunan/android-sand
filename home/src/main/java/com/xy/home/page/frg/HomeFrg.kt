@@ -2,6 +2,8 @@ package com.xy.home.page.frg
 
 import android.graphics.Color
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.addModels
 import com.drake.brv.utils.divider
@@ -11,10 +13,14 @@ import com.drake.brv.utils.setup
 import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.data.AppFontsType
+import com.xy.common.data.ArticleTotalNum
 import com.xy.common.data.Common
 import com.xy.home.R
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.KyImageModel
+import com.xy.common.data.model.KyVideoModel
 import com.xy.common.util.AppFontsUtil
+import com.xy.common.util.MmkvRepository
 import com.xy.common.util.setSemiBoldFonts
 import com.xy.common.view.bindArticleList
 import com.xy.home.databinding.FragmentHomeBinding
@@ -22,6 +28,11 @@ import com.xy.home.databinding.ItemTopArticleBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.vm.MainVm
 import com.xy.mviframework.base.ui.vb.frg.MviFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * @file HomeFrg
@@ -46,6 +57,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             includeVisible = true
         }.setup {
             addType<ArticleModel>(R.layout.item_top_article)
+
             onBind {
                 val data = getModel<ArticleModel>()
                 val item = getBinding<ItemTopArticleBinding>()
@@ -92,9 +104,9 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                     if (it.list.size < 10) {
                         binding.prf.setNoMoreData(true)
                     }
-                    if(viewModel.isRefresh){
+                    if (viewModel.isRefresh) {
                         binding.rvList.models = it.list
-                    }else{
+                    } else {
                         binding.rvList.addModels(it.list)
                     }
 
@@ -111,8 +123,10 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
     }
 
     fun startRefresh() {
-
-        viewModel.refresh(Common.Default)
+        viewModel.page = 1
+        getData {
+            viewModel.refresh(Common.Default, it)
+        }
     }
 
     override fun onListens() {
@@ -121,11 +135,57 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                 startRefresh()
             }
             onLoadMore {
+                viewModel.page++
+                getData {
+                    viewModel.refresh(Common.Default, it)
+                }
                 viewModel.loadMore(Common.Default)
             }
         }
         binding.prf.refreshing()
     }
+
+
+    fun getData(onSuccess: (List<ArticleModel>) -> Unit = {}) {
+        lifecycleScope.launch {
+            try {
+                val (videoRes, imageRes) = coroutineScope {
+                    val videoDeferred = async { viewModel.wrapKyMediaRequest("video") }
+                    val imageDeferred = async { viewModel.wrapKyMediaRequest("image") }
+                    Pair(
+                        videoDeferred.await(),
+                        imageDeferred.await(),
+                    )
+                }
+
+                withContext(Dispatchers.Main) {
+                    val listAll = mutableListOf<ArticleModel>()
+                    videoRes.forEach {
+                        it as KyVideoModel
+                        val model = ArticleModel()
+                        model.videos = it
+                        listAll.add(model)
+                    }
+
+                    val groupSize = (1..3).random()
+
+                    imageRes.chunked(groupSize).forEach { group ->
+                        group as List<KyImageModel>
+                        val model = ArticleModel()
+                        model.images = group
+                        listAll.add(model)
+                    }
+
+                    onSuccess.invoke(listAll)
+
+                }
+            } catch (e: Exception) {
+                // 统一错误处理
+                Toast.makeText(context, "请求失败: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 }
 
 
