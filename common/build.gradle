@@ -70,6 +70,11 @@ dependencies {
 
     api 'com.github.zxy-hunan:xUtils:v1.1.0'
 
+    api 'com.github.liangjingkanji:Net:3.7.0'
+    api 'com.github.chuckerteam.chucker:library:3.5.2' // 通知栏监听网络日志
+
+    api 'com.github.jenly1314:imageviewer:1.2.0'
+
     api rootProject.ext.dependenciesroot["banner"]
 
     kapt rootProject.ext.dependenciesroot["arouterCompiler"]

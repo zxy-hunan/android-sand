@@ -1,11 +1,16 @@
 package com.xy.common.vm
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.scopeNetLife
+import com.drake.net.Get
 import com.dylanc.longan.topActivity
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.xy.common.api.ArticleApiService
 import com.xy.common.api.KaiyApiService
 import com.xy.common.data.ArticleTotalNum
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.BingImgModel
 import com.xy.common.data.model.KyBaseModel
 import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyImageResultModel
@@ -166,5 +171,61 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
 
 
     }
+
+
+
+    private fun initBingKYNet() {
+        NetUtil.options().setApiPath(KaiyApiService::class.java)
+            .setDefault_time(100)
+            .setEnableLog(true)
+            .setUrl("https://peapix.com/bing/")
+    }
+
+
+    fun getBingImages(onSuccess: (List<BingImgModel>) -> Unit = {}) {
+        initBingKYNet()
+        val countryList= mutableListOf<String>("au","br","ca","cn","de","fr","in","it","jp","es","gb","us")
+        var map = mutableMapOf<String, String>()
+        map["country"] = countryList.random()
+
+        val kyService: KaiyApiService = NetUtil.getApiPath() as KaiyApiService
+        kyService.getBingImages(map)
+            .compose(RxHelper.observableIO2Main(topActivity))
+            .subscribe(object : MyObserver<MutableList<BingImgModel>>(topActivity) {
+                override fun onComplete(isError: Boolean?) {
+                    logE(LOG_TAG, "getBingImages onComplete result: ${isError}")
+                }
+
+                override fun onFailure(e: Throwable?, errorMsg: String?) {
+                    logE(LOG_TAG, "getBingImages onFailure result: ${errorMsg},  ${e}")
+                }
+
+                override fun onSuccess(result: MutableList<BingImgModel>?) {
+                    result?.let {
+                        logE(LOG_TAG, "getBingImages onSuccess result: ${it}, ")
+
+                    }
+//                    result?.result?.list?.let {
+//                        logE(LOG_TAG, "onSuccess list: ${it}")
+//                        onSuccess.invoke(it)
+//                    }
+                }
+
+
+            })
+    }
+
+    fun fetchImages(onSuccess: (MutableList<BingImgModel>) -> Unit = {}) = scopeNetLife {
+        val data= Get<MutableList<BingImgModel>>("feed"){
+            val countryList= mutableListOf<String>("au","br","ca","cn","de","fr","in","it","jp","es","gb","us")
+            param("country",countryList.random())
+        }.await()
+        logE(LOG_TAG, "fetchUserInfo onSuccess result: ${data}")
+//        val gson = Gson()
+//        val type = object : TypeToken<MutableList<BingImgModel>>() {}.type
+//        val bingImgList: MutableList<BingImgModel> = gson.fromJson(data.toString(), type)
+        onSuccess.invoke(data)
+    }
+
 
 }

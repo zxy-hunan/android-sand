@@ -18,13 +18,13 @@ data class ArticleModel(
     @SerialName("id")
     val id: Int = 0,
     @SerialName("imageurl")
-    val imageurl: String = "",
+    var imageurl: String = "",
     @SerialName("arpath")
     val arpath: String = "",
     @SerialName("status")
     val status: Int = 0,
     @SerialName("title")
-    val title: String = "",
+    var title: String = "",
     @SerialName("sysUser")
     var sysUser: SysUserModel = SysUserModel(),
     @SerialName("starNum")
@@ -32,18 +32,18 @@ data class ArticleModel(
     @SerialName("videos")
     var videos: KyVideoModel? = null,
     @SerialName("images")
-    var images: List<KyImageModel>? = null,
+    var images: List<BingImgModel>? = null,
 ) : java.io.Serializable
 
 
 @Serializable
 data class SysUserModel(
     @SerialName("nickName")
-    val nickName: String = "",
+    var nickName: String = "",
     @SerialName("userName")
     val userName: String = "",
     @SerialName("avatar")
-    val avatar: String = "",
+    var avatar: String = "",
     @SerialName("userId")
     val userId: Int? = 0,
 ) : java.io.Serializable
@@ -159,4 +159,24 @@ class KyVideoModel(
     val playUrl: String = "",
     @SerialName("duration")
     val duration: String = "",
+) : java.io.Serializable
+
+
+
+@Serializable
+data class BingImgModel(
+    @SerialName("title")
+    val title: String = "",
+    @SerialName("fullUrl")
+    val fullUrl: String = "",
+    @SerialName("thumbUrl")
+    val thumbUrl: String = "",
+    @SerialName("date")
+    val date: String = "",
+    @SerialName("imageUrl")
+    val imageUrl: String = "",
+    @SerialName("copyright")
+    val copyright: String = "",
+    @SerialName("pageUrl")
+    val pageUrl: String = "",
 ) : java.io.Serializable

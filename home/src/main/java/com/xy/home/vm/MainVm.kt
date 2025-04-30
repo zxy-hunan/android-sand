@@ -43,6 +43,8 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
         isRefresh = true
 
         articleList("${com.no}",list)
+//        getBingImages()
+
     }
 
     fun loadMore(com: Common,list:List<ArticleModel> = mutableListOf()) {
@@ -81,7 +83,11 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
                 }
             }
             "image" ->{
-                getKyImages(page){result ->
+               /* getKyImages(page){result ->
+                    continuation.resume(result)
+                }*/
+                fetchImages(){
+                        result ->
                     continuation.resume(result)
                 }
             }

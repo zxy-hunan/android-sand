@@ -1,15 +1,28 @@
 package com.xy.sand
 
+import GlobalHeaderInterceptor
+import GsonConverter
+import SerializationConverter
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.drake.net.NetConfig
+import com.drake.net.cookie.PersistentCookieJar
+import com.drake.net.interceptor.LogRecordInterceptor
+import com.drake.net.okhttp.setConverter
+import com.drake.net.okhttp.setDebug
+import com.drake.net.okhttp.setRequestInterceptor
 import com.drake.statelayout.StateConfig
+import com.king.image.imageviewer.loader.GlideImageLoader
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.xy.mviframework.base.BaseApp
 import com.xy.mviframework.network.tool.SHOW_LOG
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import java.io.InputStream
 import java.security.SecureRandom
@@ -42,7 +55,12 @@ class App :BaseApp() {
         initArouter()
         smartRefreshInit()
         initStateConfig()
+        initMojito()
         SHOW_LOG = true
+    }
+
+    private fun initMojito() {
+//        Mojito.initialize(GlideImageLoader.with(applicationContext), SketchImageLoadFactory())
     }
 
     private fun initStateConfig() {
@@ -58,8 +76,51 @@ class App :BaseApp() {
 
     private fun initNetWork() {
         BASEURL = BuildConfig.BASE_URL_PRODUCTION
+        initNet()
     }
 
+    private fun initNet() {
+
+        NetConfig.initialize("https://peapix.com/bing/", this) {
+
+            // 超时设置
+            connectTimeout(30, TimeUnit.SECONDS)
+            readTimeout(30, TimeUnit.SECONDS)
+            writeTimeout(30, TimeUnit.SECONDS)
+
+            // 本框架支持Http缓存协议和强制缓存模式
+            cache(Cache(cacheDir, 1024 * 1024 * 128)) // 缓存设置, 当超过maxSize最大值会根据最近最少使用算法清除缓存来限制缓存大小
+
+            // LogCat是否输出异常日志, 异常日志可以快速定位网络请求错误
+            setDebug(BuildConfig.DEBUG)
+
+            // AndroidStudio OkHttp Profiler 插件输出网络日志
+            addInterceptor(LogRecordInterceptor(BuildConfig.DEBUG))
+
+            // 添加持久化Cookie管理
+            cookieJar(PersistentCookieJar(this@App))
+
+            // 仅开发模式启用通知栏监听网络日志, 该框架存在下载大文件时内存溢出崩溃请等待官方修复 https://github.com/ChuckerTeam/chucker/issues/1068
+            if (BuildConfig.DEBUG) {
+                addInterceptor(
+                    ChuckerInterceptor.Builder(this@App)
+                        .collector(ChuckerCollector(this@App))
+                        .maxContentLength(250000L)
+                        .redactHeaders(emptySet())
+                        .alwaysReadResponseBody(false)
+                        .build()
+                )
+            }
+
+            // 添加请求拦截器, 可配置全局/动态参数
+            setRequestInterceptor(GlobalHeaderInterceptor())
+
+            // 数据转换器
+            setConverter(GsonConverter())
+
+        }
+
+    }
 
 
     private fun initArouter() {
@@ -138,7 +199,7 @@ class App :BaseApp() {
              */
             override fun checkServerTrusted(x509Certificates: Array<X509Certificate>, s: String) {}
             override fun getAcceptedIssuers(): Array<X509Certificate?> {
-                return arrayOfNulls(0)
+                return emptyArray()
             }
         }
     }

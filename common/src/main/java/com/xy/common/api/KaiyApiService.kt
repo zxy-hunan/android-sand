@@ -1,5 +1,6 @@
 package com.xy.common.api
 
+import com.xy.common.data.model.BingImgModel
 import com.xy.common.data.model.KyBaseModel
 import com.xy.common.data.model.KyImageResultModel
 import com.xy.common.data.model.KyVideoResultModel
@@ -21,4 +22,8 @@ interface KaiyApiService : ApiPath {
 
     @GET("getHaoKanVideo")
     fun getHaoKanVideo(@QueryMap params: Map<String,String>): Observable<KyBaseModel<KyVideoResultModel>>
+
+
+    @GET("feed")
+    fun getBingImages(@QueryMap params: Map<String,String>): Observable<MutableList<BingImgModel>>
 }

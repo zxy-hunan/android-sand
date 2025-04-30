@@ -1,4 +1,5 @@
 package com.xy.common.util.glide
+
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.Registry
 import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
@@ -25,6 +27,10 @@ import com.xy.mviframework.network.tool.logE
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import java.io.InputStream
+import java.util.concurrent.TimeUnit
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 
 /**
@@ -59,13 +65,58 @@ class MyAppGlideModule : AppGlideModule() {
     override fun isManifestParsingEnabled() = false
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        /*registry.replace(
-            GlideUrl::class.java,
-            InputStream::class.java,
-            OkHttpUrlLoader.Factory(SafeOkHttpClient.client)
-        )*/
+// 设置请求方式为 OkHttp，并设置 OkHttpClient 的证书及超时时间
+        val factory = OkHttpUrlLoader.Factory(UnsafeOkHttpClient.getUnsafeOkHttpClient())
+        registry.replace(GlideUrl::class.java, InputStream::class.java, factory)
+
     }
 }
+
+// 自定义工具类修改OkHttpClient证书和超时时间
+class UnsafeOkHttpClient {
+    companion object {
+        fun getUnsafeOkHttpClient(): OkHttpClient {
+            try {
+                // 创建一个不验证证书链的信任管理器
+                val trustAllCerts = arrayOf<TrustManager>(
+                    object : X509TrustManager {
+                        override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                            // 不做任何校验
+                        }
+
+                        override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
+                            // 不做任何校验
+                        }
+
+                        override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {
+                            return emptyArray()
+                        }
+                    }
+                )
+
+                // 安装全信任的信任管理器
+                val sslContext = SSLContext.getInstance("SSL")
+                sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+
+                // 创建使用全信任管理器的 SSL Socket Factory
+                val sslSocketFactory = sslContext.socketFactory
+
+                val builder = OkHttpClient.Builder()
+                builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
+                builder.hostnameVerifier { _, _ -> true }
+
+                builder.connectTimeout(20, TimeUnit.SECONDS)
+                builder.readTimeout(20, TimeUnit.SECONDS)
+                builder.writeTimeout(20, TimeUnit.SECONDS)
+
+                return builder.build()
+            } catch (e: Exception) {
+                throw RuntimeException(e)
+            }
+        }
+    }
+}
+
 
 @JvmOverloads
 fun ImageView.loadAny(
@@ -90,7 +141,6 @@ fun ImageView.loadAny(
         }
         .into(this)
 }
-
 
 
 //改变bitmap尺寸的方法
@@ -127,8 +177,6 @@ fun glideCenterCrop(): Transformation<Bitmap> {
 fun glideCircleCrop(): Transformation<Bitmap> {
     return CircleCrop()
 }
-
-
 
 
 /*

@@ -10,17 +10,15 @@ import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
-import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.data.AppFontsType
-import com.xy.common.data.ArticleTotalNum
 import com.xy.common.data.Common
 import com.xy.home.R
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.BingImgModel
 import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyVideoModel
 import com.xy.common.util.AppFontsUtil
-import com.xy.common.util.MmkvRepository
 import com.xy.common.util.setSemiBoldFonts
 import com.xy.common.view.bindArticleList
 import com.xy.home.databinding.FragmentHomeBinding
@@ -93,7 +91,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
     }
 
     override fun observe() {
-        intentCallBack {
+        intentCallBack { it ->
             when (it) {
                 is MainIntent.ArticleList -> {
                     Log.e("MainIntent", "ArticleList: ")
@@ -111,7 +109,9 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                     }
 
 
-                    var topList = (binding.rvList.models as List<ArticleModel>).take(3)
+                    val topList = (binding.rvList.models as List<ArticleModel>)
+                        .filter { it.images.isNullOrEmpty() && it.videos == null }
+                        .take(3)
                     binding.rvTop.models = topList
                 }
 
@@ -122,7 +122,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
         }
     }
 
-    fun startRefresh() {
+    private fun startRefresh() {
         viewModel.page = 1
         getData {
             viewModel.refresh(Common.Default, it)
@@ -137,16 +137,16 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             onLoadMore {
                 viewModel.page++
                 getData {
-                    viewModel.refresh(Common.Default, it)
+                    viewModel.loadMore(Common.Default, it)
                 }
-                viewModel.loadMore(Common.Default)
+
             }
         }
         binding.prf.refreshing()
     }
 
 
-    fun getData(onSuccess: (List<ArticleModel>) -> Unit = {}) {
+    private fun getData(onSuccess: (List<ArticleModel>) -> Unit = {}) {
         lifecycleScope.launch {
             try {
                 val (videoRes, imageRes) = coroutineScope {
@@ -170,9 +170,12 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
                     val groupSize = (1..3).random()
 
                     imageRes.chunked(groupSize).forEach { group ->
-                        group as List<KyImageModel>
+                        group as List<BingImgModel>
                         val model = ArticleModel()
                         model.images = group
+                        model.title = group[0].title
+                        model.sysUser.avatar = group[0].imageUrl
+                        model.sysUser.nickName = group[0].copyright
                         listAll.add(model)
                     }
 

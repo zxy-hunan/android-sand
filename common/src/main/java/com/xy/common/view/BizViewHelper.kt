@@ -11,18 +11,25 @@ import com.drake.brv.utils.divider
 import com.drake.brv.utils.grid
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
+import com.dylanc.longan.topActivity
+import com.king.image.imageviewer.ImageViewer
+import com.king.image.imageviewer.loader.GlideImageLoader
 import com.xy.common.R
 import com.xy.common.data.AppFontsType
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.BingImgModel
 import com.xy.common.data.model.KyImageModel
 import com.xy.common.databinding.ItemArticleBinding
 import com.xy.common.databinding.ItemChildImageBinding
 import com.xy.common.databinding.ItemImageBinding
 import com.xy.common.databinding.ItemVideoBinding
 import com.xy.common.util.AppFontsUtil
+import com.xy.common.util.clickDebounce
 import com.xy.common.util.dp2px
 import com.xy.common.util.glide.loadAny
 import com.xy.common.util.mContext
+import com.xy.mviframework.network.tool.LOG_TAG
+import com.xy.mviframework.network.tool.logD
 import com.xy.mviframework.network.tool.logI
 
 /**
@@ -105,6 +112,8 @@ fun RecyclerView.bindArticleList() {
                     item.tvContent.text = data.videos?.title ?: ""
                     item.tvDuration.text = data.videos?.duration ?: ""
 
+                    AppFontsUtil.setControlFonts(mContext, item.tvContent, AppFontsType.BARLOW_SEMI_BOLD)
+                    AppFontsUtil.setControlFonts(mContext, item.tvName, AppFontsType.BARLOW_SEMI_BOLD)
                 }
 
                 R.layout.item_image -> {
@@ -112,8 +121,16 @@ fun RecyclerView.bindArticleList() {
                     val data = getModel<ArticleModel>()
                     val item = getBinding<ItemImageBinding>()
 
-                    data.images?.let {
-                        var itemSpanCountNum = itemSpanCount(it)
+                    item.tvTitle.text = data.title
+                    item.tvName.text = data.sysUser.nickName
+
+                    AppFontsUtil.setControlFonts(mContext, item.tvTitle, AppFontsType.BARLOW_SEMI_BOLD)
+                    AppFontsUtil.setControlFonts(mContext, item.tvName, AppFontsType.BARLOW_SEMI_BOLD)
+
+                    item.ivHead.load(data.sysUser.avatar)
+
+                    data.images?.let {images->
+                        var itemSpanCountNum = itemSpanCount(images)
 
                         if (itemSpanCountNum > 0) {
                             var bindingAdapter = item.rvImage.adapter as BindingAdapter
@@ -126,12 +143,29 @@ fun RecyclerView.bindArticleList() {
                             }
 
                             bindingAdapter.onBind {
-                                val data = getModel<KyImageModel>()
+                                val data = getModel<BingImgModel>()
                                 val item = getBinding<ItemChildImageBinding>()
-                                item.ivImage.loadAny(data.url)
+                                logD(LOG_TAG, "image url:${data.thumbUrl}")
+                                item.ivImage.loadAny(data.thumbUrl)
+
+                                item.ivImage.clickDebounce {
+
+                                    val urls= mutableListOf<String>()
+                                    images.forEach {
+                                        urls.add(it.imageUrl)
+                                    }
+                                    ImageViewer.load(urls)//要加载的图片数据，单张或多张
+                                        .imageLoader(GlideImageLoader())// 图片加载器，目前内置的有CoilImageLoader、GlideImageLoader和PicassoImageLoader，也可以自己实现
+                                        .selection(modelPosition)
+                                        .showIndicator(true)
+                                        .start(topActivity,null)
+
+                                }
+
                             }
 
-                            bindingAdapter.models = it
+
+                            bindingAdapter.models = images
 
                         }
                     }
@@ -147,7 +181,20 @@ fun RecyclerView.bindArticleList() {
 
         R.id.cl_root.onClick {
             val data = getModelOrNull<ArticleModel>() ?: return@onClick
-            ARouterConfig.Home.H5Act.push(data.arpath, data)
+            when (itemViewType) {
+                R.layout.item_article -> {
+                    ARouterConfig.Home.H5Act.push(data.arpath, data)
+                }
+                R.layout.item_video -> {
+
+                }
+                R.layout.item_image -> {
+
+                }
+                else -> {
+
+                }
+            }
         }
 
     }
@@ -159,20 +206,20 @@ fun initOnCreateRvMedia(rv: RecyclerView) {
             if (rv.adapter == null) {
                 orientation = DividerOrientation.GRID
                 setDivider(10.dp2px().toInt())
-                includeVisible = false
+                includeVisible = true
             }
         }.setup {
-            addType<KyImageModel>(R.layout.item_child_image)
+            addType<BingImgModel>(R.layout.item_child_image)
         }
 }
 
 
-fun itemSpanCount(datas: List<KyImageModel>): Int {
+fun itemSpanCount(datas: List<Any>): Int {
     val imgList = datas.filterIndexed { index, s ->
         index < 9
     }
     var spanCount = when (imgList.size) {
-        1 -> 6
+        1 -> 5
         2 -> 3
         else -> 2
     }
