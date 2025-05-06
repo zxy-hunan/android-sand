@@ -16,24 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" android:host="zhiniao.abr.ge" />
-                <data android:scheme="https" android:host="zhiniao.abr.ge" />
-            </intent-filter>
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" android:host="zhiniao.airbridge.io" />
-                <data android:scheme="https" android:host="zhiniao.airbridge.io" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -51,6 +33,14 @@
         <activity android:name=".page.act.H5Acy"/>
         <activity android:name=".page.act.MarkdownAcy"
             android:windowSoftInputMode="adjustResize"/>
+
+
+        <activity
+            android:name=".page.act.VideoPlayerAcy"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+
     </application>
 
 </manifest>

@@ -180,3 +180,30 @@ data class BingImgModel(
     @SerialName("pageUrl")
     val pageUrl: String = "",
 ) : java.io.Serializable
+
+
+@Serializable
+class KyMiniVideoResultModel(
+    @SerialName("total")
+    val total: Int = 0,
+    @SerialName("list")
+    val list: List<LiuVideoModel> = listOf(),
+) : java.io.Serializable
+
+@Serializable
+data class LiuVideoModel(
+    @SerialName("id")
+    val id: Int = 0,
+    @SerialName("title")
+    val title: String = "",
+    @SerialName("alias")
+    val alias: String = "",
+    @SerialName("picuser")
+    val picuser: String = "",
+    @SerialName("picurl")
+    val picurl: String = "",
+    @SerialName("playurl")
+    val playurl: String = "",
+    @SerialName("sec")
+    val sec: String = "",
+) : java.io.Serializable

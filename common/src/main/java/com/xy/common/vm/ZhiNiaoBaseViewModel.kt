@@ -14,8 +14,10 @@ import com.xy.common.data.model.BingImgModel
 import com.xy.common.data.model.KyBaseModel
 import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyImageResultModel
+import com.xy.common.data.model.KyMiniVideoResultModel
 import com.xy.common.data.model.KyVideoModel
 import com.xy.common.data.model.KyVideoResultModel
+import com.xy.common.data.model.LiuVideoModel
 import com.xy.common.util.MmkvRepository
 import com.xy.mviframework.base.vm.BaseViewModel
 import com.xy.mviframework.network.def.apiRetrofit
@@ -225,6 +227,53 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
 //        val type = object : TypeToken<MutableList<BingImgModel>>() {}.type
 //        val bingImgList: MutableList<BingImgModel> = gson.fromJson(data.toString(), type)
         onSuccess.invoke(data)
+    }
+
+
+
+    fun fetchVideos(onSuccess: (MutableList<LiuVideoModel>) -> Unit = {}) = scopeNetLife {
+        val data= Get<MutableList<LiuVideoModel>>("feed"){
+            val countryList= mutableListOf<String>("au","br","ca","cn","de","fr","in","it","jp","es","gb","us")
+            param("country",countryList.random())
+        }.await()
+        logE(LOG_TAG, "fetchUserInfo onSuccess result: ${data}")
+//        val gson = Gson()
+//        val type = object : TypeToken<MutableList<BingImgModel>>() {}.type
+//        val bingImgList: MutableList<BingImgModel> = gson.fromJson(data.toString(), type)
+        onSuccess.invoke(data)
+    }
+
+
+    fun fetchVideos(page: Int = 1, size: Int = 10, onSuccess: (List<LiuVideoModel>) -> Unit = {}) {
+        initKYNet()
+        //https://api.apiopen.top/api/getHaoKanVideo?page=1&size=10
+        var map = mutableMapOf<String, String>()
+        map["page"] = "$page"
+        map["size"] = "$size"
+
+        val kyService: KaiyApiService = NetUtil.getApiPath() as KaiyApiService
+        kyService.getMiniVideo(map)
+            .compose(RxHelper.observableIO2Main(topActivity))
+            .subscribe(object : MyObserver<KyBaseModel<KyMiniVideoResultModel>>(topActivity) {
+                override fun onComplete(isError: Boolean?) {
+                    logE(LOG_TAG, "onComplete : $isError")
+                }
+
+                override fun onFailure(e: Throwable?, errorMsg: String?) {
+                    logE(LOG_TAG, "onFailure : $errorMsg")
+                    onSuccess.invoke(listOf())
+                }
+
+                override fun onSuccess(result: KyBaseModel<KyMiniVideoResultModel>?) {
+                    logE(LOG_TAG, "onSuccess result: ${result?.result?.total}")
+                    result?.result?.list?.let {
+                        logE(LOG_TAG, "onSuccess list: ${it}")
+                        onSuccess.invoke(it)
+                    }
+                }
+
+
+            })
     }
 
 

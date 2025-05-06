@@ -129,7 +129,7 @@ fun RecyclerView.bindArticleList() {
 
                     item.ivHead.load(data.sysUser.avatar)
 
-                    data.images?.let {images->
+                    data.images?.let { images ->
                         var itemSpanCountNum = itemSpanCount(images)
 
                         if (itemSpanCountNum > 0) {
@@ -150,7 +150,7 @@ fun RecyclerView.bindArticleList() {
 
                                 item.ivImage.clickDebounce {
 
-                                    val urls= mutableListOf<String>()
+                                    val urls = mutableListOf<String>()
                                     images.forEach {
                                         urls.add(it.imageUrl)
                                     }
@@ -158,7 +158,7 @@ fun RecyclerView.bindArticleList() {
                                         .imageLoader(GlideImageLoader())// 图片加载器，目前内置的有CoilImageLoader、GlideImageLoader和PicassoImageLoader，也可以自己实现
                                         .selection(modelPosition)
                                         .showIndicator(true)
-                                        .start(topActivity,null)
+                                        .start(topActivity, null)
 
                                 }
 
@@ -185,12 +185,17 @@ fun RecyclerView.bindArticleList() {
                 R.layout.item_article -> {
                     ARouterConfig.Home.H5Act.push(data.arpath, data)
                 }
-                R.layout.item_video -> {
 
+                R.layout.item_video -> {
+                    data.videos?.let {
+                        ARouterConfig.Video.VideoPlayerAcy.push(model = it)
+                    }
                 }
+
                 R.layout.item_image -> {
 
                 }
+
                 else -> {
 
                 }
@@ -219,7 +224,7 @@ fun itemSpanCount(datas: List<Any>): Int {
         index < 9
     }
     var spanCount = when (imgList.size) {
-        1 -> 5
+        1 -> 6
         2 -> 3
         else -> 2
     }

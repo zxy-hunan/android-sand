@@ -1,6 +1,5 @@
 package com.xy.common.arouter.user
 
-import ARouterConfig.Home.H5Act.ARTICLE_URL
 import com.alibaba.android.arouter.launcher.ARouter
 
 class ARouterConfig {

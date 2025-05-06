@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/home" />
+            <option value="$PROJECT_DIR$/hot" />
             <option value="$PROJECT_DIR$/im" />
             <option value="$PROJECT_DIR$/im/TIMCommon/timcommon" />
             <option value="$PROJECT_DIR$/im/TUIChat/tuichat" />

@@ -3,6 +3,7 @@ package com.xy.common.api
 import com.xy.common.data.model.BingImgModel
 import com.xy.common.data.model.KyBaseModel
 import com.xy.common.data.model.KyImageResultModel
+import com.xy.common.data.model.KyMiniVideoResultModel
 import com.xy.common.data.model.KyVideoResultModel
 import com.zyx_hunan.baseutil.net.ApiPath
 import io.reactivex.Observable
@@ -23,6 +24,9 @@ interface KaiyApiService : ApiPath {
     @GET("getHaoKanVideo")
     fun getHaoKanVideo(@QueryMap params: Map<String,String>): Observable<KyBaseModel<KyVideoResultModel>>
 
+
+    @GET("getMiniVideo")
+    fun getMiniVideo(@QueryMap params: Map<String,String>): Observable<KyBaseModel<KyMiniVideoResultModel>>
 
     @GET("feed")
     fun getBingImages(@QueryMap params: Map<String,String>): Observable<MutableList<BingImgModel>>

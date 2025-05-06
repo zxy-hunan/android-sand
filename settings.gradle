@@ -25,6 +25,7 @@ dependencyResolutionManagement {
 include ':app'
 include ':user'
 include ':home'
+include ':hot'
 include ':im'
 include ':common'
 

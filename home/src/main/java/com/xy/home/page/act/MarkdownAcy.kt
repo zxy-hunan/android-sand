@@ -1,13 +1,11 @@
 package com.xy.home.page.act
 
-import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.drake.brv.annotaion.DividerOrientation
@@ -20,14 +18,12 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.data.model.ArticleModel
 import com.xy.common.data.model.CommModel
 import com.xy.common.util.RxKeyboardTool
-import com.xy.common.util.clickDebounce
 import com.xy.common.util.remove
 import com.xy.common.util.setAliFonts
 import com.xy.common.view.load
 import com.xy.home.R
 import com.xy.home.databinding.ActivityMarkdownBinding
 import com.xy.home.databinding.ItemCommLayoutBinding
-import com.xy.home.databinding.ItemTopArticleBinding
 import com.xy.home.intent.MainIntent
 import com.xy.home.vm.MainVm
 import com.xy.mviframework.base.ui.vb.MviAcy

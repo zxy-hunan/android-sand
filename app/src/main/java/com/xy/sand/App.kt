@@ -24,6 +24,10 @@ import com.xy.mviframework.base.BaseApp
 import com.xy.mviframework.network.tool.SHOW_LOG
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import xyz.doikki.videoplayer.ijk.IjkPlayerFactory
+import xyz.doikki.videoplayer.player.AndroidMediaPlayerFactory
+import xyz.doikki.videoplayer.player.VideoViewConfig
+import xyz.doikki.videoplayer.player.VideoViewManager
 import java.io.InputStream
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -56,6 +60,7 @@ class App :BaseApp() {
         smartRefreshInit()
         initStateConfig()
         initMojito()
+        initVideoPlayer()
         SHOW_LOG = true
     }
 
@@ -127,6 +132,19 @@ class App :BaseApp() {
         ARouter.openLog()
         ARouter.openDebug()
         ARouter.init(this)
+    }
+
+
+    private fun initVideoPlayer() {
+        VideoViewManager.setConfig(
+            VideoViewConfig.newBuilder()
+            //使用使用IjkPlayer解码
+            .setPlayerFactory(IjkPlayerFactory.create())
+//            //使用ExoPlayer解码
+//            .setPlayerFactory(ExoMediaPlayerFactory.create())
+            //使用MediaPlayer解码
+            .setPlayerFactory(AndroidMediaPlayerFactory.create())
+            .build());
     }
 
     private fun smartRefreshInit() {

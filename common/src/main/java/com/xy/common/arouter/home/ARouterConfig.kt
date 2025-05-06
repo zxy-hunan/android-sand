@@ -1,8 +1,10 @@
+import ARouterConfig.Home.H5Act.ARTICLE_URL
 import com.alibaba.android.arouter.launcher.ARouter
 import com.xy.common.data.model.ArticleModel
+import com.xy.common.data.model.KyVideoModel
 
 class ARouterConfig {
-    object Home{
+    object Home {
         private const val GROUP: String = "/home"
 
         object HomeDetailAcy {
@@ -23,11 +25,11 @@ class ARouterConfig {
             const val ARTICLE_URL = "ARTICLE_URL"
             const val ARTICLE_MODE = "ARTICLE_MODE"
 
-            fun push(url:String="",model: ArticleModel) {
+            fun push(url: String = "", model: ArticleModel) {
                 ARouter.getInstance()
                     .build(PATH)
-                    .withSerializable(ARTICLE_MODE,model)
-                    .withString(ARTICLE_URL,url)
+                    .withSerializable(ARTICLE_MODE, model)
+                    .withString(ARTICLE_URL, url)
                     .navigation()
             }
         }
@@ -40,7 +42,7 @@ class ARouterConfig {
             fun push(model: ArticleModel) {
                 ARouter.getInstance()
                     .build(PATH)
-                    .withSerializable(ARTICLE_MODE,model)
+                    .withSerializable(ARTICLE_MODE, model)
                     .navigation()
             }
         }
@@ -48,7 +50,7 @@ class ARouterConfig {
 
     }
 
-    object Post{
+    object Post {
         private const val GROUP: String = "/post"
 
         object PostAcy {
@@ -63,4 +65,26 @@ class ARouterConfig {
         }
 
     }
+
+
+    object Video {
+        private const val GROUP: String = "/player"
+
+        object VideoPlayerAcy {
+
+            const val PATH = "$GROUP/page/act/videoplayeracy"
+//            const val VIDEO_URL = "VIDEO_URL"
+            const val VIDEO_MODE = "VIDEO_MODE"
+
+            fun push(url: String = "",model: KyVideoModel) {
+                ARouter.getInstance()
+                    .build(PATH)
+                    .withSerializable(VIDEO_MODE, model)
+//                    .withString(VIDEO_URL, url)
+                    .navigation()
+            }
+        }
+
+    }
+
 }
