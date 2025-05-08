@@ -244,7 +244,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
     }
 
 
-    fun fetchVideos(page: Int = 1, size: Int = 10, onSuccess: (List<LiuVideoModel>) -> Unit = {}) {
+    fun fetchVideos(page: Int = 1, size: Int = 10, onSuccess: (MutableList<LiuVideoModel>) -> Unit = {}) {
         initKYNet()
         //https://api.apiopen.top/api/getHaoKanVideo?page=1&size=10
         var map = mutableMapOf<String, String>()
@@ -261,7 +261,7 @@ open class ZhiNiaoBaseViewModel<I> : BaseViewModel<I>() {
 
                 override fun onFailure(e: Throwable?, errorMsg: String?) {
                     logE(LOG_TAG, "onFailure : $errorMsg")
-                    onSuccess.invoke(listOf())
+                    onSuccess.invoke(mutableListOf())
                 }
 
                 override fun onSuccess(result: KyBaseModel<KyMiniVideoResultModel>?) {

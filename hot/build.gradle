@@ -42,7 +42,7 @@ android {
 
 dependencies {
     api project(':common')
-    implementation project(':home')
+//    implementation project(':home')
 
     kapt rootProject.ext.dependenciesroot["arouterCompiler"]
 }

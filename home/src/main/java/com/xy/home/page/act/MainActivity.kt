@@ -15,6 +15,7 @@ import com.xy.home.intent.MainIntent
 import com.xy.home.page.frg.HomeCNFrg
 import com.xy.home.page.frg.HomeFrg
 import com.xy.home.vm.MainVm
+import com.xy.hot.page.frg.HotFrg
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.mviframework.network.tool.SHOW_LOG
 import com.xy.user.page.frg.UserFrg
@@ -45,9 +46,10 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
 
     private fun initFrg() {
         frgList.add(HomeFrg())
-        frgList.add(HomeCNFrg())
+//        frgList.add(HomeCNFrg())
 //        frgList.add(NotiFrg())
 //        frgList.add(TUIConversationMinimalistFragment())
+        frgList.add(HotFrg())
         frgList.add(TUIConversationFragment())
         frgList.add(UserFrg())
     }

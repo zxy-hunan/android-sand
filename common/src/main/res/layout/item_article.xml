@@ -100,7 +100,8 @@
                 android:src="@drawable/ic_like"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                tools:src="@drawable/ic_like"/>
 
             <TextView
                 android:id="@+id/tv_star"
@@ -109,7 +110,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="3dp"
                 android:textColor="#333"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_content"
@@ -124,7 +125,8 @@
                 android:src="@drawable/ic_comm"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/tv_star"
-                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                tools:src="@drawable/ic_comm"/>
 
             <TextView
                 android:id="@+id/tv_common"
@@ -133,7 +135,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="2dp"
                 android:textColor="#333"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="@+id/imageView3"

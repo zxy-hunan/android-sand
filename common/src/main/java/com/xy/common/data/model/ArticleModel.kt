@@ -187,7 +187,7 @@ class KyMiniVideoResultModel(
     @SerialName("total")
     val total: Int = 0,
     @SerialName("list")
-    val list: List<LiuVideoModel> = listOf(),
+    val list: MutableList<LiuVideoModel> = mutableListOf<LiuVideoModel>(),
 ) : java.io.Serializable
 
 @Serializable

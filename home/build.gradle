@@ -45,6 +45,7 @@ android {
 dependencies {
 
     api project(':common')
+    implementation project(':hot')
     implementation project(':im')
     implementation project(':user')
 
