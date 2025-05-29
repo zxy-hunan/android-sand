@@ -92,4 +92,6 @@ dependencies {
 
     // 可选，如需要缓存或者抖音预加载功能请引入此库
     api 'xyz.doikki.android.dkplayer:videocache:3.3.7'
+
+    api 'com.github.getActivity:TitleBar:10.6'
 }

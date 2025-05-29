@@ -1,6 +1,7 @@
 package com.xy.common.util
 
 import com.dylanc.mmkv.MMKVOwner
+import com.dylanc.mmkv.mmkvBool
 import com.dylanc.mmkv.mmkvInt
 import com.dylanc.mmkv.mmkvParcelable
 import com.dylanc.mmkv.mmkvString
@@ -21,5 +22,8 @@ object MmkvRepository : MMKVOwner{
     var loginToken by mmkvString(default = "")
 
     var userModel by mmkvParcelable<UserModel>(default = UserModel())
+
+
+    var homeFlag by mmkvBool(default = false)
 
 }

@@ -39,36 +39,38 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
 
     var isRefresh = true
 
-    fun refresh(com: Common,list:List<ArticleModel> = mutableListOf()) {
+    fun refresh(com: Common, list: List<ArticleModel> = mutableListOf()) {
         isRefresh = true
 
-        articleList("${com.no}",list)
+        articleList("${com.no}", list)
 //        getBingImages()
 
     }
 
-    fun loadMore(com: Common,list:List<ArticleModel> = mutableListOf()) {
+    fun loadMore(com: Common, list: List<ArticleModel> = mutableListOf()) {
         isRefresh = false
 
-        articleList("${com.no}",list)
+        articleList("${com.no}", list)
     }
 
-    fun articleList(comId: String = "${Common.Hot.no}",list:List<ArticleModel> = mutableListOf()) {
+    fun articleList(comId: String = "${Common.Hot.no}", list: List<ArticleModel> = mutableListOf()) {
         articleListReq(comId) {
             val allList = mutableListOf<ArticleModel>()
             allList.addAll(it)
             allList.addAll(list)
 
-       /*     getKyVideoResult(page) {
-                val videoList = mutableListOf<ArticleModel>()
-                it.forEach {
-                    val model = ArticleModel()
-                    model.videos = it
-                    videoList.add(model)
-                }
-                allList.addAll(videoList)*/
+            /*     getKyVideoResult(page) {
+                     val videoList = mutableListOf<ArticleModel>()
+                     it.forEach {
+                         val model = ArticleModel()
+                         model.videos = it
+                         videoList.add(model)
+                     }
+                     allList.addAll(videoList)*/
+            if (list.isNotEmpty()) {
                 allList.shuffle()
-                _intent.emitCoroutine(MainIntent.ArticleList(allList))
+            }
+            _intent.emitCoroutine(MainIntent.ArticleList(allList))
         }
     }
 
@@ -76,18 +78,18 @@ class MainVm : ZhiNiaoBaseViewModel<MainIntent>() {
     suspend fun wrapKyMediaRequest(
         param: String
     ): List<Any> = suspendCoroutine { continuation ->
-        when(param){
-            "video" ->{
+        when (param) {
+            "video" -> {
                 getKyVideoResult(page) { result ->
                     continuation.resume(result)
                 }
             }
-            "image" ->{
-               /* getKyImages(page){result ->
-                    continuation.resume(result)
-                }*/
-                fetchImages(){
-                        result ->
+
+            "image" -> {
+                /* getKyImages(page){result ->
+                     continuation.resume(result)
+                 }*/
+                fetchImages() { result ->
                     continuation.resume(result)
                 }
             }

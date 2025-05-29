@@ -43,6 +43,15 @@ fun RecyclerView.rvSetting(){
                     ARouterConfig.User.LoginAct.push()
                 }
 
+                UserTag.PERSONAL.tag -> {
+                }
+
+                UserTag.OTHER.tag -> {
+                }
+
+                UserTag.ADJUST.tag -> {
+                }
+
                 else -> {}
             }
         }

@@ -38,7 +38,7 @@ class WelcomeAct : Activity() {
     private fun gotoMainPage() {
         //携程 非阻塞式
         jumpJob = GlobalScope.launch {
-            Thread.sleep(200)
+            Thread.sleep(5000)
             startActivity(Intent(this@WelcomeAct, MainActivity::class.java))
             finish()
         }

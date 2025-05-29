@@ -22,6 +22,17 @@ sealed class UserTag {
         override val tag: String
             get() = "2"
     }
+
+    object PERSONAL : UserTag() {
+        override val tag: String
+            get() = "3"
+    }
+
+
+    object ADJUST : UserTag() {
+        override val tag: String
+            get() = "4"
+    }
 }
 
 sealed class ArticleTag {

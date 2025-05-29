@@ -10,7 +10,10 @@ import com.drake.brv.utils.divider
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
+import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
+import com.king.image.imageviewer.ImageViewerSpec.orientation
+import com.tencent.qcloud.tuicore.util.TUIBuild.getModel
 import com.xy.common.data.AppFontsType
 import com.xy.common.data.Common
 import com.xy.home.R
@@ -19,6 +22,9 @@ import com.xy.common.data.model.BingImgModel
 import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyVideoModel
 import com.xy.common.util.AppFontsUtil
+import com.xy.common.util.MmkvRepository
+import com.xy.common.util.glide.loadAny
+import com.xy.common.util.mContext
 import com.xy.common.util.setSemiBoldFonts
 import com.xy.common.view.bindArticleList
 import com.xy.home.databinding.FragmentHomeBinding
@@ -48,6 +54,9 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 
             titleBarMarginTop(binding.viewLine)
         }
+
+        binding.ivHome.loadAny(if(MmkvRepository.homeFlag) R.drawable.home_am else R.drawable.home_dance)
+
 
         binding.rvTop.linear().divider {
             orientation = DividerOrientation.HORIZONTAL
@@ -83,6 +92,7 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             startVisible = true
         }.bindArticleList()
 
+        setHomeFlagClick()
     }
 
     override fun lazyLoad() {
@@ -122,6 +132,26 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
         }
     }
 
+    private fun setHomeFlagClick(){
+        binding.ivHome.setOnClickListener {
+
+            when(MmkvRepository.homeFlag){
+                true -> {
+                    MmkvRepository.homeFlag = false
+                    binding.ivHome.loadAny(R.drawable.home_dance)
+                    toast("心猿意马")
+                }
+                false -> {
+                    MmkvRepository.homeFlag = true
+                    binding.ivHome.loadAny(R.drawable.home_am)
+                    toast("心无旁贷")
+                }
+            }
+//            startRefresh()
+            binding.prf.refreshing()
+        }
+    }
+
     private fun startRefresh() {
         viewModel.page = 1
         getData {
@@ -147,6 +177,10 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
 
 
     private fun getData(onSuccess: (List<ArticleModel>) -> Unit = {}) {
+        if(MmkvRepository.homeFlag){
+            onSuccess.invoke(listOf())
+            return
+        }
         lifecycleScope.launch {
             try {
                 val (videoRes, imageRes) = coroutineScope {
