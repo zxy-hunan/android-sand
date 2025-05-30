@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <RegexEditText
+                <com.xy.common.widget.view.RegexEditText
                     android:id="@+id/et_register_phone"
                     style="@style/EditTextStyle"
                     android:layout_width="match_parent"
@@ -60,12 +60,12 @@
                     android:layout_gravity="bottom" />
             </FrameLayout>
 
-            <CountdownView
+            <com.xy.common.widget.view.CountdownView
                 android:id="@+id/cv_register_countdown"
                 style="@style/CountdownViewStyle" />
         </LinearLayout>
 
-        <RegexEditText
+        <com.xy.common.widget.view.RegexEditText
             android:id="@+id/et_register_code"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
@@ -79,7 +79,7 @@
 
         <View style="@style/HorizontalLineStyle" />
 
-        <PasswordEditText
+        <com.xy.common.widget.view.PasswordEditText
             android:id="@+id/et_register_password1"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
@@ -91,7 +91,7 @@
 
         <View style="@style/HorizontalLineStyle" />
 
-        <PasswordEditText
+        <com.xy.common.widget.view.PasswordEditText
             android:id="@+id/et_register_password2"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
@@ -104,7 +104,7 @@
 
         <View style="@style/HorizontalLineStyle" />
 
-        <SubmitButton
+        <com.xy.common.widget.view.SubmitButton
             android:id="@+id/btn_register_commit"
             style="@style/ButtonStyle"
             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-
+package com.xy.common.widget.view
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator

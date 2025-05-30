@@ -1,4 +1,4 @@
-
+package com.xy.common.widget.view
 import android.animation.ValueAnimator
 import android.content.*
 import android.content.res.TypedArray

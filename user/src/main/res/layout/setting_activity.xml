@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
                 app:bar_rightDrawable="@drawable/arrow_right"
                 tools:bar_rightHint="@string/setting_language_simple" />
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,9 +49,9 @@
                     app:shape_radius="@dimen/dp_720"
                     app:shape_solidColor="#F85E5E" />
 
-            </SettingBar>
+            </com.xy.common.widget.layout.SettingBar>
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 app:bar_rightDrawable="@drawable/arrow_right"
                 tools:bar_rightText="181****1413" />
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 app:bar_rightDrawable="@drawable/arrow_right"
                 tools:bar_rightText="密码强度较低" />
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_agreement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,37 +76,37 @@
                 app:bar_leftText="setting_agreement"
                 app:bar_rightDrawable="@drawable/arrow_right" />
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:bar_leftText="setting_about"
                 app:bar_rightDrawable="@drawable/arrow_right" />
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
                 app:bar_leftText="setting_auto">
 
-                <SwitchButton
+                <com.xy.common.widget.view.SwitchButton
                     android:id="@+id/sb_setting_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginHorizontal="@dimen/dp_15" />
 
-            </SettingBar>
+            </com.xy.common.widget.layout.SettingBar>
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_cache"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:bar_leftText="setting_cache"
                 app:bar_rightDrawable="@drawable/arrow_right" />
 
-            <SettingBar
+            <com.xy.common.widget.layout.SettingBar
                 android:id="@+id/sb_setting_exit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

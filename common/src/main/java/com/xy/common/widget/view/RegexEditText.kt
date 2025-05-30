@@ -1,4 +1,4 @@
-
+package com.xy.common.widget.view
 import android.content.*
 import android.content.res.TypedArray
 import android.text.*

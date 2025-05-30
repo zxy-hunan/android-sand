@@ -1,4 +1,4 @@
-
+package com.xy.common.widget.view
 import android.content.*
 import android.graphics.drawable.Drawable
 import android.text.TextUtils

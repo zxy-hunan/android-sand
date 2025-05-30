@@ -1,5 +1,4 @@
-
-import RegexEditText
+package com.xy.common.widget.view
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.text.Editable

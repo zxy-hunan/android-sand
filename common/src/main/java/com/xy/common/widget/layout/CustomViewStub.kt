@@ -1,4 +1,4 @@
-
+package com.xy.common.widget.layout
 import android.content.*
 import android.content.res.TypedArray
 import android.util.AttributeSet
