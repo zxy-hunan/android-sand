@@ -23,6 +23,7 @@ import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyVideoModel
 import com.xy.common.util.AppFontsUtil
 import com.xy.common.util.MmkvRepository
+import com.xy.common.util.clickDebounce
 import com.xy.common.util.glide.loadAny
 import com.xy.common.util.mContext
 import com.xy.common.util.setSemiBoldFonts
@@ -93,6 +94,9 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
         }.bindArticleList()
 
         setHomeFlagClick()
+        binding.flSearch.clickDebounce{
+            ARouterConfig.Home.SearchAcy.push()
+        }
     }
 
     override fun lazyLoad() {

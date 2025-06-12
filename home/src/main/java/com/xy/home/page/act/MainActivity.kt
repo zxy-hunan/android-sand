@@ -41,7 +41,7 @@ class MainActivity : MviAcy<ActivityMainBinding, MainVm, MainIntent>(MainVm::cla
         immersionBar(binding.view)
         initFrg()
         navSelectedAction()
-        CultureDialog.dayCultureDialog()
+//        CultureDialog.dayCultureDialog()
     }
 
     private fun initFrg() {

@@ -31,6 +31,7 @@
         <activity android:name=".page.act.HomeDetailAcy"/>
         <activity android:name=".page.act.PostCommunityAct"/>
         <activity android:name=".page.act.H5Acy"/>
+        <activity android:name=".page.act.SearchAcy"/>
         <activity android:name=".page.act.MarkdownAcy"
             android:windowSoftInputMode="adjustResize"/>
 

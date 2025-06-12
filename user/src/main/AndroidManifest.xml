@@ -5,5 +5,7 @@
         <activity android:name="com.xy.user.page.acy.LoginAcy" />
         <activity android:name=".page.acy.SettingsAcy"/>
         <activity android:name=".page.acy.ArticleClassifyAcy"/>
+        <activity android:name=".page.acy.PersonalAcy"/>
+        <activity android:name=".page.acy.AboutAcy"/>
     </application>
 </manifest>

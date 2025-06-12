@@ -4,19 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF7F7F7"
     android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="data" />
+        app:title="个人中心" />
 
     <com.xy.common.widget.layout.SettingBar
         android:id="@+id/fl_person_data_avatar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:bar_leftText="personal_data_head">
+        app:bar_leftText="头像">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_person_data_avatar"
@@ -35,23 +42,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
-        app:bar_leftText="personal_data_id"
+        app:bar_leftText="ID"
         tools:bar_rightText="880634" />
 
     <com.xy.common.widget.layout.SettingBar
         android:id="@+id/sb_person_data_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:bar_leftText="personal_data_name"
-        app:bar_rightTextHint="personal_data_name_hint"
-        tools:bar_rightText="Android 轮子哥" />
+        app:bar_leftText="昵称"
+        app:bar_rightTextHint="Android dev"
+        tools:bar_rightText="Android dev" />
 
     <com.xy.common.widget.layout.SettingBar
         android:id="@+id/sb_person_data_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:bar_leftText="personal_data_address"
+        app:bar_leftText="地址"
         app:bar_rightDrawable="@drawable/arrow_right"
-        app:bar_rightTextHint="personal_data_address_hint" />
+        app:bar_rightTextHint="xxxx" />
 
 </LinearLayout>

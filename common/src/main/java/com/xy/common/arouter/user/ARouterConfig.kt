@@ -29,6 +29,28 @@ class ARouterConfig {
             }
         }
 
+        object PersonalAcy {
+
+            const val PATH = "$GROUP/page/acy/personalacy"
+
+            fun push() {
+                ARouter.getInstance()
+                    .build(PATH)
+                    .navigation()
+            }
+        }
+
+        object AboutAcy {
+
+            const val PATH = "$GROUP/page/acy/aboutacy"
+
+            fun push() {
+                ARouter.getInstance()
+                    .build(PATH)
+                    .navigation()
+            }
+        }
+
 
         object ArticleClassifyAct {
 

@@ -21,7 +21,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@id/tv_origin"
+        android:layout_toStartOf="@id/tv_origin"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -32,10 +32,21 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.xy.common.widget.shinebuttonlib.ShineButton
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="5dp"
+                app:btn_color="@android:color/darker_gray"
+                app:btn_fill_color="#996699"
+                app:enable_flashing="true"
+                app:siShape="@raw/like"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"/>
+ <!--           <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_like" />
+                android:src="@drawable/ic_like" />-->
 
             <TextView
                 android:id="@+id/tv_star"

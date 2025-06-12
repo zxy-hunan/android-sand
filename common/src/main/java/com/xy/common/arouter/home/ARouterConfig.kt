@@ -18,6 +18,17 @@ class ARouterConfig {
             }
         }
 
+        object SearchAcy {
+
+            const val PATH = "$GROUP/page/act/searchacy"
+
+            fun push() {
+                ARouter.getInstance()
+                    .build(PATH)
+                    .navigation()
+            }
+        }
+
 
         object H5Act {
 

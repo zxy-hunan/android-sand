@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:animateType="scale"
-            />
+            tools:ignore="MissingClass" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -92,16 +92,18 @@
                 tools:text="7854623" />
 
 
-            <ImageView
+            <com.xy.common.widget.shinebuttonlib.ShineButton
                 android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/ic_like"
+                app:btn_color="@android:color/darker_gray"
+                app:btn_fill_color="#996699"
+                app:enable_flashing="true"
+                app:siShape="@raw/star"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_content"
-                tools:src="@drawable/ic_like"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"/>
 
             <TextView
                 android:id="@+id/tv_star"
@@ -117,16 +119,18 @@
                 tools:text="12" />
 
 
-            <ImageView
+            <com.xy.common.widget.shinebuttonlib.ShineButton
                 android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/ic_comm"
+                app:btn_color="@android:color/darker_gray"
+                app:btn_fill_color="#996699"
+                app:enable_flashing="true"
+                app:siShape="@raw/heart"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/tv_star"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
-                tools:src="@drawable/ic_comm"/>
+                app:layout_constraintTop_toTopOf="@+id/imageView2"/>
 
             <TextView
                 android:id="@+id/tv_common"

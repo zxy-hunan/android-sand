@@ -8,6 +8,7 @@ import com.drake.brv.utils.grid
 import com.drake.brv.utils.linear
 import com.drake.brv.utils.setup
 import com.xy.common.arouter.user.ARouterConfig
+import com.xy.common.dialog.CultureDialog
 import com.xy.common.util.setAliFonts
 import com.xy.common.util.setSemiBoldFonts
 import com.xy.user.R
@@ -39,17 +40,20 @@ fun RecyclerView.rvSetting(){
             val item = getModel<UserTagModel>()
             when (item.tag) {
                 UserTag.SETTING.tag -> {
-//                    ARouterConfig.User.SettingsAct.push()
-                    ARouterConfig.User.LoginAct.push()
+                    ARouterConfig.User.SettingsAct.push()
+//                    ARouterConfig.User.LoginAct.push()
                 }
 
                 UserTag.PERSONAL.tag -> {
+                    ARouterConfig.User.PersonalAcy.push()
                 }
 
                 UserTag.OTHER.tag -> {
+                    ARouterConfig.User.AboutAcy.push()
                 }
 
                 UserTag.ADJUST.tag -> {
+                    CultureDialog.dayCultureDialog()
                 }
 
                 else -> {}
