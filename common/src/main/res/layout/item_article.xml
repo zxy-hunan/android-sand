@@ -34,19 +34,19 @@
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
-            android:background="@drawable/shape_img_10ran"
-            app:shapeAppearance="@style/CircleStyle1"
+            android:background="@drawable/shape_default_image_bg"
+            app:shapeAppearance="@style/CircleStyle"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="5dp"
             android:visibility="visible"
             android:src="@drawable/icon_default"
             />
-        <com.xy.common.widget.htextview.HTextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:animateType="scale"
-            tools:ignore="MissingClass" />
+            tools:ignore="MissingClass,RelativeOverlap" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -100,10 +100,10 @@
                 app:btn_color="@android:color/darker_gray"
                 app:btn_fill_color="#996699"
                 app:enable_flashing="true"
-                app:siShape="@raw/star"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_content"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                app:siShape="@raw/like" />
 
             <TextView
                 android:id="@+id/tv_star"
@@ -115,7 +115,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
                 tools:text="12" />
 
 
@@ -127,22 +127,21 @@
                 app:btn_color="@android:color/darker_gray"
                 app:btn_fill_color="#996699"
                 app:enable_flashing="true"
-                app:siShape="@raw/heart"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/tv_star"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"/>
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                app:siShape="@raw/heart" />
 
             <TextView
                 android:id="@+id/tv_common"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
                 android:textColor="#333"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/tv_star"
                 tools:text="12" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

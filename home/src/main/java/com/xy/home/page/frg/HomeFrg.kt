@@ -12,20 +12,15 @@ import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
-import com.king.image.imageviewer.ImageViewerSpec.orientation
-import com.tencent.qcloud.tuicore.util.TUIBuild.getModel
 import com.xy.common.data.AppFontsType
 import com.xy.common.data.Common
 import com.xy.home.R
 import com.xy.common.data.model.ArticleModel
 import com.xy.common.data.model.BingImgModel
-import com.xy.common.data.model.KyImageModel
 import com.xy.common.data.model.KyVideoModel
 import com.xy.common.util.AppFontsUtil
 import com.xy.common.util.MmkvRepository
 import com.xy.common.util.clickDebounce
-import com.xy.common.util.glide.loadAny
-import com.xy.common.util.mContext
 import com.xy.common.util.setSemiBoldFonts
 import com.xy.common.view.bindArticleList
 import com.xy.home.databinding.FragmentHomeBinding
@@ -56,7 +51,10 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             titleBarMarginTop(binding.viewLine)
         }
 
-        binding.ivHome.loadAny(if(MmkvRepository.homeFlag) R.drawable.home_am else R.drawable.home_dance)
+//        binding.ivHome.loadAny(if(MmkvRepository.homeFlag) R.drawable.home_am else R.drawable.home_dance)
+
+        binding.ivHome.setAnimation(if(MmkvRepository.homeFlag) com.xy.common.R.raw.bookn else com.xy.common.R.raw.dance)
+        binding.ivHome.playAnimation()
 
 
         binding.rvTop.linear().divider {
@@ -142,12 +140,16 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
             when(MmkvRepository.homeFlag){
                 true -> {
                     MmkvRepository.homeFlag = false
-                    binding.ivHome.loadAny(R.drawable.home_dance)
+//                    binding.ivHome.loadAny(R.drawable.home_dance)
+                    binding.ivHome.setAnimation(com.xy.common.R.raw.dance)
+                    binding.ivHome.playAnimation()
                     toast("心猿意马")
                 }
                 false -> {
                     MmkvRepository.homeFlag = true
-                    binding.ivHome.loadAny(R.drawable.home_am)
+//                    binding.ivHome.loadAny(R.drawable.home_am)
+                    binding.ivHome.setAnimation(com.xy.common.R.raw.bookn)
+                    binding.ivHome.playAnimation()
                     toast("心无旁贷")
                 }
             }

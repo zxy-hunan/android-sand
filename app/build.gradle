@@ -23,8 +23,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
 //        buildConfigField("String", "BASE_URL_PRODUCTION", '"http://gyuelife.online/prod-api/"')
-//        buildConfigField("String", "BASE_URL_PRODUCTION", '"http://zhiniao.xyz/prod-api/"')
-        buildConfigField("String", "BASE_URL_PRODUCTION", '"http://47.121.27.62:8080/prod-api/"')
+        buildConfigField("String", "BASE_URL_PRODUCTION", '"http://zhiniao.xyz/prod-api/"')
+//        buildConfigField("String", "BASE_URL_PRODUCTION", '"http://47.121.27.62:8080/prod-api/"')
 
         def configPath = rootProject.ext.sand
         buildConfigField("String", "IM_APPID", "\"${configPath.im_appid}\"")

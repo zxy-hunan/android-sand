@@ -18,6 +18,7 @@ import com.xy.hot.widget.render.TikTokRenderViewFactory
 import com.xy.mviframework.base.ui.vb.frg.MviFragment
 import xyz.doikki.videoplayer.player.VideoView
 import xyz.doikki.videoplayer.util.L
+import kotlin.random.Random
 
 /**
  * @file HotFrg
@@ -45,7 +46,7 @@ class HotFrg() : MviFragment<FragmentHotBinding, HotVM, HotIntent>(HotVM::class.
 
 
     override fun lazyLoad() {
-        viewModel.fetchVideosReq()
+        viewModel.fetchVideosReq(page = Random.nextInt(1, 51), size = 20)
     }
 
     override fun observe() {
