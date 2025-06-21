@@ -2,7 +2,6 @@ package com.xy.sand
 
 import GlobalHeaderInterceptor
 import GsonConverter
-import SerializationConverter
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
@@ -16,7 +15,6 @@ import com.drake.net.okhttp.setConverter
 import com.drake.net.okhttp.setDebug
 import com.drake.net.okhttp.setRequestInterceptor
 import com.drake.statelayout.StateConfig
-import com.king.image.imageviewer.loader.GlideImageLoader
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -51,7 +49,15 @@ import javax.net.ssl.X509TrustManager
  * https://www.mockplus.cn/example/rp/100009/?hmsr=zhihu
  */
 class App :BaseApp() {
+    companion object {
+        /**
+         * 实现单例，任何一个页面都能拿到这个类的数据和对象
+         */
+        @JvmStatic
+        lateinit var instance: App
+            private set
 
+    }
     override fun onCreate() {
         super.onCreate()
         handleSSLHandshake()

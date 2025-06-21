@@ -23,23 +23,24 @@
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="10dp">
 
-        <com.xy.common.widget.view.ClearEditText
+        <androidx.appcompat.widget.SearchView
+            app:queryHint="Search"
+            android:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            android:id="@+id/mSearchView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_article" />
 
 </LinearLayout>

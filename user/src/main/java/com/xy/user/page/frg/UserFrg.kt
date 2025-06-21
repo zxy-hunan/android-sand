@@ -4,8 +4,10 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.drake.brv.utils.models
 import com.gyf.immersionbar.ktx.immersionBar
+import com.xy.common.arouter.user.ARouterConfig
 import com.xy.common.data.ArticleTotalNum
 import com.xy.common.util.MmkvRepository
+import com.xy.common.util.clickDebounce
 import com.xy.common.util.setAliFonts
 import com.xy.common.util.setSemiBoldFonts
 import com.xy.common.view.load
@@ -59,6 +61,13 @@ class UserFrg : MviFragment<FragmentUserBinding, UserVm, UserIntent>(UserVm::cla
         setFonts()
         getUserInfo()
 
+        binding.clTop.clickDebounce {
+            if (MmkvRepository.loginToken.isEmpty()) {
+                ARouterConfig.User.LoginAct.push()
+            } else {
+                ARouterConfig.User.PersonalAcy.push()
+            }
+        }
     }
 
     private fun setFonts() {

@@ -14,7 +14,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +30,8 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/iv_home"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:fitsSystemWindows="false"
@@ -42,27 +42,27 @@
 
         <ImageView
             android:id="@+id/iv_sign"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/signenable" />
+            android:src="@mipmap/ic_sign" />
 
         <FrameLayout
             android:id="@+id/fl_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
             android:layout_toEndOf="@id/iv_home"
             android:layout_toStartOf="@id/iv_sign">
 
             <com.hjq.shape.view.ShapeTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_sign"
                 android:paddingHorizontal="35dp"
-                android:paddingVertical="10dp"
+                android:gravity="center|start"
                 android:text="搜索知鸟"
                 android:textColor="#d0d0d0"
                 android:textSize="12sp"

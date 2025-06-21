@@ -33,37 +33,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_line" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_head"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_top"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:src="@drawable/shape_default_image_bg"
-        app:shapeAppearance="@style/cornerRadius_5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/iv_scan"
-        app:layout_constraintTop_toBottomOf="@+id/iv_scan" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_scan">
 
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="username"
-        android:textColor="#000"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_head"
-        app:layout_constraintTop_toTopOf="@+id/iv_head" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/shape_default_image_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/cornerRadius_5" />
 
-    <TextView
-        android:id="@+id/tv_slogen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="陪伴技术成长的每一瞬间"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_head"
-        app:layout_constraintStart_toStartOf="@+id/tv_name" />
 
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="username"
+            android:textColor="#000"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_head"
+            app:layout_constraintTop_toTopOf="@+id/iv_head" />
+
+        <TextView
+            android:id="@+id/tv_slogen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="陪伴技术成长的每一瞬间"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_head"
+            app:layout_constraintStart_toStartOf="@+id/tv_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- top -->
 
     <com.hjq.shape.layout.ShapeLinearLayout
@@ -74,7 +85,7 @@
         android:layout_marginTop="35dp"
         app:layout_constraintEnd_toEndOf="@+id/iv_setting"
         app:layout_constraintStart_toStartOf="@+id/iv_scan"
-        app:layout_constraintTop_toBottomOf="@+id/iv_head">
+        app:layout_constraintTop_toBottomOf="@+id/cl_top">
 
 
         <androidx.recyclerview.widget.RecyclerView

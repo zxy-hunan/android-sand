@@ -234,7 +234,7 @@ fun itemSpanCount(datas: List<Any>): Int {
 
 fun ImageView.load(url: String) {
     logI("load url:$url")
-    var transurl = if (url.startsWith("http") || url.startsWith("https")) url else "http://gyuelife.online" + url
+    var transurl = if (url.startsWith("http") || url.startsWith("https")) url else "http://zhiniao.xyz$url"
     Glide.with(this).load(transurl).placeholder(
         com.xy.common.R.drawable.icon_default
     ).into(this)
