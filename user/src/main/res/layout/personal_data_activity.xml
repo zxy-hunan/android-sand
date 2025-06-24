@@ -14,6 +14,7 @@
         android:background="@color/white" />
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/tb_top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="个人中心" />
@@ -59,6 +60,6 @@
         android:layout_height="wrap_content"
         app:bar_leftText="地址"
         app:bar_rightDrawable="@drawable/arrow_right"
-        app:bar_rightTextHint="xxxx" />
+        app:bar_rightTextHint="CS City,CS Show." />
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import com.drake.brv.utils.models
 import com.gyf.immersionbar.ktx.immersionBar
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.common.data.ArticleTotalNum
+import com.xy.common.dialog.OperDialog
 import com.xy.common.util.MmkvRepository
 import com.xy.common.util.clickDebounce
 import com.xy.common.util.setAliFonts
@@ -46,12 +47,6 @@ class UserFrg : MviFragment<FragmentUserBinding, UserVm, UserIntent>(UserVm::cla
         binding.rvHigh.rvBase()
         binding.rvTop.rvTop()
 
-        /*   binding.tvName.clickDebounce {
-               toast("30")
-               topTagList[2].tagUrl = "30"
-               binding.rvTop.models = topTagList
-           }*/
-
         binding.rvSetting.models = viewModel.getSettingTagList()
         binding.rvMiddle.models = viewModel.getMiddleTagList()
         binding.rvHigh.models = viewModel.getHighTagList()
@@ -67,6 +62,14 @@ class UserFrg : MviFragment<FragmentUserBinding, UserVm, UserIntent>(UserVm::cla
             } else {
                 ARouterConfig.User.PersonalAcy.push()
             }
+        }
+
+        binding.ivSetting.clickDebounce {
+            ARouterConfig.User.SettingsAct.push()
+        }
+
+        binding.ivScan.clickDebounce {
+            OperDialog.showdevelopeingDialog()
         }
     }
 

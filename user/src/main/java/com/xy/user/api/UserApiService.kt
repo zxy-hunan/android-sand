@@ -16,6 +16,9 @@ import retrofit2.http.QueryMap
  * @brief mainapiserviice
  */
 interface UserApiService {
+
+    @POST("register")
+    fun register(@Body params: Map<String,String>): Flow<BaseRes<String>>
     @POST("loginOS")
     fun login(@Body params: Map<String,String>): Flow<BaseRes<String>>
 

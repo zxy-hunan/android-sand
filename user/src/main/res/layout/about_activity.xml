@@ -15,10 +15,27 @@
         android:background="@color/white" />
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/tb_top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="关于" />
 
+    <com.hjq.shape.view.ShapeImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="80dp"
+        app:shape="oval"
+        app:shape_radius="20dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:text="要相信美好的事情即将发生！"/>
 
 </LinearLayout>

@@ -3,11 +3,11 @@ package com.xy.user.page.acy
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.gyf.immersionbar.ktx.immersionBar
+import com.hjq.bar.OnTitleBarListener
+import com.hjq.bar.TitleBar
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.user.databinding.AboutActivityBinding
-import com.xy.user.databinding.PersonalDataActivityBinding
-import com.xy.user.databinding.SettingActivityBinding
 import com.xy.user.intent.UserIntent
 import com.xy.user.vm.UserVm
 
@@ -29,7 +29,13 @@ class AboutAcy : MviAcy<AboutActivityBinding, UserVm, UserIntent>(UserVm::class.
 
             titleBarMarginTop(binding.viewLine)
         }
-
+//nav
+        binding.tbTopBar.setOnTitleBarListener(object : OnTitleBarListener {
+            override fun onLeftClick(titleBar: TitleBar?) {
+                super.onLeftClick(titleBar)
+                finish()
+            }
+        })
     }
 
     override fun observe() {

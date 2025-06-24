@@ -13,17 +13,21 @@ import com.xy.common.data.model.UserModel
  * @date 2025/1/23 16:44
  * @brief MmkvRepository
  */
-object MmkvRepository : MMKVOwner{
+object MmkvRepository : MMKVOwner {
 
     var imAppId by mmkvInt(
         default = 1600045254
     )
 
     var loginToken by mmkvString(default = "")
+    fun resetToken() {
+        loginToken = ""
+    }
 
     var userModel by mmkvParcelable<UserModel>(default = UserModel())
 
 
     var homeFlag by mmkvBool(default = false)
 
+    var autoLogin by mmkvBool(default = true)
 }

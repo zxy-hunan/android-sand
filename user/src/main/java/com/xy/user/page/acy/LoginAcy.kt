@@ -5,6 +5,8 @@ import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.dylanc.longan.toast
 import com.gyf.immersionbar.ktx.immersionBar
+import com.kongzue.dialogx.dialogs.TipDialog
+import com.kongzue.dialogx.dialogs.WaitDialog
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.common.util.clickDebounce
 import com.xy.mviframework.base.ui.vb.MviAcy
@@ -26,18 +28,32 @@ class LoginAcy : MviAcy<ActivityLoginBinding, UserVm, UserIntent>(UserVm::class.
     override fun initView() {
         immersionBar(binding.view)
         binding.llLogin.clickDebounce {
+            login()
+        }
+
+        binding.llRegister.clickDebounce {
             val userName=binding.shapeEditText.text.toString().trim()
             val password=binding.shapeEditText2.text.toString().trim()
             if(userName.isEmpty()||password.isEmpty()) return@clickDebounce
-            viewModel.login(userName, password)
+            viewModel.register(userName, password)
         }
+    }
+
+    fun login(){
+        val userName=binding.shapeEditText.text.toString().trim()
+        val password=binding.shapeEditText2.text.toString().trim()
+        if(userName.isEmpty()||password.isEmpty()) return
+        viewModel.login(userName, password)
     }
 
     override fun observe() {
         intentCallBack {
             when(it){
+                is UserIntent.RegisterSuccess->{
+                    login()
+                }
                 is UserIntent.LoginSuccess->{
-                    toast("login success")
+                    TipDialog.show("login success", WaitDialog.TYPE.SUCCESS)
                     finish()
                 }
                 else -> {}

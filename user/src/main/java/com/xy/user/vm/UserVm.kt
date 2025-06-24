@@ -3,6 +3,8 @@ package com.xy.user.vm
 import SharedFlowBus
 import UserApiService
 import android.util.Log
+import com.kongzue.dialogx.dialogs.TipDialog
+import com.kongzue.dialogx.dialogs.WaitDialog
 import com.xy.common.data.ArticleTotalNum
 import com.xy.common.data.Common
 import com.xy.common.util.MmkvRepository
@@ -30,6 +32,20 @@ class UserVm : ZhiNiaoBaseViewModel<UserIntent>() {
         apiRetrofit.create(UserApiService::class.java)
     }
 
+    fun register(username: String = "",password: String = "") {
+        val dftMap = mutableMapOf<String, String>()
+        dftMap["username"] = username
+        dftMap["password"] = password
+        dftMap["code"] = ""
+        dftMap["uuid"] = ""
+
+        apiService.register(dftMap).HttpCoroutine(onError = {
+            TipDialog.show("register: fail,${it.message}", WaitDialog.TYPE.ERROR)
+        }, onSuccess = {
+            _intent.emitCoroutine(UserIntent.RegisterSuccess(true))
+        })
+    }
+
     fun login(username: String = "",password: String = "") {
         val dftMap = mutableMapOf<String, String>()
         dftMap["username"] = username
@@ -48,7 +64,7 @@ class UserVm : ZhiNiaoBaseViewModel<UserIntent>() {
     }
 
 
-    fun getInfo(onSuccess: () -> Unit) {
+    fun getInfo(onSuccess: () -> Unit={}) {
         apiService.getInfo(MmkvRepository.loginToken).HttpCoroutine(onError = {
         }, onOriginSuccess = {
             Log.e("UserVm", "token: onSuccess ${it}")

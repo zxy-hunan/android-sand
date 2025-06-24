@@ -11,6 +11,8 @@ import com.xy.mviframework.base.vm.BaseIntent
  * @brief user
  */
 sealed class UserIntent : BaseIntent() {
+
+    data class RegisterSuccess(val flag:Boolean) : UserIntent()
     data class LoginSuccess(val token:String) : UserIntent()
 
     data class UserInfoSuccess(val info: UserModel) : UserIntent()

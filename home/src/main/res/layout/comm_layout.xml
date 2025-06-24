@@ -33,9 +33,8 @@
             android:orientation="horizontal">
 
             <com.xy.common.widget.shinebuttonlib.ShineButton
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 app:btn_color="@android:color/darker_gray"
                 app:btn_fill_color="#996699"
                 app:enable_flashing="true"
@@ -50,9 +49,11 @@
 
             <TextView
                 android:id="@+id/tv_star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:text="12"
                 android:textSize="12sp" />
 

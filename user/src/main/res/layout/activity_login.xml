@@ -19,9 +19,9 @@
 
     <ImageView
         android:id="@+id/circleImageView"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:src="@mipmap/ic_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,49 +83,26 @@
         app:layout_constraintStart_toStartOf="@+id/shapeEditText2"
         app:layout_constraintTop_toBottomOf="@+id/shapeEditText2"/>
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textColor="#fff"-->
-<!--            android:text="login"/>-->
 
 
-<!--    </com.hjq.shape.view.ShapeTextView>-->
-
-
-    <!-- 添加忘记密码和去注册的TextView -->
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/ll_register"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:shape_startColor="@color/color_2196f3"
+        app:shape_endColor="@color/color_2196f3"
+        android:text="Register(Auto-login)"
+        android:textSize="@dimen/sp_18"
+        app:shape_radius="10dp"
+        android:textColor="@color/white"
+        android:background="@color/color_2196f3"
         app:layout_constraintEnd_toEndOf="@+id/ll_login"
         app:layout_constraintStart_toStartOf="@+id/ll_login"
-        app:layout_constraintTop_toBottomOf="@+id/ll_login"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:id="@+id/tv_forget_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="忘记密码"
-            android:textColor="@color/color_2196f3"
-            android:textSize="@dimen/sp_14"
-            android:layout_gravity="start"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="去注册"
-            android:textColor="@color/color_2196f3"
-            android:textSize="@dimen/sp_14"
-            android:layout_gravity="end"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </LinearLayout>
-
-
+        app:layout_constraintTop_toBottomOf="@+id/ll_login"/>
 
 </com.hjq.shape.layout.ShapeConstraintLayout>

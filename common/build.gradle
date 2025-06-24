@@ -96,4 +96,7 @@ dependencies {
     api 'com.github.getActivity:TitleBar:10.6'
 
     api 'com.github.MasayukiSuda:EasingInterpolator:v1.3.2'
+
+    def dialogx_version = "0.0.50.beta37"
+    api "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
 }

@@ -95,7 +95,7 @@ class H5Acy :MviAcy<ActivityH5Binding, MainVm, MainIntent>(MainVm::class.java, w
 //                R.id.loading_state_common_error_retry_btn
 //            )
             .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK)
-            .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK) //打开其他应用时，弹窗咨询用户是否前往其他应用
+            .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.DISALLOW) //打开其他应用时，弹窗咨询用户是否前往其他应用
             .interceptUnkownUrl() //拦截找不到相关页面的Scheme
             .createAgentWeb()
             .ready()
