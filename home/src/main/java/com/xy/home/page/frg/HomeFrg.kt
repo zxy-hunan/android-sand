@@ -95,6 +95,10 @@ class HomeFrg() : MviFragment<FragmentHomeBinding, MainVm, MainIntent>(MainVm::c
         binding.flSearch.clickDebounce{
             ARouterConfig.Home.SearchAcy.push()
         }
+
+        binding.ivSign.clickDebounce{
+            ARouterConfig.Home.SigninAcy.push()
+        }
     }
 
     override fun lazyLoad() {

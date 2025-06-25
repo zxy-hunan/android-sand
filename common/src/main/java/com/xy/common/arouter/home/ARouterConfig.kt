@@ -29,6 +29,17 @@ class ARouterConfig {
             }
         }
 
+        object SigninAcy {
+
+            const val PATH = "$GROUP/page/act/signinacy"
+
+            fun push() {
+                ARouter.getInstance()
+                    .build(PATH)
+                    .navigation()
+            }
+        }
+
 
         object H5Act {
 
