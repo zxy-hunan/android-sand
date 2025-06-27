@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="SplashTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+    <style name="SplashTheme" parent="@style/Theme.SplashScreen">
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -10,5 +10,9 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:navigationBarColor">@color/translucent</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/color_A6A6A6</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+
     </style>
 </resources>

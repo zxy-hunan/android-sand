@@ -99,4 +99,6 @@ dependencies {
 
     def dialogx_version = "0.0.50.beta37"
     api "com.github.kongzue.DialogX:DialogX:${dialogx_version}"
+
+    api 'androidx.core:core-splashscreen:1.0.0-beta02'
 }

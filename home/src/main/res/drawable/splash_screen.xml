@@ -29,11 +29,13 @@
 <!--    </item>-->
 
 
-    <item android:top="40dp" >
+<!--    <item>
         <bitmap
             android:gravity="top"
+            android:width="200dp"
+            android:height="200dp"
             android:src="@drawable/ic_launcher_round" />
-    </item>
+    </item>-->
 
 
     <!--<item android:top="@dimen/dp_500"
