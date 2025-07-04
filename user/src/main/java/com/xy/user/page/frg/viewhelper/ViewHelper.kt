@@ -49,7 +49,7 @@ fun RecyclerView.rvSetting(){
                 }
 
                 UserTag.OTHER.tag -> {
-                    ARouterConfig.User.AboutAcy.push()
+                    ARouterConfig.User.AboutAcy.push("http://zhiniao.xyz")
                 }
 
                 UserTag.ADJUST.tag -> {

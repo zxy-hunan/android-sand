@@ -76,7 +76,7 @@ class SettingsAcy : MviAcy<SettingActivityBinding, UserVm, UserIntent>(UserVm::c
         }
 
         binding.sbSettingAbout.clickDebounce {
-            ARouterConfig.User.AboutAcy.push()
+            ARouterConfig.User.AboutAcy.push("http://zhiniao.xyz")
         }
 
     }

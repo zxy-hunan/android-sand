@@ -1,5 +1,6 @@
 package com.xy.common.arouter.user
 
+import ARouterConfig.Home.H5Act.ARTICLE_URL
 import com.alibaba.android.arouter.launcher.ARouter
 
 class ARouterConfig {
@@ -43,10 +44,11 @@ class ARouterConfig {
         object AboutAcy {
 
             const val PATH = "$GROUP/page/acy/aboutacy"
-
-            fun push() {
+            const val URL = "URL"
+            fun push(url: String = "") {
                 ARouter.getInstance()
                     .build(PATH)
+                    .withString(URL, url)
                     .navigation()
             }
         }
