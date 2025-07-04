@@ -1,28 +1,28 @@
 ext {
 
     sand=[
-            im_appid      : "1600045254",
+            im_appid                        : "1600045254",
     ]
 
     versions = [
-            compileSdk    : 34,
-            minSdk        : 24,
-            targetSdk     : 34,
-            javaSDKVersion: JavaVersion.VERSION_11,
-            jvmTarget     : 11,
+            compileSdk                      : 34,
+            minSdk                          : 24,
+            targetSdk                       : 34,
+            javaSDKVersion                  : JavaVersion.VERSION_11,
+            jvmTarget                       : 11,
     ]
 
     libVersions = [
             //路由
-            arouterApiVersion     : "1.5.2",
-            arouterCompilerVersion: "1.5.2",
-            bannerVersion         : "2.2.2",
+            arouterApiVersion               : "1.5.2",
+            arouterCompilerVersion          : "1.5.2",
+            bannerVersion                   : "2.2.2",
     ]
 
     dependenciesroot = [
             //路由
-            arouterApi                   : "com.alibaba:arouter-api:${libVersions["arouterApiVersion"]}",
-            arouterCompiler              : "com.alibaba:arouter-compiler:${libVersions["arouterCompilerVersion"]}",
+            arouterApi                      : "com.alibaba:arouter-api:${libVersions["arouterApiVersion"]}",
+            arouterCompiler                 : "com.alibaba:arouter-compiler:${libVersions["arouterCompilerVersion"]}",
             "banner"                        : "io.github.youth5201314:banner:${libVersions["bannerVersion"]}",
     ]
 }
