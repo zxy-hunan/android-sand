@@ -51,7 +51,7 @@
         android:right="8dp">
         <bitmap
             android:gravity="bottom|center"
-            android:src="@drawable/icon_login_bottom_circle" />
+            android:src="@drawable/icon_slogan" />
     </item>
 
 </layer-list>

@@ -55,7 +55,7 @@ class H5Acy :MviAcy<ActivityH5Binding, MainVm, MainIntent>(MainVm::class.java, w
             statusBarDarkFont(true)
             titleBarMarginTop(binding.viewLine)
         }
-        binding.tblNav.setTitle("详情")
+        binding.tblNav.setTitle("Detail")
         initWebView()
         binding.clLayout.tvOrigin.clickDebounce {
             ARouterConfig.Home.MarkdownAct.push(articleModel)

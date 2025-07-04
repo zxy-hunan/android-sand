@@ -20,7 +20,7 @@
         app:lottie_rawRes="@raw/welcome"
         tools:ignore="MissingConstraints" />
 
-    <TextView
+<!--    <TextView
         android:id="@+id/tv_slogen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,5 +32,15 @@
         android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />-->
+
+ <!--   <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_slogan"
+        android:layout_marginBottom="58dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

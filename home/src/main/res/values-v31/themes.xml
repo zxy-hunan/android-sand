@@ -13,7 +13,7 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/color_A6A6A6</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>
-        <item name="android:windowSplashScreenBrandingImage">@drawable/icon_slogen</item>
+<!--        <item name="android:windowSplashScreenBrandingImage">@drawable/icon_slogan</item>-->
         <item name="android:windowSplashScreenBackground">@color/color_F5F5F5</item>
     </style>
 </resources>
