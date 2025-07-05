@@ -4,8 +4,11 @@
 一句话介绍项目用途和主要功能。
 
 [//]: # (![演示]&#40;doc/images/zn1.gif&#41;)
-<img src="doc/images/zn1.gif" width="100" height="300" alt="演示" />
-
+<div style="display:flex; gap: 10px;">
+  <img src="doc/images/zn1.gif" width="150" height="350" alt="演示1" />
+  <img src="doc/images/zn2.gif" width="150" height="350" alt="演示2" />
+  <img src="doc/images/zn3.gif" width="150" height="350" alt="演示3" />
+</div>
 
 ## 🧩 技术栈
 - 架构：MVI
