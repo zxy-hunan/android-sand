@@ -36,11 +36,18 @@ android {
             }
         }
 
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
+        }
+
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false  // 同时开启
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
