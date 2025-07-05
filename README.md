@@ -3,7 +3,9 @@
 ## 📌 简介
 一句话介绍项目用途和主要功能。
 
-![演示](doc/images/zn1.gif)
+[//]: # (![演示]&#40;doc/images/zn1.gif&#41;)
+<img src="doc/images/zn1.gif" width="100" height="300" alt="演示" />
+
 
 ## 🧩 技术栈
 - 架构：MVI
