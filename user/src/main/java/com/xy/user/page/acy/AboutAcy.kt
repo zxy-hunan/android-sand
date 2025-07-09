@@ -1,31 +1,24 @@
 package com.xy.user.page.acy
 
-import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.net.Uri
-import android.net.http.SslError
+import android.content.Context
 import android.os.Bundle
-import android.webkit.SslErrorHandler
-import android.webkit.ValueCallback
-import android.webkit.WebResourceError
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebView
-import android.widget.LinearLayout
+import android.widget.TextView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.dylanc.longan.intentExtras
 import com.gyf.immersionbar.ktx.immersionBar
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
 import com.just.agentweb.AgentWeb
-import com.just.agentweb.DefaultWebClient
-import com.just.agentweb.WebChromeClient
-import com.just.agentweb.WebViewClient
 import com.xy.common.arouter.user.ARouterConfig
 import com.xy.mviframework.base.ui.vb.MviAcy
 import com.xy.user.databinding.AboutActivityBinding
 import com.xy.user.intent.UserIntent
 import com.xy.user.vm.UserVm
+import io.noties.markwon.Markwon
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+
 
 /**
  * @file PersonalAcy
@@ -57,7 +50,9 @@ class AboutAcy : MviAcy<AboutActivityBinding, UserVm, UserIntent>(UserVm::class.
                 finish()
             }
         })
-        initWebView()
+//        initWebView()
+
+        loadMarkdownFromAssets(this, "README.md", binding.tvContent)
     }
 
     override fun observe() {
@@ -66,7 +61,37 @@ class AboutAcy : MviAcy<AboutActivityBinding, UserVm, UserIntent>(UserVm::class.
     override fun onListener() {
     }
 
-    private fun initWebView() {
+
+    fun loadMarkdownFromAssets(context: Context, fileName: String, textView: TextView) {
+        // 获取AssetManager
+        val assetManager = context.assets
+        try {
+            // 打开assets目录下的文件流
+            val inputStream = assetManager.open(fileName)
+
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            val stringBuilder = StringBuilder()
+            var line: String?
+            while (reader.readLine().also { line = it } != null) {
+                stringBuilder.append(line).append("\n")
+            }
+
+            reader.close()
+            inputStream.close()
+
+            val markdownContent = stringBuilder.toString()
+
+            val markwon = Markwon.create(context)
+            markwon.setMarkdown(textView, markdownContent)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            // 处理文件读取异常
+            textView.text = "Error loading markdown file: " + e.message
+        }
+    }
+
+
+    /*    private fun initWebView() {
         mAgentWeb = AgentWeb.with(this)
             .setAgentWebParent(binding.container, LinearLayout.LayoutParams(-1, -1))
             .useDefaultIndicator()
@@ -170,5 +195,5 @@ class AboutAcy : MviAcy<AboutActivityBinding, UserVm, UserIntent>(UserVm::class.
             super.onReceivedError(view, errorCode, description, failingUrl)
         }
 
-    }
+    }*/
 }

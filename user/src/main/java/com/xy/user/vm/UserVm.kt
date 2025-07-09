@@ -115,9 +115,9 @@ class UserVm : ZhiNiaoBaseViewModel<UserIntent>() {
 
     fun getSettingTagList(): MutableList<UserTagModel> {
         val list = mutableListOf<UserTagModel>()
-        list.add(UserTagModel("个人中心", "1", UserTag.PERSONAL.tag, R.drawable.user_smile))
-        list.add(UserTagModel("关于我们", "1", UserTag.OTHER.tag, R.drawable.user_help))
-        list.add(UserTagModel("提交建议", "1", UserTag.ADJUST.tag, R.drawable.user_help))
+        list.add(UserTagModel("个人中心", "1", UserTag.PERSONAL.tag, R.drawable.user_personal))
+        list.add(UserTagModel("关于我们", "1", UserTag.OTHER.tag, R.drawable.user_about))
+        list.add(UserTagModel("提交建议", "1", UserTag.ADJUST.tag, R.drawable.user_ques))
         list.add(UserTagModel("设置", "1", UserTag.SETTING.tag, R.drawable.user_setting))
         return list
     }
