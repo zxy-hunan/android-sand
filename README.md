@@ -2,7 +2,7 @@
 知鸟
 
 ## 📌 简介
-学习休闲加娱乐。
+学习休闲加娱乐。[点击下载APP](app/release/app-release.apk) 
 
 [//]: # (![演示]&#40;doc/images/zn1.gif&#41;)
 <div style="display:flex; gap: 10px;">
